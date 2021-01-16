@@ -1,0 +1,92 @@
+# DTOs
+- Controller와 Service 사이의 데이터 교환을 위한 객체
+- Entity와 비슷하더라도, 절대 Entity를 DTO처럼 사용하면 안된다.
+    - Entity 클래스는 DB와 맞닿은 핵심 클래스이다.
+    - 화면 변경과 같은 매우 사소한 변화지만, DB와 맞닿은 Entity 클래스의 변화는 너무 큰 변화이다.
+    - Entity 클래스의 변경은 다른 수많은 클래스에 영향을 준다.
+- 
+# Entity
+- Entity
+    - 데이터베이스의 테이블과 1:1 매칭되는 클래스
+    - 절대 setter를 쓰지 않는다.
+    - @Entity
+        - 이 클래스가 데이터베이스와 매칭될 클래스 라는 것을 명시한다.
+    - @Table
+        - 이 클래스가 매핑될 테이블을 설정해 준다.
+        - @Table 어노테이션이 없다면 기본적으로 클래스 이름을 언더스코어 네이밍으로 매칭시켜준다.
+    - @Id
+        - 해당 클래스의 PK값을 나타낸다.
+        - @GeneratedValue(strategy = PK 종류)
+            - PK 생성 규칙을 나타낸다.
+            - IDENTITY
+                - 간단하게 AUTO_INCREMENT 이다.
+                - PK값 생성을 여기서 하는게 아니라, 데이터베이스가 자동으로 생성해주기를 기대?하는 것이다.
+            - 만약 유저의 email과 같이 unique한 값이 PK라면 굳이 사용하지 않아도 된다.
+    - @Column
+        - 해당 테이블의 컬럼과 1:1로 매핑시켜준다.
+        - name
+            - 해당 컬럼의 이름을 지정해 준다.
+            - 기본값은 변수 이름을 언더스코어 네이밍 한 것이다.
+        - table
+            - 다른 테이블에 매핑을 시켜주고 싶을때 사용
+        - nullable
+            - null값 허용 여부
+        - unique
+            - 제약 조건
+        - length
+            - varchar나 char같은 경우에 길이를 지정해 준다.
+    - @MappedSuperclass
+        - 다른 Entity 클래스에서 해당 클래스를 상속하면, 해당 클래스의 필드들을 하나의 컬럼으로 인식한다.
+    - @EntityListeners(AuditingEntityListener.class)
+        - 사용하기 위해서는 메인 클래스에 @EnableJpaAuditing 을 사용해야 한다.
+        - 시간에 대한 값을 자동으로 넣어주는 기능
+        - @CreatedDate
+            - Entity가 생성되어 저장된 시간이 자동으로 저장된다.
+        - @LastModifiedDate
+            - 해당 Entity값이 변경될 때 시간이 저장된다.
+- Repository
+    - repository 메소드
+        - postsRepository.save
+            - posts 테이블의 insert와 update 쿼리를 실행한다.
+            - id값이 있으면 update, 없으면 insert를 실행한다.
+        - postsRepository.findAll
+            - posts에 있는 모든 데이터를 조회한다.
+            - findAllByName(String name)과 같이, 원하는 조건이 있다면 그 조건을 By 뒤에 적고, name에 적으면 해당 name인 데이터만 가져온다.
+            - And를 통해 And 연산을 시킬 수 있다.
+            - Or를 통해 Or 연산을 시킬 수 있다.
+            - 필드Between(시작값, 끝값)
+                - 필드중 시작값과 끝값 사이에 있는 데이터만 추린다.
+            - LessThan
+                - 해당 값보다 작은 값만 추린다.
+            - LessThanEqual
+                - 해당 값보다 작거나 같은 값만 추린다.
+            - GreaterThan
+                - 해당 값보다 큰 값만 추린다.
+            - GreaterThanEqual
+                - 해당 값보다 크거나 같은 값만 추린다.
+            - Like
+                - 내가 원하는 문자열과 비슷한 값만 추린다.
+            - IsNull
+                - 해당 값이 NULL인 값을 찾는다
+                - 매개변수가 필요 없다.
+            - In
+                - 여러 값들중 하나라도 포함하고 있는 값을 가져온다.
+            - OrderBy필드
+                - 값들을 원하는 필드를 기준으로 정렬시킨다.
+                - Asc와 Desc로 각각 오름차순, 내림차순을 시킬 수 있다.
+            - Pageable
+                - return 타입이 Pageable이면, 우리가 흔히 보는 페이지로 나누어진 웹사이트처럼 값을 받을 수 있다.
+                    - 만약 한 페이지에 6개의 데이터가 들어가는 곳의 3번째 페이지라면, 내가 원하는 값들만 가져온다.
+                - 반환값이 Pageable이라면 매개변수에 page와 size를 줘야 한다.
+                
+    - JPA 인터페이스
+        - JpaRepository
+            - 기본적인 메소드들이 자동으로 생성된다.
+            - 다른 인터페이스들의 부모이다.
+            - List 타입을 반환한다.
+        - CrudRepository
+            - CRUD 기능 위주로 제공한다.
+            - Iterable 타입으로 반환한다.
+        - PagingAndSortingRepository
+            - 페이지 및 정렬을 위주로 제공한다.
+            - Page 타입을 반환한다.
