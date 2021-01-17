@@ -54,5 +54,5 @@ compile('org.springframework.boot::spring-boot-starter-mustache')
     - 버전 관리를 하지않아도 된다.
     - 추가설정이 필요없어 간편하다.
 - 머스테치의 기본 파일 위치는 src/main/resources/templates 이다.
+- controller에서 String을 return하면, 알아서 기본 파일 위치에 있는 String.mustache를 찾아간다.
 ### index.mustache
-- 
