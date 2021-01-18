@@ -243,4 +243,33 @@ String userNameAttributeName = userRequest.getClientRegistration().getProviderDe
                 .getUserInfoEndpoint().getUserNameAttributeName();
 ```
 
-- 추가 공사 예정. OAuth2UserRequest를 뜯어봐야겠당
+- 구글은 유니크값의 필드 이름이 sub 이고, 네이버는 id가 필드 이름 이므로, 필드를 찾을 때 필요하다.
+
+``` java
+OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
+```
+
+- OAuth2User 클래스의 attribute들을 담을 클래스
+- 다른 소셜 로그인도 이 클래스를 이용한다.
+- 우리가 직접 정의할 클래스 이다.
+
+``` java
+User user = saveOrUpdate(attributes);
+```
+
+- saveOrUpdate
+  - 대상 객체가 현재 영속화 되어 있을경우 아무것도 하지 않는다.
+  - 준영속 객체와 동일한 식별값을 갖는 객체가 있다면 Exception이 발생한다.
+  - 대상 객체가 식별자 프로퍼티가 없다면 save한다.
+  - 대상 객체가 식별 값을 갖고 있지 않다면 save한다.
+  - version값이 없으면 save한다.
+  - 위에서 아무것도 걸리지 않았다면 update한다.
+
+``` java
+httpSession.setAttribute("user", new SessionUser(user));
+```
+
+- 사용자 정보를 세션에 저장하기 위한 DTO
+- User 클래스를 사용하면, 직렬화 문제가 발생하기 때문에 SessionUser를 만들었다.
+  - DB와 직접적으로 연결되는 엔티티는, 직렬화시에 자식 엔티티를 가질 수 있기 때문에 성능 이슈가 발생할 수 있다.
+
