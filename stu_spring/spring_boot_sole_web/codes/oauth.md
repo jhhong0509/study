@@ -78,4 +78,96 @@ spring.security.oauth2.client.registration.google.scope=profile,email
   - 그렇게 된다면 openid 서비스를 지원하는 구글과 같은 서비스와, 그렇지 않은 네이버와 카카오 등의 서비스를 나눠서 따로 만들어 줘야 한다.
   - 그렇기 때문에 강제로 openid를 제외한 email과 profile값만 넣어준다.
 
-- - 
+
+#### security config 구현
+
+- 전체 코드
+
+``` java
+@RequiredArgsConstructor
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private final CustomOAuth2UserService customOAuth2UserService;
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception{
+        http
+                .csrf().disable().headers().frameOptions().disable().and()
+                .authorizeRequests()
+                .antMatchers("/","/css/**","/images/**","/js/**","/h2-console/**", "/profile").permitAll()
+                .antMatchers("/api/v1/**").hasRole(Role.USER.name())
+                .anyRequest().authenticated()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/")
+                .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService);
+
+    }
+}
+```
+
+##### 코드 설명
+
+```java
+@EnableWebSecurity
+```
+
+- Spring Security 설정들을 활성화 시켜 준다.
+
+``` java
+http.csrf().disable().headers().frameOptions().disable()
+```
+
+- Spring Security에서, h2의 접근을 차단하는것을 방지하기 위해 해줘야 한다.
+
+``` java
+.authorizeRequests()
+```
+
+- 권한 관리 옵션의 시작점이다.
+
+```java
+.antMatchers("url1","url2")
+```
+
+- andMatchers가 아니라 antMatchers다.
+- URL, HTTP 메소드 별로 관리할 수 있다.
+- .permitAll()을 통해, 권한 확인 없이 모두가 이용 가능하도록 할 수 있다.
+- .hasRole()을 통해, 해당 권한이 있는 사람들만 접근할 수 있도록 할 수 있다.
+
+```java
+.anyRequest()
+```
+
+- 따로 정의해주지 않은 모든 요청들을 나타낸다.
+- .authenticated()를 통해 인증된 사용자만 이용하게 할수도 있고, .permitAll()을 통해 모두 공개시킬 수 있다.
+
+``` java
+.logout().logoutSuccessUrl("/")
+```
+
+- 로그아웃에 성공했을 때, / 주소로 이동한다.
+- 로그아웃 설정의 시작점이다.
+
+``` java
+.oauth2Login()
+```
+
+- OAuth2에서 지원하는 로그인 기능의 설정 시작점이다.
+
+``` java
+.userInfoEndpoint()
+```
+
+- 로그인 성공시 사용자 정보를 가져올 때 설정을 담당한다.
+
+``` java
+.userService(customOAuth2UserService)
+```
+
+- 소셜 로그인에 성공했을 때, UserService에서 후속 조치를 진행한다.
+
+- 해당 클래스는 직접 구현해 줘야 한다.
