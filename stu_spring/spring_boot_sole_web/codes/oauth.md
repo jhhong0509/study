@@ -50,7 +50,7 @@ spring-security-oauth2-autoconfigure
 
 - yml
 
-``` yml
+``` yaml
 spring:
 	security:
 		oauth2:
@@ -60,15 +60,49 @@ spring:
 						client-id: 클라이언트 아이디
 						client-secret: 클라이언트 시크릿
 						scope:
-							- openid
 							- email
 							- profile
 ```
 
 - properties
 
-``` pro
-spring.security.oauth2.client.registration.google.client-id=
-spring.security.oauth2.client.registration.google.client-secret=
+``` properties
+spring.security.oauth2.client.registration.google.client-id=값
+spring.security.oauth2.client.registration.google.client-secret=값
 spring.security.oauth2.client.registration.google.scope=profile,email
 ```
+
+- scope의 의미
+  - 원래 기본값은 openid, email, profile이다.
+  - 하지만 openid가 scope의 값으로 들어가면 Open Id Provider로 인식하게 된다.
+  - 그렇게 된다면 openid 서비스를 지원하는 구글과 같은 서비스와, 그렇지 않은 네이버와 카카오 등의 서비스를 나눠서 따로 만들어 줘야 한다.
+  - 그렇기 때문에 강제로 openid를 제외한 email과 profile값만 넣어준다.
+
+#### spring boot profile
+
+- properties
+
+  ``` properties
+  spring.profile.include=oauth
+  ```
+
+  - 스프링 부트에서는 application-이름.properties와 같은 형식으로 profile을 만들 수 있다.
+  - 위와 같은 형태는 oauth라는 이름의 profile을 가져온다.
+
+- yml
+
+  ``` yaml
+  spring:
+  	profile:
+  		active: test
+  ---
+  spring:
+  	profile: dev
+  ```
+
+  
+
+  - yml 형식의 파일에서는, 훨씬 더 간편하게 profile 설정을 해줄 수 있다.
+  - 위와 같이, 하나의 yml 파일 내에서 여러개의 프로필들을 만들어줄 수 있다.
+  - profile: 이름 과 같은 형식을 통해 프로필의 이름을 설정해줄 수 있다.
+
