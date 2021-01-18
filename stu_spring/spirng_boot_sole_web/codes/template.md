@@ -224,3 +224,16 @@ main.init()
 
 - {{이름}}
   - 우리가 만든 API가 정상적으로 요청을 받았고, 값을 반환했다면 해당 이름에 맞는 값들을 알아서 꺼내와 준다.
+
+#### Mustache에 값을 전달하는 방법
+
+``` java
+@GetMapping("/")
+public String index(Model model){
+    model.addAttribute("posts", postsService.findAllDesc());
+    return "index";
+}
+```
+
+- 위와 같이, Model을 이용하면 된다.
+- posts 라는 이름으로, post들을 모두 담은 리스트를 넘겨준다.
