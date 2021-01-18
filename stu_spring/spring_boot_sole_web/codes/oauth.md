@@ -383,3 +383,7 @@ public @interface LoginUser {
     - CLASS
     - RUNTIME
 
+- @interface
+  - 이 파일을 어노테이션 클래스로 지정한다.
+  - 해당 이름(LoginUser)을 가진 어노테이션이 생성된다.
+
