@@ -78,10 +78,15 @@ spring.security.oauth2.client.registration.google.scope=profile,email
   - 그렇게 된다면 openid 서비스를 지원하는 구글과 같은 서비스와, 그렇지 않은 네이버와 카카오 등의 서비스를 나눠서 따로 만들어 줘야 한다.
   - 그렇기 때문에 강제로 openid를 제외한 email과 profile값만 넣어준다.
 
-
 #### security config 구현
 
-- 전체 코드
+``` java
+complie('org.springframework.boot::spring-boot-starter-oauth2-client')
+```
+
+- 소셜 기능 구현시 꼭 필요한 의존성이다.
+
+- SecurityConfig 전체 코드
 
 ``` java
 @RequiredArgsConstructor
@@ -169,5 +174,73 @@ http.csrf().disable().headers().frameOptions().disable()
 ```
 
 - 소셜 로그인에 성공했을 때, UserService에서 후속 조치를 진행한다.
+  - 해당 클래스는 직접 구현해 줘야 한다.
 
-- 해당 클래스는 직접 구현해 줘야 한다.
+#### User 구현
+
+- ENUM
+  - spring security에서 권한을 나타내는 ENUM은 항상 ROLE_GUEST처럼 ROLE_를 붙여야 한다.
+- Repository
+  - 꼭 PK가 아닌, email처럼 unique한 값을 PK처럼 사용해도 된다.
+
+#### CustomOAuth2UserService 구현
+
+- 위 코드 분석에서 말했듯이, 소셜 로그인 성공 시에 할 조치이다.
+
+``` java
+@RequiredArgsConstructor
+@Service
+public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+    private final UserRepository userRepository;
+    private final HttpSession httpSession;
+
+    @Override
+    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        OAuth2UserService delegate = new DefaultOAuth2UserService();
+        OAuth2User oAuth2User = delegate.loadUser(userRequest);
+
+        String registrationId = userRequest.getClientRegistration().getRegistrationId();
+        String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails()
+                .getUserInfoEndpoint().getUserNameAttributeName();
+
+        OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
+
+        User user = saveOrUpdate(attributes);
+        httpSession.setAttribute("user", new SessionUser(user));
+
+        return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
+                attributes.getAttributes(),
+                attributes.getNameAttributeKey());
+    }
+
+    private User saveOrUpdate(OAuthAttributes attributes){
+        User user = userRepository.findByEmail(attributes.getEmail())
+                .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
+                .orElse(attributes.toEntity());
+
+        return userRepository.save(user);
+    }
+}
+```
+
+##### 코드 해석
+
+```java
+OAuth2User oAuth2User = delegate.loadUser(userRequest);
+```
+
+- 요청중 유저 정보만 추출하는걸로 추정된다..
+
+``` java
+String registrationId = userRequest.getClientRegistration().getRegistrationId();
+```
+
+- request에서 어떤 요청인지 추출해 준다.
+  - 구글인지, 네이버 인지 등 어떤 소셜 로그인을 이용했는지에 대한 정보
+
+``` java
+String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails()
+                .getUserInfoEndpoint().getUserNameAttributeName();
+```
+
+- 추가 공사 예정. OAuth2UserRequest를 뜯어봐야겠당
