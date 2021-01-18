@@ -85,4 +85,142 @@ compile('org.springframework.boot::spring-boot-starter-mustache')
 
 - bootstrap을 사용하기 위해 CDN을 이용한다.
 
-- 단순한 <html> 또는 <head>와 같이 반복되는 코드들을 써 놓는다.
+- <html>과 같이 파일 맨 위에서 단순히 반복되는 코드들
+
+#### footer.mustache
+
+``` html
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+```
+
+- </html>과 같이 파일 맨 밑에서 단순히 반복되는 코드들
+
+#### index.mustache
+
+``` html
+{{>layout/header}}
+    <h1>스프링 부트로 시작하는 웹 서비스 ver.2</h1>
+    <div class="col-md-12">
+        <!-- 로그인 기능 영역 -->
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
+            </div>
+        </div>
+    </div>
+
+{{>layout/footer}}
+```
+
+- {{>layout/footer}}과 같은 형태는, layout 폴더의 footer를 불러온다 와 같은 형태이다.
+- 위에서 header와 footer의 코드들을 해당 위치에 불러온다.
+- /posts/save 라는 URI로 요청을 보낸다.
+- 해당 URI에서는 단순히 posts-save.mustache 파일을 불러와 준다.
+
+#### posts-save.mustache
+
+``` html
+{{>layout/header}}
+
+<h1>게시글 등록</h1>
+<div class="col-md-12">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="title">제목</label>
+                <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
+            </div>
+            <div class="form-group">
+                <label for="author"> 작성자</label>
+                <input type="text" class="form-control" id="author" placeholder="작성자를 입력하세요">
+            </div>
+            <div class="form-group">
+                <label for="content"> 내용</label>
+                <textarea class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
+            </div>
+        </form>
+        <a href="/" role="button" class="btn btn-secondary">취소</a>
+        <button type="button" class="btn btn-primary" id="btn-save">등록</button>
+    </div>
+</div>
+{{>layout/footer}}
+```
+
+- bootstrap에서 간편하게 이용할 수 있도록 만들어둔 여러 css를 이용한다.
+  - 간편하게 예쁜 UI를 디자이너 없이 구현할 수 있다.
+- 제목, 작성자, 내용을 입력하는 텍스트 박스와 제출 버튼을 포함한다.
+
+#### index.js
+
+```javascript
+var main = {
+    init : function () {
+        var _this = this;
+        $('#btn-save').on('click', function(){
+            _this.save();
+        })
+    },
+    save : function () {
+        var data = {
+            title: $('#title').val(),
+            author: $('#author').val(),
+            content: $('#content').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/posts',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function(){
+            alert('글이 등록되었습니다.');
+            window.location.href = "/";
+        }).fail(function(error){
+            alert(JSON.stringify(error));
+        });
+    },
+};
+
+main.init()
+```
+
+- 게시글 등록 
+
+- var main과 같이 선언한 이유
+  - js 특성상, 이름이 같은 함수가 2개라면 나중에 선언된 함수가 실행된다
+  - init과 save라는 이름은 언제든지 중복 사용될 우려가 있기 때문에, main으로 묶어주는 것이다.
+  - namespace 기법이라고 한다.
+- 만약 등록 버튼이 눌렸다면, save 함수를 호출한다
+- data 변수에 각각 title, author, content를 저장한다.
+- /api/v1/posts 라는 URI로 POST 요청을 보낸다.
+- 이때, 데이터 타입은 json 형식을 이용한다.
+- JSON.stringify(data)라는 메소드를 통해, 저장해둔 data 변수를 json 형식으로 변환한다.
+- 또한, 위 작업들이 완료된 후에, 글이 등록되었다는 메세지를 보낸 후에 / (인덱스 페이지)로 이동한다.
+- 만약 실패했다면 에러를 띄운다.
+
+#### index.mustache 수정
+
+- 보고서 보기를 위해 index.mustache를 수정해야 한다.
+
+``` html
+{{#posts}}
+    <tr>
+        <td>{{id}}</td>
+        <td>{{title}}</td>
+        <td>{{author}}</td>
+        <td>{{modifiedDate}}</td>
+	</tr>
+{{/posts}}
+```
+
+- {{#posts}}
+  - 자바의 for each 문 이라고 생각하면 된다.
+  - posts라는 배열에 담긴 값들을 다 꺼내며 반복을 한다.
+
+- {{이름}}
+  - 우리가 만든 API가 정상적으로 요청을 받았고, 값을 반환했다면 해당 이름에 맞는 값들을 알아서 꺼내와 준다.
