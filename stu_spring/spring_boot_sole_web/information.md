@@ -33,3 +33,48 @@ spring:
 ### Domain Model
 - @Entity가 사용된 영역
 - 무조건적으로 DB의 테이블과 관련 있어야 하는것은 아님
+
+# spring boot profile
+
+### properties
+
+``` properties
+spring.profile.include=oauth
+```
+
+- 스프링 부트에서는 application-이름.properties와 같은 형식으로 profile을 만들 수 있다.
+- 위와 같은 형태는 oauth라는 이름의 profile을 가져온다.
+
+### yml
+
+``` yaml
+spring:
+	profile:
+		active: test
+
+---
+
+spring:
+	profile: dev
+
+server:
+	port: 8080
+
+---
+
+spring:
+	profile: test
+
+server:
+	port: 8181
+```
+
+
+
+- yml 형식의 파일에서는, 훨씬 더 간편하게 profile 설정을 해줄 수 있다.
+- 위와 같이, 하나의 yml 파일 내에서 여러개의 프로필들을 만들어줄 수 있다.
+- --- 이라는 구분자를 통해, 다른 파일을 관리하듯이 사용할 수 있다.
+  - 위 구조에서, dev라는 프로필과, test 라는 프로필을 만들었다.
+  - 또한, active를 통해 test 라는 프로필을 활성화 했다는것을 쉽게 알 수 있다.
+- profile: 이름 과 같은 형식을 통해 프로필의 이름을 설정해줄 수 있다.
+
