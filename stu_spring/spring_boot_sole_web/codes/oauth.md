@@ -272,4 +272,114 @@ private User saveOrUpdate(OAuthAttributes attributes){
 ```
 
 - 요청 속성중, email을 통해 user 에서 찾는다.
-  - 그리고 만약 
+- 만약 user에서 값을 찾을 수 없다면, attributes 값을 통해 엔티티를 생성한다.
+- 만약 찾았다면, 이름과 사진을 새로 업데이트 한다.
+- 위 과정을 거친 엔티티는 저장된다.
+
+#### OAuthAttributes
+
+``` java
+@Getter
+public class OAuthAttributes {
+    private Map<String, Object> attributes;
+    private String nameAttributeKey;
+    private String name;
+    private String email;
+    private String picture;
+
+    @Builder
+    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String name, String email, String picture){
+        this.attributes = attributes;
+        this.nameAttributeKey = nameAttributeKey;
+        this.name = name;
+        this.email = email;
+        this.picture = picture;
+    }
+
+    public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes){
+        System.out.println("registration="+registrationId);
+        return ofGoogle(userNameAttributeName, attributes);
+    }
+    private static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes){
+        return OAuthAttributes.builder()
+                .name((String) attributes.get("name"))
+                .email((String) attributes.get("email"))
+                .picture((String) attributes.get("picture"))
+                .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .build();
+    }
+
+    public User toEntity(){
+        return User.builder()
+                .name(name)
+                .email(email)
+                .picture(picture)
+                .role(Role.GUEST)
+                .build();
+    }
+}
+```
+
+- toEntity
+  - User 엔티티를 생성한다.
+  - 처음 가입할 때 생성된다.
+  - 기본 권한은 GUEST 이기 때문에, role에는 GUEST값을 넣는다.
+
+``` java
+@Getter
+public class SessionUser implements Serializable {
+
+    private String name;
+    private String email;
+    private String picture;
+
+    public SessionUser(User user){
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.picture = user.getPicture();
+    }
+}
+```
+
+- 이름, 이메일, 사진만 필요함으로 필드에 name, email, picture만 선언해 준다.
+
+### 어노테이션 기반으로 개선하기
+
+``` java
+@Target(ElementType.PARAMETER)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface LoginUser {
+}
+```
+
+- 커스텀 어노테이션 이다.
+- @Target()
+  - 이 어노테이션을 적용시킬 위치
+  - 범위 종류
+    - PACKAGE
+      - 패키지 선언할 때
+    - TYPE
+      - 클래스, 인터페이스, ENUM 선언할 때
+    - CONSTRUCTOR
+      - 생성자 선언할 때
+    - FIELD
+      - 멤버 변수 선언할 때
+    - METHOD
+      - 메소드 선언할 때
+    - ANNOTATION_TYPE
+      - 어노테이션 타입 선언할 때
+    - LOCAL_VARIABLE
+      - 지역변수 선언할 때
+    - PARAMETER
+      - 파라미터 선언할 때
+    - TYPE_PARAMETER
+      - 파라미터 타입 선언할 때
+
+- @Retention()
+  - 해당 어노테이션이 어디까지 유효할지 선언해 주는 것.
+  - 유효 범위 종류
+    - SOURCE
+    - CLASS
+    - RUNTIME
+
