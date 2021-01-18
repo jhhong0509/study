@@ -36,7 +36,7 @@
     - 문법이 어렵다.
     - Vue.js를 사용해 봤다면 사용해도 좋다.
     - intelliJ 커뮤니티 버전에서 지원하지 않는다.
-### Mustache
+### Mustache의 장점
 - 현존하는 대부분의 언어를 지원한다.
 - 문법이 심플하다.
 - 로직코드를 사용할 수 없어, View와 서버를 명확히 분리할 수 있다.
@@ -44,9 +44,9 @@
 - intelliJ 커뮤니티 버전에서도 지원한다.
 ### Mustache 적용
 - 플러그인 설치에서 Mustache를 설치한다
-    - 문법 체크
+    - 문법 체크 지원
     - HTML 문법 지원
-    - 자동완성
+    - 자동완성 지원
 ``` java
 compile('org.springframework.boot::spring-boot-starter-mustache')
 ```
@@ -55,4 +55,34 @@ compile('org.springframework.boot::spring-boot-starter-mustache')
     - 추가설정이 필요없어 간편하다.
 - 머스테치의 기본 파일 위치는 src/main/resources/templates 이다.
 - controller에서 String을 return하면, 알아서 기본 파일 위치에 있는 String.mustache를 찾아간다.
-### index.mustache
+- Mustache를 적용하는 방법
+    - 외부 CDN을 이용
+        - 실제 서비스에선 잘 이용되지 않는다.
+        - CDN에서 문제가 발생하면, 서비스에 문제가 발생할 수 있기 때문
+        - 또한 CDN의 속도가 느려 성능 이슈 또한 발생할 수 있다.
+        - 이 책에서 공부할때 사용되는 방식이다.
+    - 직접 라이브러리를 받아서 사용
+        - 실제 서비스에서 잘 이용된다.
+        - CDN에 문제가 발생해도 서비스에는 문제가 발생하지 않는다.
+### 실제 Mustache 코드
+
+- 코드의 반복을 줄이기 위해, header과 footer를 만들어 준다.
+  
+
+#### header.mustache
+
+``` html
+<!doctype html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>스프링 부트 웹 서버</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/app/bgimg.css">
+</head>
+```
+
+- bootstrap을 사용하기 위해 CDN을 이용한다.
+
+- 단순한 <html> 또는 <head>와 같이 반복되는 코드들을 써 놓는다.
