@@ -15,7 +15,7 @@
     - 지금의 프로젝트는 스프링 부트가 아닌 그냥 일반적인 Gradle 프로젝트이기 때문에 spring boot 프로젝트로 바꿔야 한다.
     - 아래 코드를 build.gradle 에 넣어주면 된다.
 
-    ```
+    ```gradle
     buildscript {
         ext {
             springBootVersion = '2.1.7.RELEASE' // build.gradle에서 springBootVersion을 전역변수로 설정하고, 그 값을 저장한다는 의미

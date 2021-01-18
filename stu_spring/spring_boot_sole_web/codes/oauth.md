@@ -254,18 +254,6 @@ OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttribut
 - 우리가 직접 정의할 클래스 이다.
 
 ``` java
-User user = saveOrUpdate(attributes);
-```
-
-- saveOrUpdate
-  - 대상 객체가 현재 영속화 되어 있을경우 아무것도 하지 않는다.
-  - 준영속 객체와 동일한 식별값을 갖는 객체가 있다면 Exception이 발생한다.
-  - 대상 객체가 식별자 프로퍼티가 없다면 save한다.
-  - 대상 객체가 식별 값을 갖고 있지 않다면 save한다.
-  - version값이 없으면 save한다.
-  - 위에서 아무것도 걸리지 않았다면 update한다.
-
-``` java
 httpSession.setAttribute("user", new SessionUser(user));
 ```
 
@@ -273,3 +261,15 @@ httpSession.setAttribute("user", new SessionUser(user));
 - User 클래스를 사용하면, 직렬화 문제가 발생하기 때문에 SessionUser를 만들었다.
   - DB와 직접적으로 연결되는 엔티티는, 직렬화시에 자식 엔티티를 가질 수 있기 때문에 성능 이슈가 발생할 수 있다.
 
+``` java
+private User saveOrUpdate(OAuthAttributes attributes){
+        User user = userRepository.findByEmail(attributes.getEmail())
+                .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
+                .orElse(attributes.toEntity());
+
+        return userRepository.save(user);
+    }
+```
+
+- 요청 속성중, email을 통해 user 에서 찾는다.
+  - 그리고 만약 
