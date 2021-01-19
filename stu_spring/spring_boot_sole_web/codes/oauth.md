@@ -346,6 +346,8 @@ public class SessionUser implements Serializable {
 
 ### 어노테이션 기반으로 개선하기
 
+#### LoginUser
+
 ``` java
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
@@ -354,6 +356,7 @@ public @interface LoginUser {
 ```
 
 - 커스텀 어노테이션 이다.
+- config.user 패키지에 들어간다.
 - @Target()
   - 이 어노테이션을 적용시킬 위치
   - 범위 종류
@@ -375,15 +378,369 @@ public @interface LoginUser {
       - 파라미터 선언할 때
     - TYPE_PARAMETER
       - 파라미터 타입 선언할 때
-
 - @Retention()
   - 해당 어노테이션이 어디까지 유효할지 선언해 주는 것.
   - 유효 범위 종류
     - SOURCE
     - CLASS
     - RUNTIME
-
 - @interface
   - 이 파일을 어노테이션 클래스로 지정한다.
   - 해당 이름(LoginUser)을 가진 어노테이션이 생성된다.
 
+#### LoginUserArgumentResolver
+
+``` java
+@RequiredArgsConstructor
+@Component
+public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
+    
+    private final HttpSession httpSession;
+    
+    @Override
+    public boolean supportsParameter(MethodParameter parameter) {
+        
+        boolean isLoginUserAnnotation = parameter.getParameterAnnotation(LoginUser.class) != null;
+        boolean isUserClass = SessionUser.class.equals(parameter.getParameterType());
+        return isLoginUserAnnotation && isUserClass;
+    }
+    
+    @Override
+    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+        return httpSession.getAttribute("user");
+    }
+    
+}
+```
+
+##### 코드 해석
+
+``` java
+@Component
+```
+
+- 개발자가 작성한 클래스를 Bean으로 등록하기 위한 어노테이션
+- @Component vs @Bean
+  - @Component는 말했듯이, 개발자가 직접 작성한 클래스를 Bean에 등록한다.
+  - @Bean은 개발자가 직접적으로 제어가 불가능한 외부 라이브러리 같은 것 들을 Bean에 등록한다.
+
+``` java
+implements HandlerMethodArgumentResolver
+```
+
+- 해당 클래스는 HandlerMethodArgumentResolver 라는 인터페이스를 구현한 클래스 이다.
+
+  - ```java
+    boolean supportsParameter(MethodParameter var1)
+    ```
+
+    - 쉽게 말해, 해당 resolver가 이걸 하려고 만들어 진건지 여부를 검사한다.
+    - 이 클래스 에서는, @LoginUser 어노테이션이 붙어있고 파라미터 클래스 타입이 SessionUser.class 인 경우에만 true를 반환한다.
+
+  - ```java
+    Object resolveArgument(MethodParameter var1, @Nullable ModelAndViewContainer var2, NativeWebRequest var3, @Nullable WebDataBinderFactory var4) throws Exception
+    ```
+
+    - 실제 객체를 리턴한다.
+
+    - 여기서는 세션에서 객체를 가져와서 반환해 준다.
+
+- HandlerMethodArgumentResolver 은 한가지 기능을 지원하는데, 조건이 맞을 경우 메소드가 있다면 해당 인터페이스의 구현체가 지정한 값을 파라미터로 넘길 수 있다.
+
+``` java
+private final HttpSession httpSession;
+```
+
+- 우리가 반환할 값이 세션에서 값을 꺼내오는 것이기 때문에, HttpSession이 필요하다.
+- 장점
+  - 상태값의 종류, 크기, 개수에 제한이 없다.
+  - 보안상 유리하다
+- 단점
+  - 서버에 무리가 갈 수 있다.
+
+- 메소드
+  - setAttribute(키, 값)
+    - 키는 나중에 해당 세션을 불러오기 위한 이름
+    - 값은 자료형을 예측할 수 없어서 Object이다.
+  - getAttribute(키)
+    - 키를 통해 값을 찾는다.
+    - 키로 값을 찾았는데, 없다면 null이 반환된다.
+  - getSession(boolean)
+    - true
+      - 세션이 있다면 돌려주고,없다면 생성한다.
+    - false
+      - 세션이 있다면 돌려주고, 없으면 null을 돌려준다.
+  - getCreationTime()
+    - 해당 세션이 생성된 시간
+    - mile second 단위
+  - getLastAccessedTime()
+    - 마지막 세션 시간
+  - setMaxInactiveInterval(int second)
+    - 해당 시간(초) 동안 클라이언트에서 요청이 없다면 세션이 만료된다.
+  - getMaxInactiveInterval()
+    - 세션 만료 시간을 가져온다.
+  - invalidate()
+    - 세션 종료
+    - 유효하지 않아짐
+  - getId()
+    - 처음 요청했을 때 생긴 세션의 아이디를 문자열로 반환
+
+``` java
+parameter.getParameterAnnotation(LoginUser.class)
+```
+
+- 해당 파라미터의 어노테이션이 LoginUser.class인지 확인해주는 역할
+
+``` java
+SessionUser.class.equals(parameter.getParameterType())
+```
+
+- 파라미터의 타입이 세션유저인지 확인해주는 역할
+
+``` java
+httpSession.getAttribute("user")
+```
+
+- user 라는 이름의 세션 값을 가져온다.
+
+#### WebConfig
+
+- 방금 만들었던 resolver를, 스프링에서 인식하도록 만들어야 한다.
+- 그러기 위해서 WebMvcConfigurer에 추가해야 한다.
+
+``` java
+@RequiredArgsConstructor
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+    private final LoginUserArgumentResolver loginUserArgumentResolver;
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers){
+        argumentResolvers.add(loginUserArgumentResolver);
+    }
+}
+```
+
+``` java
+implements WebMvcConfigurer
+```
+
+- 기존 세팅에 사용자의 세팅을 추가할 수 있도록 해준다.
+
+``` java
+argumentResolvers.add(loginUserArgumentResolver)
+```
+
+- argumentResolvers 에 만들었던 loginuserArgumentResolver를 추가시켜 준다.
+
+#### 기존의 컨트롤러 수정
+
+``` java
+(User)httpSession.getAttribute("user")
+```
+
+``` java
+@LoginUser SessionUser user
+```
+
+- 위와 같은 방법으로 가져오던 세션 값이 아래와 같이 개선되었다.
+- 이러한 방식은 어느 컨트롤러에서든지 사용할 수 있다.
+
+#### 세션 저장소 개선하기
+
+- 기존의 세션은 WAS(내장 톰캣)에 저장되고, 호출된다.
+- 하지만 내장 톰캣의 경우 배포를 할때마다 초기화 된다.
+- 또한, 2대 이상의 서버를 사용하고 있다면, 톰캣마다 세션 동기화 설정을 해야 한다.
+- 해결법
+  - 그냥 톰캣 세션을 사용한다.
+    - 기본적인 방식
+    - 2대 이상의 WAS가 구동될 때엔, 톰캣들간의 세션 공유를 위한 설정이 필요하다.
+  - 데이터베이스를 세션 저장소로 사용한다.
+    - 가장 쉬운 방법이다.
+    - 로그인 요청마다 DB에 IO가 발생하기 때문에, 성능 이슈가 발생할 수 있다.
+    - 우리가 사용할 방법이다.
+    - 비용 절감을 위해서 이다.
+  - Redis, Memcached와 같은 메모리 DB를 사용한다.
+    - 실제 서비스에서는 Embedded Redis와 달리, 외부 메모리 서버를 사용해야 한다.
+
+##### 구현
+
+- build. gradle에 의존성을 추가해 준다.
+
+``` java
+compile('org.springframework.session:spring-session-jdbc')
+```
+
+- application.properties에서 세션 저장소를 jdbc로 이용하도록 한다.
+
+``` yaml
+spring:
+	session:
+		store-type: jdbc
+```
+
+``` properties
+spring.session.store-type=jdbc
+```
+
+- 아직은 계속해서 초기화 된다.
+  - H2를 이용하고 있는데, H2가 재시작 되기 때문
+- 실제 배포에선 RDS를 이용할 것이기 때문에 문제가 되지 않음
+
+### 네이버 로그인 구현
+
+#### properties 또는 yml 구현
+
+- 기존에 CommonOAuth2Provider에서 설정해주던 값들을 모두 수동으로 입력해 줘야 한다.
+
+``` yaml
+spring:
+	security:
+		oauth2:
+			client:
+				registration:
+					naver:
+						client-id: 클라이언트 아이디
+						client-secret: 클라이언트 시크릿키
+						redirect-uri: {baseUrl}/{action}/oauth2/code/{registrationId}
+						authorization_grant_type: authorization_code
+						scope: name, email, profile_image
+						client-name: Naver
+                provider:
+                	naver:
+                		authorization_uri: https://nid.naver.com/oauth2,0/authorize
+                		token_uri: https://nid.naver.com/oauth2.0/token
+                		user-info-url: https://openapi.naver.com/v1/nid/me
+                		user_name_attribute: response
+```
+
+- user_name_attribute가 response인 이유는 회원조회시 JSON 형태로 반환되기 때문이다.
+
+#### 기존의 OAuthAttributes 추가
+
+``` java
+return ofGoogle(userNameAttributeName, attributes);
+```
+
+``` java
+if("naver".equals(registrationId)) {
+    return ofNaver("id",attributes);
+}
+return ofGoogle(userNameAttributeName, attributes);
+```
+
+- 위와 같던 코드에서 그냥 if로 naver라면 naver를 호출해 준다.
+
+``` java
+private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes) {
+    Map<String,Object> response = (Map<String, Object>) attributes.get("response");
+    
+    return OAuthAttributes.builder()
+        .name((String) response.get("name"))
+        .email((String) response.get("email"))
+        .picture((String) response.get("profile_image"))
+        .attributes(response)
+        .nameAttributeKey(userNameAttributeName)
+        .build();
+}
+```
+
+#### OAuth 테스트 적용하기
+
+##### OAuth properties 파일 못가져 오는 오류
+
+- 기존의 테스트들은 작동하지 않는다.
+- 설정값들을 가져올 수 없기 때문이다.
+- test에 application.properties 파일이 없다면 main에서 가져오게 되는데, 정말 application.properties 만을 가져오기 때문에, application-oauth.properties 파일은 가져오지 않기 때문이다.
+- 그래서 테스트를 위한 가짜 설정값들을 넣어주면 된다.
+
+``` yaml
+spring:
+	jpa:
+		show_sql: true
+    properties:
+    	hibernate:
+    		dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    h2:
+    	console:
+    		enabled: true
+    session:
+    	store-type: jdbc
+    security:
+    	oauth2:
+    		client:
+    			registration:
+    				google:
+    					client-id: test
+    					client-secret: test
+    					scope: profile, email
+```
+
+##### 사용자 인증 오류
+
+- 인증되지 않은 사용자의 요청은 리다이렉션 시키기 때문에, 임의로 인증된 사용자를 만들어줘야 한다.
+
+- 그러기 위해서 spring에서 공식적으로 지원하는 방법을 사용한다.
+- 우선 build.gradle에 다음 코드를 추가한다.
+
+``` java
+testCompile("org.springframework.security:spring-security-test")
+```
+
+- 또한, @Test 어노테이션 밑에 다음 코드를 추가한다.
+
+``` java
+@WithMockUser(roles="USER")
+```
+
+- 이 테스트는, USER의 권한을 가진 사용자의 테스트로 인식한다.
+
+- 하지만 아직 SpringBootTest를 통해 테스트를 하고 있고, MockMvc를 사용하지 않기 때문에 작동하지 않는다.
+- 그렇기 때문에 다음을 테스트코드에 추가한다.
+
+``` java
+@Before
+public void setup() {
+    mvc = MockMvcBuilders
+        .webAppContextSetup(context)
+        .apply(springSecurity())
+        .build();
+}
+```
+
+- 위 코드는 매 테스트의 시작 전에 실행된다.
+- MockMvc 인스턴스를 생성해 준다.
+
+##### CustomOAuth2UserService 스캔 오류
+
+- @WebMvcTest가 스캔하는 것
+  - WebSecurityConfigurerAdapter
+  - WebMvcConfigurer
+  - @ControllerAdvice
+  - @Controller
+- 즉, @Repository, @Service, @Component를 스캔하지 않는다.
+- 그렇기 때문에 SecurityConfig를 스캔했지만, SecurityConfig에 필요한 CustomOAuth2UserService를 읽어오지 못해서 발생한 문제이다.
+- 그러므로, SecurityConfig를 스캔하지 않도록 한다.
+
+``` java
+@WebMvcTest(controllers = HelloController.class,
+           excludeFilters = {
+               @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)
+           })
+```
+
+- 별로 추천되지 않는 방식이다.
+
+##### @EnableJpaAuditing 에러
+
+- @EnableJpaAuditing 어노테이션은 최소한 하나의 @Entity 클래스가 필요하다.
+- 하지만 @WebMvcTest에는 존재하지 않는다.
+- @EnableJpaAuditing을 @SpringBootApplication과 함께 뒀기 때문에 @WebMvcTest가 스캔하게 된다.
+- 그러므로, @EnableJpaAuditing을 분리시켜줘야 한다.
+- 그리고 JpaConfig를 만들어 준다.
+
+``` java
+@Configuration
+@EnableJpaAuditing
+public class JpaConfig {}
+```
