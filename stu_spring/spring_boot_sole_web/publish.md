@@ -109,5 +109,44 @@ nohup java -jar \
 
 ### RDS 접근하기
 
+- 테이블 생성
 
+  - 원래 H2는 자동으로 테이블을 생성해 줬지만, 이제는 직접 쿼리를 이용해야 한다.
+  - JPA가 사용하던 테이블
+    - 그냥 테스트코드에서 찍히는 로그들을 복사해서 붙여넣기 하면 된다.
+  - 세션 테이블
+    - schema-mysql.sql 파일에서 확인할 수 있다.(ctrl+shift+n)
+    - 여기서도 복사해서 가져가면 된다.
+
+- 프로젝트 설정
+
+  - build.gradle
+
+    - compile("org.mariadb.jdbc:mariadb-java-client")
+
+  - RDS환경의 profile 설정을 추가한다.
+
+    - application-real.properties를 만든다.(real 이라는 프로필)
+
+    - ```properties
+      spring.profiles.include=oauth, real-db
+      spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+      spring.session.store-type=jdbc
+      ```
+
+- EC2 설정
+
+  - RDS 접속 정보 또한 보호해야 하니까 EC2 서버에 직접 설정파일을 올린다.
+
+  - vim ~/app/application-real-db.properties
+
+    - ```properties
+      spring.jpa.hibernate.ddl-auto=none
+      spring.datasource.url=jdbc:mariadb://엔드포인트:포트/db이름
+      spring.datasource.username=db계정
+      spring.datasource.password=db비번
+      spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+      ```
+
+    - 
 
