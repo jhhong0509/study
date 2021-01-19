@@ -148,5 +148,10 @@ nohup java -jar \
       spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
       ```
 
-    - 
-
+    - ```sh
+      nohup java -jar \
+      	-Dspring.config.location=classpath:/application.properties,/home/ec2-user/app/application-oauth.properties,/home/ex2-user/app/application-real-db.properties,classpath:/application-real.properties \
+      	application-real.properties \
+      	-Dspring.profiles.active=real \
+      	$REPOSITORY/$JAR_NAME 2>&1 &
+      ```
