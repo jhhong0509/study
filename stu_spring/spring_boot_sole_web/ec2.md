@@ -166,4 +166,21 @@
   - 해당 인스턴스의 자바 버전을 번경하기 위해, sudo /usr/sbin/alternatives --config java 를 친 후에, Java8을 선택한다.
   - 그리고 sudo yum remove java-1.7.0-openjdk 를 통해 자바 7을 지워준다.
   - java -version을 통해 자바가 제대로 설치되었는지 확인한다.
+- 시간 설정
+  - EC2는 기본적으로 UTC(세계 표준 시간)을 이용하기 때문에 한국과 시간차이가 발생한다.
+  - 그렇기에 수정해 줘야 한다.
+  - sudo rm /etc/localtime
+  - sudo ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+  - date 를 통해 시간이 정상적인지 확인할 수 있다.
+- Hostname 변경
+  - 서버의 IP만 가지고 어떤 서비스 서번지 알기 힘들기 때문에, 이름을 변경하도록 한다.
+  - sudo vim /etc/sysconfig/network 를 통해 편집 파일을 연다.
+  - 해당 부분중, HOSTNAME을 원하는 이름으로 바꿔준다.
+  - 서버를 sudo reboot 를 통해 재부팅한다.
+  - sudo vim /etc/hosts 를 통해 파일을 연다.
+  - HOSTNAME을 등록한다
+    - 127.0.0.1 HOSTNAME
+  - :wq로 종료한다.
+  - curl 호스트이름 을 통해 확인한다.
+    - 잘 되었다면 80포트 접근이 불가능 하다는 에러가 발생한다.
 
