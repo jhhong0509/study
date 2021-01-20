@@ -71,7 +71,7 @@
       branches:
         only:
           - master
-      		
+      
       cache:
         directories:
           - '$HOME/.m2/repository'
@@ -188,10 +188,10 @@
       - mv 파일 이름.zip deploy/파일 이름.zip
     deploy:	
       - provider: s3
-      access_key_id: $AWS_ACCESS_KEY
-    	
+        access_key_id: $AWS_ACCESS_KEY
+    
       secret_access_key: $AWS_SECREY_KEY
-    	
+    
       bucket: 버킷 이름
       region: 지역
       skip_cleanup: true
