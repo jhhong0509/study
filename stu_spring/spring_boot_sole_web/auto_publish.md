@@ -186,7 +186,7 @@
     	- zip -r zip 파일의 이름 *
     	- mkdir -p deploy
     	- mv 파일 이름.zip deploy/파일 이름.zip
-    deploy:
+    deploy:	
     	- provider: s3
     	access_key_id: $AWS_ACCESS_KEY
     	
@@ -221,9 +221,16 @@
       - 아까 환경변수로 설정했던 값을 가져온다.
 
     - ``` yaml
-      local_dir: deploy
+      skip_cleanup: true
       ```
 
+      - 빌드가 끝난 후에, 결과물을 삭제하지 않겠다는 의미이다.
+      - cleanup을 스킵하겠단 의미
+    
+    - ``` yaml
+      local_dir: deploy
+      ```
+    
       - 해당 디렉토리의 파일만 전송된다.
       - 위에서 만들었던 deploy 디렉토리로 정한다.
 
@@ -289,4 +296,245 @@
     - 30% 또는 50%로 나누어서 배포할지 등을 결정할 수 있다.
     - 우리는 한번에 전부 다 배포하는 AllAtOnce를 선택한다.
   - 로드밸런싱은 체크를 해제한다.
-- 
+
+### Travis CI, S3, CodeDeploy
+
+- S3의 zip파일을 저장할 디렉토리 생성
+  - mkdir ~/app/step2 && mkdir ~/app/step2/zip
+  - &&를 통해 여러개의 명령어를 연속해서 사용할 수 있다.
+  - 해당 디렉토리에 zip 파일이 복사되어 압축을 풀게 할 예정
+
+- AWS CodeDeploy 설정
+
+  - CodeDeploy 설정은 appspec.yml로 할 수 있다.
+
+  - 코드
+
+    - ``` yaml
+      version: 0.0
+      os: linux
+      file:
+      	- source: /
+      	destination: 파일을 받을 경로
+      	overwrite: yes
+      ```
+
+    - 코드 분석
+
+      - ``` yaml
+        version: 0.0
+        ```
+
+        - CodeDeploy 버전
+
+      - ``` yaml
+        source: /
+        ```
+
+        - CodeDeploy에서 받은 파일중, 목적지로 이동시킬 대상
+        - /로 하면 모든 파일
+
+      - ``` yaml
+        destionation: 파일을 받을 경로
+        ```
+
+        - source에서 받아온 파일을 받을 위치
+        - Jar을 실행하는 등 작업은 여기서 옮긴 파일들로 진행된다.
+
+      - ``` yaml
+        overwrite: yes
+        ```
+
+        - 기존의 파일을 덮어쓸지 여부
+        - yes 이니 덮어쓴다는 의미이다.
+
+  - .travis.yml에서도 CodeDeploy에 관한 내용을 추가해야 한다.
+
+    - ``` yaml
+      deploy:
+      	- provider: codedeploy
+      	access_key_id: $AWS_ACCESS_KEY
+      	secret_access_key: $AWS_SECRET_KEY
+      	
+      	bucket: S3 버킷이름
+      	key: zip 파일이름
+      	
+      	bundle_type: zip
+      	application: 웹 콘솔의 CodeDeploy 애플리케이션
+      	
+      	deployment_group: CodeDeploy 배포 그룹 이름
+      	
+      	region: ap-northeast-2
+      	wait-until-deployed: true
+      ```
+
+- 배포 자동화 만들기
+
+  - scripts 디렉토리를 만든다.
+
+  - 그 아래에 deploy.sh 파일을 만들어 준다.
+
+    - 코드
+
+    - ``` sh
+      #!/bin/bash
+      
+      REPOSITORY=/home/ec2-user/app/step2
+      PROJECT_NAME=freelec-springboot2-webservice
+      
+      echo "> Build 파일 복사"
+      
+      cp $REPOSITORY/zip/*.jar $REPOSITORY/
+      
+      echo "> 현재 구동중인 애플리케이션 pid 확인"
+      
+      CURRENT_PID=$(pgrep -fl freelec-springboot2-webservice | grep jar | awk '{print $1}')
+      
+      echo "현재 구동중인 어플리케이션 pid: $CURRENT_PID"
+      
+      if [ -z "$CURRENT_PID" ]; then
+          echo "> 현재 구동중인 애플리케이션이 없으므로 종료하지 않습니다."
+      else
+          echo "> kill -15 $CURRENT_PID"
+          kill -15 $CURRENT_PID
+          sleep 5
+      fi
+      
+      echo "> 새 어플리케이션 배포"
+      
+      JAR_NAME=$(ls -tr $REPOSITORY/*.jar | tail -n 1)
+      
+      echo "> JAR Name: $JAR_NAME"
+      
+      echo "> $JAR_NAME 에 실행권한 추가"
+      
+      chmod +x $JAR_NAME
+      
+      echo "> $JAR_NAME 실행"
+      
+      nohup java -jar \
+          -Dspring.config.location=classpath:/application.properties,classpath:/application-real.properties,/home/ec2-user/app/application-oauth.properties,/home/ec2-user/app/application-real-db.properties \
+          -Dspring.profiles.active=real \
+          $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
+      ```
+
+    - 코드 설명
+
+      - ``` sh
+        $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
+        ```
+
+      - 기본적으로 nohup 실행시에, CodeDeploy는 무한으로 대기한다.
+
+      - 이것을 해결하기 위해 nohup.out 파일을 표준 입출력으로 별도 사용한다.
+
+  - .travis.yml 파일 수정
+
+    - ``` yaml
+      before_deploy:
+      	- mkdir -p before-deploy
+      	- cp scripts/*.sh before-deploy/
+      	- cp build/libs/*.jar before-deploy
+      	- cd before-deploy && zip -r before-deploy *
+      	
+      	- cd../ && mkdir -p deploy
+      	- mv before-deploy/before-deploy.zip deploy/이름.zip
+      ```
+
+    - 코드 해석
+      
+      ``` yaml
+mkdir -p before-deploy
+      ```
+      
+- zip에 포함시킬 파일들을 모아놓은 디렉토리를 만들어 준다.
+      - Travis CI에서 S3로 업로드 할때, 디렉토리 단위로만 가능하다.
+      
+    - ``` yaml
+  cp scripts/*.sh before-deploy/
+      ```
+
+      - 스크립트 폴더 밑의 모든 쉘 스크립트 파일들을 복사해간다.
+    
+    - ``` yaml
+  cp appspec.yml before-deploy/
+      ```
+
+      - 만들어둔 CodeDeploy 설정 파일들을 복사해간다.
+    
+    - ``` yaml
+  cp build/libs/*.jar before-deploy
+      ```
+
+      - 빌드된 jar 파일도 복사해 간다.
+
+    - cd before-deploy && zip -r before-deploy *
+
+      - before-deploy로 이동한 후에 모든 파일을 압축시킨다.
+    
+    - ``` yaml
+  mv before-deploy/before-deploy.zip deploy/이름.zip
+      ```
+    
+      - 압축된 파일을 새로 만든 deploy 폴더로 옮겨준다.
+    
+  - appspec.yml 수정
+  
+    - ``` yaml
+      permissions:
+        - object: /
+      	pattern: "**"
+      	owner: ec2-user
+      	group: ec2-user
+      hooks:
+      	ApplicationStart:
+      		- location: deploy.sh
+      		timeout: 60
+      		runas: ec2-user
+      ```
+  
+    - 코드 분석
+  
+      - ``` yaml
+        permissions:
+          - object: /
+        	pattern: "**"
+        	owner: ec2-user
+        	group: ec2-user
+        ```
+  
+        - 가져온 파일들에 대해서 모두 ec2-user의 권한을 가지게 한다.
+  
+      - ``` yaml
+        hooks:
+        	ApplicationStart:
+        	  - location: deploy.sh
+        		timeout: 60
+        		runas: ec2-user
+        ```
+  
+        - CodeDeploy에서 배포할 때 실행할 명령어를 지정해 준다.
+        - ApplicationStart 단계에서 스크립트 파일을 ec2-user 권한으로 실행한다.
+        - 만약 60초 이상 수행이 끝나지 않으면 실패한다.
+
+### 로그 보기
+
+- AWS가 지원하는 서비스에서 로그를 볼 줄 모른다면, 해결하기 매우 어려워 진다.
+
+- 배포에 실패했을 때, 어느 로그를 봐야 할지 소개하려 한다.
+
+- CodeDeploy 에 관한 내용들의 위치로 이동해 준다.
+
+  - cd /opt/codedeploy-agent/deployment-root
+
+- ll을 통해 내용을 확인해 준다.
+
+  - 코드처럼 생긴 디렉토리
+    - 영문과 -로 이루어진 디렉토리 명은 CodeDeploy의 ID이다.
+    - 본인의 서버에는 본인의 코드로 되어있다.
+    - 배포 파일이 정상적으로 있는지 확인할 수 있다.
+
+  - deployment-logs
+    - CodeDeploy의 로그들이 저장되는 파일이다.
+    - 배포중 표준 입/출력은 모두 포함된다.
+    - echo 내용도 포함된다.
