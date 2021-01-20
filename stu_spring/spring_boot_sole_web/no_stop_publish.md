@@ -314,18 +314,18 @@ spring.session.store-type=jdbc
 
   - ``` yaml
     hooks:
-    	AferInstall:
-    	  - location: stop.sh
-    		timeout: 60
-    		runas: ec2-user
-    	ApplicationStart:
-    	  - location: start.sh
-    	  	timeout: 60
-    	  	runas: ec2-user
-    	ValidateService:
-    	  - location: health.sh
-    	  	timeout: 60
-    	  	runas: ec2-user
+      AferInstall:
+        - location: stop.sh
+          timeout: 60
+    	  runas: ec2-user
+      ApplicationStart:
+        - location: start.sh
+          timeout: 60
+    	  runas: ec2-user
+      ValidateService:
+        - location: health.sh
+          timeout: 60
+    	  runas: ec2-user
     ```
 
 - 해당 스크립트 들을 생성

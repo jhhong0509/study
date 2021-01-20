@@ -626,8 +626,8 @@ compile('org.springframework.session:spring-session-jdbc')
 
 ``` yaml
 spring:
-	session:
-		store-type: jdbc
+  session:
+    store-type: jdbc
 ```
 
 ``` properties
@@ -707,24 +707,24 @@ private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String,
 
 ``` yaml
 spring:
-	jpa:
-		show_sql: true
-    properties:
-    	hibernate:
-    		dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-    h2:
-    	console:
-    		enabled: true
-    session:
-    	store-type: jdbc
-    security:
-    	oauth2:
-    		client:
-    			registration:
-    				google:
-    					client-id: test
-    					client-secret: test
-    					scope: profile, email
+  jpa:
+	show_sql: true
+  properties:
+    hibernate:
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  h2:
+    console:
+     enabled: true
+  session:
+    store-type: jdbc
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: test
+            client-secret: test
+            scope: profile, email
 ```
 
 ##### 사용자 인증 오류

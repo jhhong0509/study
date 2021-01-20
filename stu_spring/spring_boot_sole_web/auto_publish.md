@@ -66,22 +66,22 @@
     - ``` yaml
       language: java
       jdk:
-      	- openjdk8
+        - openjdk8
       
       branches:
-      	only:
-      		- master
+        only:
+          - master
       		
       cache:
-      	directories:
-      		- '$HOME/.m2/repository'
-      		- '$HOME/.gradle'
+        directories:
+          - '$HOME/.m2/repository'
+          - '$HOME/.gradle'
       
       script: "./gradlew clean build"
       
       notifications:
-      	email:
-      		recipients: 이메일 주소
+        email:
+          recipients: 이메일 주소
       ```
 
     - 코드 분석
@@ -89,7 +89,7 @@
     - ```yaml
       language: java
       jdk:
-      	- openjdk8
+        - openjdk8
       ```
 
       -  언어를 설정해 준다.
@@ -97,8 +97,8 @@
 
     - ``` yaml
       branches:
-      	only:
-      		- master
+        only:
+          - master
       ```
 
       - 어느 브랜치에 PUSH 되었을 때 Travis CI를 작동시킬지 결정한다.
@@ -107,9 +107,9 @@
 
     - ``` yaml
       cache:
-      	directories:
-      		- '$HOME/.m2/repository'
-      		- '$HOME/.gradle'
+        directories:
+          - '$HOME/.m2/repository'
+          - '$HOME/.gradle'
       ```
 
       - 의존성을 한번 받은 후에, 같은 의존성을 다음 배포때 받지 않도록 한다.
@@ -122,8 +122,8 @@
 
     - ```yaml
       notifications:
-      	email:
-      		recipients: 이메일 주소
+        email:
+          recipients: 이메일 주소
       ```
 
       - Travis CI 실행시 알림이 가도록 한다.
@@ -183,30 +183,30 @@
 
     ``` yaml
     before_deploy:
-    	- zip -r zip 파일의 이름 *
-    	- mkdir -p deploy
-    	- mv 파일 이름.zip deploy/파일 이름.zip
+      - zip -r zip 파일의 이름 *
+      - mkdir -p deploy
+      - mv 파일 이름.zip deploy/파일 이름.zip
     deploy:	
-    	- provider: s3
-    	access_key_id: $AWS_ACCESS_KEY
+      - provider: s3
+      access_key_id: $AWS_ACCESS_KEY
     	
-    	secret_access_key: $AWS_SECREY_KEY
+      secret_access_key: $AWS_SECREY_KEY
     	
-    	bucket: 버킷 이름
-    	region: 지역
-    	skip_cleanup: true
-    	acl: private
-    	local_dir: deploy
-    	wait-until-deployed: true
+      bucket: 버킷 이름
+      region: 지역
+      skip_cleanup: true
+      acl: private
+      local_dir: deploy
+      wait-until-deployed: true
     ```
 
   - 코드 해석
 
     - ``` yaml
       before_deploy:
-      	- zip -r zip 파일의 이름 *
-      	- mkdir -p deploy
-      	- mv 파일 이름.zip deploy/파일 이름.zip
+        - zip -r zip 파일의 이름 *
+        - mkdir -p deploy
+        - mv 파일 이름.zip deploy/파일 이름.zip
       ```
 
       - deploy 실행 전에 실행된다.
@@ -314,9 +314,9 @@
       version: 0.0
       os: linux
       file:
-      	- source: /
-      	destination: 파일을 받을 경로
-      	overwrite: yes
+        - source: /
+          destination: 파일을 받을 경로
+          overwrite: yes
       ```
 
     - 코드 분석
@@ -352,20 +352,20 @@
 
     - ``` yaml
       deploy:
-      	- provider: codedeploy
-      	access_key_id: $AWS_ACCESS_KEY
+        - provider: codedeploy
+          access_key_id: $AWS_ACCESS_KEY
       	secret_access_key: $AWS_SECRET_KEY
       	
-      	bucket: S3 버킷이름
-      	key: zip 파일이름
+        bucket: S3 버킷이름
+        key: zip 파일이름
       	
-      	bundle_type: zip
-      	application: 웹 콘솔의 CodeDeploy 애플리케이션
+        bundle_type: zip
+        application: 웹 콘솔의 CodeDeploy 애플리케이션
       	
-      	deployment_group: CodeDeploy 배포 그룹 이름
+        deployment_group: CodeDeploy 배포 그룹 이름
       	
-      	region: ap-northeast-2
-      	wait-until-deployed: true
+        region: ap-northeast-2
+        wait-until-deployed: true
       ```
 
 - 배포 자동화 만들기
@@ -446,7 +446,7 @@
       ``` yaml
 mkdir -p before-deploy
       ```
-      
+  
 - zip에 포함시킬 파일들을 모아놓은 디렉토리를 만들어 준다.
       - Travis CI에서 S3로 업로드 할때, 디렉토리 단위로만 가능하다.
       
@@ -487,10 +487,10 @@ mkdir -p before-deploy
       	owner: ec2-user
       	group: ec2-user
       hooks:
-      	ApplicationStart:
-      		- location: deploy.sh
-      		timeout: 60
-      		runas: ec2-user
+        ApplicationStart:
+          - location: deploy.sh
+      	  timeout: 60
+      	  runas: ec2-user
       ```
   
     - 코드 분석
@@ -507,10 +507,10 @@ mkdir -p before-deploy
   
       - ``` yaml
         hooks:
-        	ApplicationStart:
-        	  - location: deploy.sh
-        		timeout: 60
-        		runas: ec2-user
+          ApplicationStart:
+            - location: deploy.sh
+              timeout: 60
+          	  runas: ec2-user
         ```
   
         - CodeDeploy에서 배포할 때 실행할 명령어를 지정해 준다.
