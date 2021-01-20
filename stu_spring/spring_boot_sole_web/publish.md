@@ -133,6 +133,8 @@ nohup java -jar \
       spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
       spring.session.store-type=jdbc
       ```
+      
+      - 실제 배포에서 사용될 정보
 
 - EC2 설정
 
@@ -148,6 +150,10 @@ nohup java -jar \
       spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
       ```
 
+    - spring.jpa.hibernate.ddl-auto=none
+      
+      - 데이터베이스의 구조를 변경하는 sql문을 생성하지 않겠다는 의미
+      
     - ```sh
       nohup java -jar \
       	-Dspring.config.location=classpath:/application.properties,/home/ec2-user/app/application-oauth.properties,/home/ex2-user/app/application-real-db.properties,classpath:/application-real.properties \
@@ -155,3 +161,38 @@ nohup java -jar \
       	-Dspring.profiles.active=real \
       	$REPOSITORY/$JAR_NAME 2>&1 &
       ```
+
+### EC2 설정하기
+
+- EC2 보안 그룹
+  - 스프링 부트 프로젝트가 8080 포트에서 배포되었으니 8080포트가 열려있는지 확인한다.
+  - 만약 안되어 있다면 추가해 준다.
+- EC2 접속하기
+  - 본인이 생성한 EC2 인스턴스를 선택하면 상세정보에서 퍼블릭 DNS가 있다.
+  - 도메인 주소라고 생각하면 된다.
+  - 도메인주소:8080 을 통해 자신의 서비스에 들어간다.
+- 서비스를 OAuth에 등록하기
+  - 이전에 개발 단계였기 때문에 localhost만 등록했었다.
+  - 그렇기 때문에 작동하지 않는다.
+  - 구글
+    - <a href="https://console.cloud.google.com/home/dashboard">이곳</a>으로접속 해 준다.
+    - API 및 서비스 탭
+    - 사용자 인증 정보 선택
+    - OAuth 동의화면 선택
+    - 승인된 도메인에 http://를 제외한 DNS 주소 등록
+    - 사용자 인증 정보 탭 선택
+    - 서비스 이름 클릭
+    - 리디렉션URI를 http://DNSaddress:8080/login/oauth2/code/google 로 바뀌준다.
+      - DNSaddress는 본인의 DNS 주소를 적어주면 된다.
+  - 네이버
+    - <a href="https://developers.naver.com/apps/#/myapps">이곳</a>으로 접속해 준다.
+    - 내 어플리케이션에서 본인의 프로젝트로 이동해 준다.
+    - API 선택을 눌러준다.
+    - PC 웹 항목까지 내려준다.
+    - 서비스 URL을 본인의 DNS 주소로 바꿔준다.
+      - 로그인을 시도하는 서비스가 네이버에 등록된 서비스인지 판단하기 위함
+      - 포트는 제외하고 입력한다.
+      - 네이버에서는 하나밖에 지원되지 않기 때문에, localhost에서는 더이상 작동하지 않는다.
+    - Callback URL을 자신의 전체 주소로 바꿔준다.
+      - http://DNSaddress:8080/login/oauth2/code/naver
+
