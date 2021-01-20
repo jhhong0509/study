@@ -10,7 +10,7 @@
         - @GetMapping("users/detail"), @PostMapping("users/detail")처럼 할 필요는 없다.
         - 클래스에 @RequestMapping("/users/detail") 처럼 해 주고, @GetMapping과 @PostMapping을 사용하면 된다.
 ```java
-    @RequestParam("넘어온 이름") String name
+@RequestParam("넘어온 이름") String name
 ```
 - @RequestParam
     - 외부에서 넘긴 파라미터를 가져오는 어노테이션
