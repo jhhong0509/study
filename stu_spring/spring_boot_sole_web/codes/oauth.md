@@ -103,16 +103,16 @@ spring-security-oauth2-autoconfigure
 
 ``` yaml
 spring:
-	security:
-		oauth2:
-			client:
-				registration:
-					google:
-						client-id: 클라이언트 아이디
-						client-secret: 클라이언트 시크릿
-						scope:
-							- email
-							- profile
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 클라이언트 아이디
+            client-secret: 클라이언트 시크릿
+            scope:
+              - email
+              - profile
 ```
 
 - properties
@@ -646,23 +646,23 @@ spring.session.store-type=jdbc
 
 ``` yaml
 spring:
-	security:
-		oauth2:
-			client:
-				registration:
-					naver:
-						client-id: 클라이언트 아이디
-						client-secret: 클라이언트 시크릿키
-						redirect-uri: {baseUrl}/{action}/oauth2/code/{registrationId}
-						authorization_grant_type: authorization_code
-						scope: name, email, profile_image
-						client-name: Naver
-                provider:
-                	naver:
-                		authorization_uri: https://nid.naver.com/oauth2,0/authorize
-                		token_uri: https://nid.naver.com/oauth2.0/token
-                		user-info-url: https://openapi.naver.com/v1/nid/me
-                		user_name_attribute: response
+  security:
+    oauth2:
+      client:
+        registration:
+          naver:
+            client-id: 클라이언트 아이디
+            client-secret: 클라이언트 시크릿키
+            redirect-uri: {baseUrl}/{action}/oauth2/code/{registrationId}
+            authorization_grant_type: authorization_code
+            scope: name, email, profile_image
+            client-name: Naver
+        provider:
+          naver:
+            authorization_uri: https://nid.naver.com/oauth2,0/authorize
+            token_uri: https://nid.naver.com/oauth2.0/token
+            user-info-url: https://openapi.naver.com/v1/nid/me
+            user_name_attribute: response
 ```
 
 - user_name_attribute가 response인 이유는 회원조회시 JSON 형태로 반환되기 때문이다.
