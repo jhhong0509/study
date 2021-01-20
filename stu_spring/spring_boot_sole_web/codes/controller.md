@@ -23,3 +23,6 @@
     - /posts/1 처럼, URI에 정보를 담을 수 있다.
     - @RequestMapping("/경로/{변수}/{변수}") 와 같이 선언해 놔야 한다.
     - restapi에서 자주 사용된다.
+- @RequestBody
+    - HTTP 요청의 body를 자바의 객체로 받을 수 있다.
+    - URL을 통해 넘어온 값은 받을 수 없다.
