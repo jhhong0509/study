@@ -314,12 +314,11 @@ httpSession.setAttribute("user", new SessionUser(user));
 
 ``` java
 private User saveOrUpdate(OAuthAttributes attributes){
-        User user = userRepository.findByEmail(attributes.getEmail())
-                .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
-                .orElse(attributes.toEntity());
-
-        return userRepository.save(user);
-    }
+    User user = userRepository.findByEmail(attributes.getEmail())
+            .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
+            .orElse(attributes.toEntity());
+    return userRepository.save(user);
+}
 ```
 
 - 요청 속성중, email을 통해 user 에서 찾는다.
@@ -708,7 +707,7 @@ private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String,
 ``` yaml
 spring:
   jpa:
-	show_sql: true
+    show_sql: true
   properties:
     hibernate:
       dialect: org.hibernate.dialect.MySQL5InnoDBDialect
