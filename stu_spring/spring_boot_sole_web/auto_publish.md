@@ -129,7 +129,7 @@
       - Travis CI 실행시 알림이 가도록 한다.
       - 꼭 이메일일 필요는 없고, 만약 slack에 올리고 싶다면 slack: 슬랙아이디 처럼 사용하면 된다.
 
-#### Travis CI와 AWS S3 연동하기
+#### S3를 이용하는 이유
 
 - S3란
   - S3란 AWS에서 지원하는 파일서버이다.
@@ -145,4 +145,148 @@
   - CodeDeploy가 빌드, 배포 모두 할 수 있다.
   - 하지만 빌드 없이 배포만 할 때 대응하기 어렵다.
   - 또한 확장성이 떨어진다.
+
+#### Travis CI와 AWS S3 연동
+
+- AWS Key
+  - 기본적으로 AWS 서비스에 외부 서비스는 접근할 수 없다.
+  - 그렇기 때문에 접근 권한을 가진 Key를 생성해서 사용해야 한다.
+  - AWS는 인증 관련 기능인 IAM을 지원한다.
+- Travis CI의 접근 허용하기
+  - AWS 콘솔에서 IAM을 검색한다.
+  - 왼쪽 사이드바에서 사용자를 누른다.
+  - 사용자 추가를 누른다.
+  - 사용자 이름, 엑세스 유형을 선택한다.
+    - 엑세스 유형은 프로그래밍 방식 엑세스로 한다.
+  - 권한 설정은 기존 정책 직접 연결을 선택한다.
+  - 아래 검색화면에서 s3full로 검색해서 체크한다.
+  - 그리고 codedeployf를 검색해서 체크한다.
+  - 태그는 Name값을 자신이 인지할 수 있을 정도로 선택해 준다.
+  - 권한 설정 항목을 확인한다.
+  - 엑세스 키를 확인한다.
+  - Travis CI 설정 화면으로 이동한다.
+  - 내리다보면 Environment Variables 항목이 있다.
+  - AWS_ACCESS_KEY 라는 이름으로 엑세스 키를 등록한다.
+  - AWS_SECREY_KEY 라는 이름으로 비밀 엑세스 키를 입력한다.
+
+- S3 만들기
+  - AWS 웹 콘솔에서 S3를 검색한다.
+  - 버킷 만들기를 누른다.
+  - 이름을 작성해 준다.
+  - 다 넘기고, 버킷 보안과 설정 부분으로 간다.
+  - 버킷의 보안과 권한 설정에서는 모든 퍼블릭 엑세스 차단을 해야 한다.
+    - Jar 파일이 Public이라면, 코드, 설정값 등 모두 탈취될 수 있다.
+
+- .travis.yml 변경
+
+  - 밑의 코드를 .travis.yml에 추가한다.
+
+    ``` yaml
+    before_deploy:
+    	- zip -r zip 파일의 이름 *
+    	- mkdir -p deploy
+    	- mv 파일 이름.zip deploy/파일 이름.zip
+    deploy:
+    	- provider: s3
+    	access_key_id: $AWS_ACCESS_KEY
+    	
+    	secret_access_key: $AWS_SECREY_KEY
+    	
+    	bucket: 버킷 이름
+    	region: 지역
+    	skip_cleanup: true
+    	acl: private
+    	local_dir: deploy
+    	wait-until-deployed: true
+    ```
+
+  - 코드 해석
+
+    - ``` yaml
+      before_deploy:
+      	- zip -r zip 파일의 이름 *
+      	- mkdir -p deploy
+      	- mv 파일 이름.zip deploy/파일 이름.zip
+      ```
+
+      - deploy 실행 전에 실행된다.
+      - CodeDeploy가 Jar 파일을 인식하지 못해서 Jar+설정파일 을 zip파일로 묶어준다.
+
+    - ``` yaml
+      access_key_id: $AWS_ACCESS_KEY
+      	
+      secret_access_key: $AWS_SECRET_KEY
+      ```
+
+      - 아까 환경변수로 설정했던 값을 가져온다.
+
+    - ``` yaml
+      local_dir: deploy
+      ```
+
+      - 해당 디렉토리의 파일만 전송된다.
+      - 위에서 만들었던 deploy 디렉토리로 정한다.
+
+- EC2와 CodeDeploy 연동하기
+  - IAM 역할 생성하기
+    - 역할과 사용자 차이
+      - 역할은 AWS 서비스에만 할당할 수 있는 권한
+      - 사용자는 AWS 서비스 외에 사용할 수 있는 권한
+  - IAM을 검색한다.
+  - 역할을 누른다.
+  - 역할 만들기를 누른다.
+  - 서비스 선택에서 AWS 서비스를 누른다.
+  - EC2를 누른다.
+  - 정책에서는 EC2RoleForA를 검색한다.
+  - 태그는 원하는 이름으로
+  - 역할의 이름을 정하고, 정보를 확인한다.
+  - EC2와 인스턴스 목록으로 이동한다.
+  - 인스턴스를 우클릭 한다.
+  - 인스턴스 설정 - IAM 역할 연결/바꾸기 를 선택한다.
+  - 방금 생성한 역할을 선택해 준다.
+  - EC2를 재부팅 해 준다.
+  - EC2가 CodeDeploy 의 요청을 받도록 에이전트를 설치한다.
+    - EC2에 접속한다.
+    - aws s3 cp s3://aws-codedeploy-ap-northeast-2/latest/install .--region ap-northeast-2를 입력한다.
+    - install 파일에 권한이 없으니 chmod +x ./install을 통해 실행 권한을 준다.
+    - sudo ./install auto 로 설치를 진행한다.
+    - sudo service codedeploy-agent status 를 통해 실행 상태를 확인한다.
+
+- CodeDeploy와 EC2 연동하기
+  - CodeDeploy에서 EC2에 접근하기 위한 권한이 필요하다.
+  - 이것 또한 IAM 역할을 생성한다.
+  - IAM을 검색한다.
+  - 역할을 누른다.
+  - 역할 만들기를 누른다.
+  - 서비스 선택에서 AWS 서비스를 누른다.
+  - CodeDeploy를 선택한다.
+  - 권한이 하나뿐이기 때문에 바로 넘어간다.
+  - 태그를 원하는 이름으로 한다.
+  - 역할 이름과 선택 항목을 작성한다.
+
+- CodeDeploy 생성하기
+  - AWS에서 지원하는 배포
+    - Code Commit
+      - 깃허브와 비슷하다.
+      - 깃허브가 무료이기 때문에 잘 안쓰인다.
+    - Code Build
+      - Travis CI처럼 빌드용 서비스 이다.
+      - 보통 젠킨스/팀시티를 이용해서 잘 사용되지 않는다.
+    - CodeDeploy
+      - AWS의 배포 서비스 이다.
+      - 대체제가 없다.
+      - 많은 기능을 지원한다.
+  - CodeDeploy 서비스로 이동한다.
+  - 애플리케이션 생성을 누른다.
+  - 컴퓨팅 플랫폼은 EC2/온프레미스를 선택한다.
+  - 생성 후 배포 그룹 생성을 누른다.
+  - 배포 그룹 이름을 등록한다.
+  - 서비스 역할은 아까 만들어둔 CodeDeploy용 IAM을 선택한다.
+  - 서비스가 1대라면 현재위치, 2대 이상이라면 블루/그린을 선택한다.
+  - 환경 구성에서 Amazon EC2 인스턴스를 선택해 준다.
+  - 배포 구성을 CodeDeployDefault.AllAtOnce를 선택한다.
+    - 한번에 몇대의 서버에 배포할지 결정한다.
+    - 30% 또는 50%로 나누어서 배포할지 등을 결정할 수 있다.
+    - 우리는 한번에 전부 다 배포하는 AllAtOnce를 선택한다.
+  - 로드밸런싱은 체크를 해제한다.
 - 
