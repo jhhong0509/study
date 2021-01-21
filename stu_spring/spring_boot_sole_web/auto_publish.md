@@ -432,13 +432,13 @@
 
     - ``` yaml
       before_deploy:
-      	- mkdir -p before-deploy
-      	- cp scripts/*.sh before-deploy/
-      	- cp build/libs/*.jar before-deploy
-      	- cd before-deploy && zip -r before-deploy *
-      	
-      	- cd../ && mkdir -p deploy
-      	- mv before-deploy/before-deploy.zip deploy/이름.zip
+        - mkdir -p before-deploy
+        - cp scripts/*.sh before-deploy/
+        - cp build/libs/*.jar before-deploy
+        - cd before-deploy && zip -r before-deploy *
+      
+        - cd../ && mkdir -p deploy
+        - mv before-deploy/before-deploy.zip deploy/이름.zip
       ```
 
     - 코드 해석
@@ -483,14 +483,14 @@ mkdir -p before-deploy
     - ``` yaml
       permissions:
         - object: /
-      	pattern: "**"
-      	owner: ec2-user
-      	group: ec2-user
+          pattern: "**"
+          owner: ec2-user
+          group: ec2-user
       hooks:
         ApplicationStart:
           - location: deploy.sh
-      	  timeout: 60
-      	  runas: ec2-user
+            timeout: 60
+            runas: ec2-user
       ```
   
     - 코드 분석
@@ -498,9 +498,9 @@ mkdir -p before-deploy
       - ``` yaml
         permissions:
           - object: /
-        	pattern: "**"
-        	owner: ec2-user
-        	group: ec2-user
+            pattern: "**"
+            owner: ec2-user
+            group: ec2-user
         ```
   
         - 가져온 파일들에 대해서 모두 ec2-user의 권한을 가지게 한다.
