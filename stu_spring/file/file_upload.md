@@ -124,4 +124,11 @@ public List<String> upload(@RequestPart List<MultipartFile> files) throws Except
     File dest = new File("C:/Image/" + originalfileName);
     ```
 
-    - 
+    - 실제 파일이 저장될 위치+파일이름을 해준다.
+    - 실제 파일이 저장될 위치를 나타낸다.
+
+  - ``` java
+    file.transferTo(dest);
+    ```
+
+    - 파일을 실제로 업로드 하는 구문이다.
