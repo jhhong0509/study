@@ -355,15 +355,15 @@
         - provider: codedeploy
           access_key_id: $AWS_ACCESS_KEY
       	secret_access_key: $AWS_SECRET_KEY
-      	
+      
         bucket: S3 버킷이름
         key: zip 파일이름
-      	
+      
         bundle_type: zip
         application: 웹 콘솔의 CodeDeploy 애플리케이션
-      	
+      
         deployment_group: CodeDeploy 배포 그룹 이름
-      	
+      
         region: ap-northeast-2
         wait-until-deployed: true
       ```
