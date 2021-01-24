@@ -125,3 +125,9 @@ public List<String> upload(@RequestPart List<MultipartFile> files) throws Except
     ```
 
     - 파일을 실제로 업로드 하는 구문이다.
+  
+- ``` java
+  file.transferTo(new File("C:\\Users\\Administrator\\Desktop\\img" + file.getOriginalFilename()));
+  ```
+
+  - 간단하게 위와 같이 구현할 수 있다.
