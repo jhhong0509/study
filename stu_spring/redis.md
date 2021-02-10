@@ -253,6 +253,8 @@ public RedisConnectionFactory redisConnectionFactory() {
 
 > Redis와 연결 해 준다.
 
+> 테스트에선 redisHost가 localhost이다.
+
 ``` java
 @Bean
 public RedisTemplate<?, ?> redisTemplate() {
