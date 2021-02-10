@@ -136,3 +136,254 @@
 - Embedded Redis란
 
   > H2와 같은 내장 Redis
+
+### Spring Boot에서 Redis 구현
+
+#### EmbeddedRedisConfig
+
+> 로컬에서 사용될 Redis의 설정을 해준다.
+
+``` java
+@Slf4j
+@Profile("local")
+@Configuration
+public class EmbeddedRedisConfig {
+
+    @Value("${spring.redis.port}")
+    private int redisPort;
+
+    private RedisServer redisServer;
+
+    @PostConstruct
+    public void redisServer() throws IOException {
+            redisServer = new RedisServer(redisPort);
+            redisServer.start();
+    }
+
+    @PreDestroy
+    public void stopRedis() {
+        if (redisServer != null) {
+            redisServer.stop();
+        }
+    }
+}
+```
+
+``` java
+@Slf4j
+```
+
+> lombok 어노테이션 이다.
+>
+> 로그를 남기기 위해 사용한다.
+
+``` java
+@Profile("local")
+```
+
+> 프로필중 로컬이 활성화 되어 있을때만 실행된다.
+>
+> 즉, 로컬에서 할때만 실행될 예정이다.
+
+``` java
+@PostConstruct
+public void redisServer() throws IOException {
+    redisServer = new RedisServer(redisPort);
+    redisServer.start();
+}
+```
+
+> Redis 서버를 해당 포트를 통해 연다는 의미
+>
+> @PostConstructor는 객체의 초기화 부분으로, 생성 후 초기화를 위해 실행되는 메소드에 사용한다.
+
+``` java
+@PreDestroy
+public void stopRedis() {
+    if (redisServer != null) {
+        redisServer.stop();
+    }
+}
+```
+
+> 소멸 단계에서 사용된다.
+>
+> 즉 모든 작업이 끝나고 객체(빈)을 삭제할 때 실행될 메소드 이다.
+>
+> RedisServer가 켜져있다면, 닫아버린다.
+
+### RedisRepositoryConfig
+
+``` java
+@Configuration
+@EnableRedisRepositories
+public class RedisRepositoryConfig {
+    @Value("${spring.redis.host}")
+    private String redisHost;
+
+    @Value("${spring.redis.port}")
+    private int redisPort;
+
+    @Bean
+    public RedisConnectionFactory redisConnectionFactory() {
+        return new LettuceConnectionFactory(redisHost, redisPort);
+    }
+
+    @Bean
+    public RedisTemplate<?, ?> redisTemplate() {
+        RedisTemplate<byte[], byte[]> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(redisConnectionFactory());
+        return redisTemplate;
+    }
+}
+```
+
+``` java
+@EnableRedisRepositories
+```
+
+> RedisRepositories를 활성화 한다.
+
+``` java
+@Bean
+public RedisConnectionFactory redisConnectionFactory() {
+    return new LettuceConnectionFactory(redisHost, redisPort);
+}
+```
+
+> Redis와 연결 해 준다.
+
+``` java
+@Bean
+public RedisTemplate<?, ?> redisTemplate() {
+    RedisTemplate<byte[], byte[]> redisTemplate = new RedisTemplate<>();
+    redisTemplate.setConnectionFactory(redisConnectionFactory());
+    return redisTemplate;
+}
+```
+
+> RedisConnection에서 넘겨준 값을 직렬화 해 준다.
+
+#### Redis 객체
+
+``` java
+@Getter
+@RedisHash("point")
+public class Point implements Serializable {
+
+    @Id
+    private String id;
+    private Long amount;
+    private LocalDateTime refreshTime;
+
+}
+```
+
+``` java
+@RedisHash("point")
+```
+
+> Redis에 저장될 Key값을 지정해 준다.
+>
+> 최종적으론 point 라는 값과, @Id가 붙어있는 필드가 합쳐져서 나타난다.
+>
+> 즉, pointId 라는 키를 갖는다.
+
+#### Repository
+
+``` java
+public interface PointRedisRepository extends CrudRepository<Point, String> {
+}
+```
+
+> 정말 간단하게 평소에 만들던 Repository처럼 만들어 주면 된다.
+
+#### 테스트코드의 포트 문제
+
+> 서로 다른 property를 가진 테스트코드 실행 시에, 새로운 Context를 생성하기 때문에 EmbeddedRedis를 한번 더 실행한다.
+
+> 그렇기 때문에 같은 포트의 Redis가 2번 실행되기 때문에 충돌이 발생한다.
+
+#### EmbeddedRedisConfig 파일 수정
+
+> 윈도우에선 할 수 없다.
+>
+> 직접 exe 프로세스를 찾는 코드를 작성해야 한다.
+
+``` java
+@Profile("local")
+@Configuration
+public class EmbeddedRedisConfig {
+
+    @Value("${spring.redis.port}")
+    private int redisPort;
+
+    private RedisServer redisServer;
+
+    @PostConstruct
+    public void redisServer() throws IOException {
+        int port = isRedisRunning()? findAvailablePort() : redisPort;
+        redisServer = new RedisServer(port);
+        redisServer.start();
+    }
+
+    @PreDestroy
+    public void stopRedis() {
+        if (redisServer != null) {
+            redisServer.stop();
+        }
+    }
+
+    /**
+     * Embedded Redis가 현재 실행중인지 확인
+     */
+    private boolean isRedisRunning() throws IOException {
+        return isRunning(executeGrepProcessCommand(redisPort));
+    }
+
+    /**
+     * 현재 PC/서버에서 사용가능한 포트 조회
+     */
+    public int findAvailablePort() throws IOException {
+
+        for (int port = 10000; port <= 65535; port++) {
+            Process process = executeGrepProcessCommand(port);
+            if (!isRunning(process)) {
+                return port;
+            }
+        }
+
+        throw new IllegalArgumentException("Not Found Available port: 10000 ~ 65535");
+    }
+
+    /**
+     * 해당 port를 사용중인 프로세스 확인하는 sh 실행
+     */
+    private Process executeGrepProcessCommand(int port) throws IOException {
+        String command = String.format("netstat -nat | grep LISTEN|grep %d", port);
+        String[] shell = {"/bin/sh", "-c", command};
+        return Runtime.getRuntime().exec(shell);
+    }
+
+    /**
+     * 해당 Process가 현재 실행중인지 확인
+     */
+    private boolean isRunning(Process process) {
+        String line;
+        StringBuilder pidInfo = new StringBuilder();
+
+        try (BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+
+            while ((line = input.readLine()) != null) {
+                pidInfo.append(line);
+            }
+
+        } catch (Exception e) {
+        }
+
+        return !StringUtils.isEmpty(pidInfo.toString());
+    }
+}
+```
+
+> 변경사항은 많지만, 결국 현재 포트로 실행중인 프로세스가 있으면 다른 포트로 실행시키고, 없다면 지정된 포트로 실행시킨다.
