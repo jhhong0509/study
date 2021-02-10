@@ -139,9 +139,18 @@
 
 ### Spring Boot에서 Redis 구현
 
+#### build.gradle
+
+```groovy
+compile('org.springframework.boot:spring-boot-starter-data-redis')
+compile group: 'it.ozimov', name: 'embedded-redis', version: '0.7.2'
+```
+
 #### EmbeddedRedisConfig
 
 > 로컬에서 사용될 Redis의 설정을 해준다.
+>
+> RedisServer는 import 할 때 redis.embedded.RedisServer 를 가져와야 한다.
 
 ``` java
 @Slf4j
