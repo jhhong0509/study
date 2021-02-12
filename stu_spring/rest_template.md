@@ -12,6 +12,9 @@
 | delete          | DELETE | String url, Object uriVariables                              | url로 요청을 보내고, DELETE 메소드를 실행한다.           |
 | put             | PUT    | String url, Object request, Object 매개변수                  | url로 요청을 보내고, PUT 메소드를 실행한다.              |
 | patchForObject  | PATCH  | String url, Object request, Class 반환 타입, Object 매개변수 | url로 요청을 보내고, 결과값을 객체로 저장한다.           |
+| exchange        | ?      | String url 또는 RequestEntity, Class 반환 타입, http 메소드  | 다른 메소드와 비슷하지만, header를 수정할 수 있다.       |
+
+> exchange 외에는 기본 http 헤더를 사용한다.
 
 ### 구현
 
@@ -103,3 +106,18 @@ setBufferRequestBody(boolean bufferRequestBody)
 > Default는 false지만, 매우 큰 바디가 들어올 경우에는 true를 권장한다.
 >
 > 대충 뭔지 모르겠으니, 크면 true 작으면 false로 하자
+
+``` java
+setMaxConnTotal(int size)
+```
+
+- connection pool의 최대 개수를 지정해 준다.
+
+``` java
+setMaxConnPerRoute(int size)
+```
+
+- port, ip당 연결 제한 갯수이다.
+
+> size가 1이라면, 하나의 ip,port에서는 하나만 연결할 수 있다.
+
