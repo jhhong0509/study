@@ -12,7 +12,7 @@
 
 > 여기서 브로커란, MQ(Message Queue)이며, pub/sub 모델을 따른다.
 >
-> pub/sub 모델이란 메세지를 보내고/받는 형태의 통신을 말한다.
+> pub/sub 모델이란  publish/subscribe의 약자로 직역하면 발행과 구독 이라는 의미이다.
 >
 > <img src="https://blog.kakaocdn.net/dn/zb1ff/btqxHUs9IYP/pjjGHGQxdonmls45awISuK/img.png" alt="img" style="zoom:70%;" align="left" />
 >
