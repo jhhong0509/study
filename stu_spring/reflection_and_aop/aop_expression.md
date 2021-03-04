@@ -91,3 +91,40 @@
   > ()처럼 빈칸으로 두면 인자가 없는 메소드만 적용된다.
 
   > (..)처럼 ..을 넣으면 인자에 상관 없이 모든 메소드에 적용된다.
+
+- 관계연산자
+
+  > 여러개의 조건을 넣고 싶다면 ||, &&, ! 과 같은 연산자를 이용할 수 있다.
+
+### 포인트컷 변수처럼 사용하기
+
+```java
+@Aspect
+@Component // @Bean과 동일하게 Spring Bean 등록 어노테이션
+public class UserHistory {
+
+    @Autowired
+    private HistoryRepository historyRepository;
+
+    @Pointcut("execution(* com.blogcode.user.UserService.update(*)) && args(user)")
+    public void updateUser(User user){}
+
+    @AfterReturning("updateUser(user)")
+    public void saveHistory(User user){
+        historyRepository.save(new History(user.getIdx()));
+    }
+}
+```
+
+``` java
+@Pointcut("execution(* com.blogcode.user.UserService.update(*)) && args(user)")
+public void updateUser(User user){}
+```
+
+> PointCut을 updateUser라는 이름으로 적용해 준다.
+
+``` java
+@AfterReturning("updateUser(user)")
+```
+
+> Return 후에 해당 어드바이스를 실행한다.
