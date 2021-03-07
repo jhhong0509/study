@@ -19,5 +19,29 @@ spring:
 - port - SSL이 요구되면 465, TLS가 요구되면 587로 설정해야 한다.
 - username - 이메일 계정
 - password - 이메일 비밀번호
-- timeout - (예상)커넥션 타임아웃 시간 설정
-- 나머진 잘 모르겠어서 포기
+- timeout - 커넥션 타임아웃 시간 설정
+- starttls - SSL 사용 여부
+
+### MailServiceImpl
+
+``` java
+@Async
+@Override
+public void sendMail(String sendTo) {
+    try {
+        final MimeMessagePreparator preparator = mimeMessage -> {
+            final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+            helper.setFrom(sender); // 보낸 사람 설정
+            helper.setTo(sendTo); // 받을 사람 설정
+            helper.setSubject("공부용 알림"); // 메일 제목
+            helper.setText("공부용 알림 내용"); // 알림 내용
+        };
+        javaMailSender.send(preparator);
+    } catch (Exception e) {
+        System.out.println(e.getCause());
+        System.out.println(e.getMessage());
+        throw new EmailSendException();
+    }
+}
+```
+
