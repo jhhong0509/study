@@ -39,3 +39,8 @@
 ![image-20210310164056983](C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20210310164056983.png)
 
 > 위 두 방식 중에서, nginx는 비동기 방식을 사용하고 있다.
+
+- 기본 원리
+  - 기본적으로 nginx는 하나의 master process와 여러개의 worker process로 구성되어 있다.
+    - master process란 worker process를 관리하는 프로세스이다.
+    - worker process는 실질적으로 요청을 처리하는 프로세스 이다.
