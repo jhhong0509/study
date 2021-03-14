@@ -140,3 +140,28 @@ http {			# 웹 트래픽 처리 블록
   }
 }
 ```
+
+``` conf
+upstream smoothbear {
+        server localhost:8082 weight=5 max_fails=3 fail_timeout=10s;	# 서버의 8082 포트로 보내준다는 의미. 
+        keepalive 100;		# keepalive가 꺼져있다면 매 요청마다 핸드쉐이크가 발생하기 때문에, 최대 몇개의 커넥션을 유지할건지 설정
+}
+
+server {
+        listen 80;
+        server_name api.smooth-bear.live;
+
+        location ~ /\.ht {
+                deny all;
+        }
+
+        location / {
+                proxy_pass http://smoothbear;
+                proxy_redirect off;
+                proxy_set_header Host $host;
+                proxy_set_header   X-Real-IP $remote_addr;
+                proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+}
+```
+
