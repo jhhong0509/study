@@ -40,8 +40,6 @@ FROM 환경:태그
 
 위 문법은 최신의 ubuntu 버전에서 실행하겠다는 의미이다.
 
-
-
 ``` dockerfile
 LABEL key=value
 ```
@@ -122,3 +120,35 @@ ENV 키 값
 환경 변수 값을 세팅해 줄 수 있다.
 
 secret key와 같은 값들을 설정해 줄 때 사용된다.
+
+``` Dockerfile
+ARG 이름=기본값
+```
+
+> 기본값은 생략 가능
+
+docker를 build할때 해당 이름으로 값을 넣어줄 수 있다.
+
+> docker build --build-arg 이름=값
+
+만약 값을 넣어주지 않으면 기본값이 들어가게 된다.
+
+설정된 값은 ${이름} 처럼 사용될 수 있다.
+
+### docker build
+
+- Dockerfile을 빌드하여 이미지로 만드는 것이다.
+
+docker build -t 이름 ./ 처럼 사용할 수 있다.
+
+> -t (-tag)는 이미지의 이름을 지정하는 것이다.
+>
+> > 참고로 이미지의 이름은 Docker Hub에 namespace/이름:속성 과 같은 형태로 저장된다.
+> >
+> > docker의 공식 이미지들은 namespace에 library가 들어가고, 유저가 만든 이미지는 namespace에 사용자의 이름이 들어가게 된다.
+>
+> 만약 파일 이름이 Dockerfile이 아니라면, -f 태그로 직접 지정시킬 수 있다.
+
+> 맨 뒤에 ./는 dockerfile의 위치를 가리킨다.
+
+.dockerignore 파일 수정을 통해 이미지를 빌드할 때 특정 디렉토리 혹은 파일을 제외시킬 수 있다.
