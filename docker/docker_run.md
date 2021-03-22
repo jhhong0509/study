@@ -90,3 +90,18 @@ docker stop 7899108d467c
   ```
 
   기존의 container id를 이용한 방식보다 훨씬 더 간편해 졌다.
+
+### -e 옵션
+
+docker의 환경 변수를 설정해주는 옵션이다.
+
+기존에 Dockerfile에서 설정한 환경변수가 있다면, -e 옵션이 우선시 되어서 Dockerfile의 환경변수를 덮어쓴다.
+
+아래와 같은 형태로 사용할 수 있다.
+
+``` shell
+docker run -e 키=값
+```
+
+### -p 옵션
+
