@@ -4,7 +4,7 @@
 
 > 기존에 블로그에서 사용하던 stomp 방식은, 복잡하고 잘 사용되지 않는다는 말을 들었고, 실제 코드를 짤 때에도 너무 복잡한 것 같았기 때문에 socket.io를 사용하게 되었다.
 
-![image-20210323141033043](C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20210323141033043.png)
+![image-20210323141033043](socket_graph.png)
 
 ### 요약
 

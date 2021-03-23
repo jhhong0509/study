@@ -6,7 +6,7 @@
 
 > STOMP(Simple Text Oriented Messaging Protocol)은 단순 텍스트 기반 프로토콜 이란 뜻을 가지고 있다.
 >
-> ![stomp_way](..\..\images\stomp_way.png)
+> ![stomp_way](stomp_way.png)
 
 > 위와 같은 형태로 구성되어 있다.
 
@@ -14,7 +14,7 @@
 >
 > pub/sub 모델이란  publish/subscribe의 약자로 직역하면 발행과 구독 이라는 의미이다.
 >
-> ![MQ](..\..\images\MQ.png)
+> ![MQ](MQ.png)
 >
 > 위 그림과 같이 토픽을 구독하고, 해당 토픽에서 메세지를 보내면, Broker가 구독한 사람들에게 메세지를 보내는 형태이다.
 >
