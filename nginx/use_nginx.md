@@ -20,7 +20,7 @@
 
 해당 명령어를 쳤을 때 아래와 같은 문장이 출력되면 성공한 것 이다.
 
-![nginx_result](C:\Users\user\Documents\github\stu_backend\images\nginx_result.png)
+![nginx_result](..\images\nginx_result.png)
 
 ### 명령어
 

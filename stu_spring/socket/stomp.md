@@ -5,8 +5,8 @@
 > STOMP는 메세징에 최적화 되어 있다.
 
 > STOMP(Simple Text Oriented Messaging Protocol)은 단순 텍스트 기반 프로토콜 이란 뜻을 가지고 있다.
-
-<img src="https://postfiles.pstatic.net/MjAxNzA5MTRfMTc0/MDAxNTA1Mzk5MTEzNDY3.-wDLzIteitBFY8jw6LYaeyjmtDu7LZrF-n2V1rpAmKMg.XFChnVn95Jp54kiKoux1P1iAx9zMD-uuVX9RYkfIGmsg.PNG.scw0531/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2017-09-14_%EC%98%A4%ED%9B%84_11.02.42.png?type=w1" align="left">
+>
+> ![stomp_way](..\..\images\stomp_way.png)
 
 > 위와 같은 형태로 구성되어 있다.
 
@@ -14,7 +14,7 @@
 >
 > pub/sub 모델이란  publish/subscribe의 약자로 직역하면 발행과 구독 이라는 의미이다.
 >
-> <img src="https://blog.kakaocdn.net/dn/zb1ff/btqxHUs9IYP/pjjGHGQxdonmls45awISuK/img.png" alt="img" style="zoom:70%;" align="left" />
+> ![MQ](..\..\images\MQ.png)
 >
 > 위 그림과 같이 토픽을 구독하고, 해당 토픽에서 메세지를 보내면, Broker가 구독한 사람들에게 메세지를 보내는 형태이다.
 >
