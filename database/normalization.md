@@ -32,7 +32,7 @@
 
 - 예제
 
-![image-20210305093929280](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210305093929280.png)
+![no_normal](C:\Users\user\Documents\github\stu_backend\images\no_normal.png)
 
 > 위와 같은 형태는 이름, 학번, 메일, 대학이 중복되어 있다.
 >
@@ -48,7 +48,7 @@
 
 > 위와 같은 과정을 거친 후, 아래와 같이 제 1 정규형이 완성된다.
 
-![image-20210305101253995](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210305101253995.png)
+![1_normal](C:\Users\user\Documents\github\stu_backend\images\1_normal.png)
 
 > PK는 학번, 수강학기, 과목명을 합친 복합키 이다.
 
@@ -64,7 +64,7 @@
 
   > 위 테이블의 경우엔, 제한인원이 복합키들에게 종속된 것 같지 않기 때문에, 분리하여 줘야 한다.
 
-![image-20210305153659857](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210305153659857.png)
+![2_normal](C:\Users\user\Documents\github\stu_backend\images\2_normal.png)
 
 ### 제 3차 정규형(THIRD NORMAL FORM)
 
@@ -78,7 +78,7 @@
 
   > 위 테이블의 경우. 학생 테이블의 전공과 대학은 종속 관계가 성립되기 때문에 정규화가 필요하다.
 
-![image-20210305155414309](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210305155414309.png)
+![3_normal](C:\Users\user\Documents\github\stu_backend\images\3_normal.png)
 
 ### BCNF(Boyce-Codd Normal Format)
 
@@ -94,7 +94,7 @@
 
 - 예제
 
-![image-20210306082914756](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210306082914756.png)
+![bcnf_not](C:\Users\user\Documents\github\stu_backend\images\bcnf_not.png)
 
 > 위 테이블은 3NF를 충족하지만 삽입, 삭제, 갱신에 문제가 발생할 수 있다.
 
@@ -120,4 +120,4 @@
 
   > 분리 전의 결정자 역할을  했던 속성을 키로 해 준다.
 
-![image-20210306083633594](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210306083633594.png)
+![bcnf_success](C:\Users\user\Documents\github\stu_backend\images\bcnf_success.png)

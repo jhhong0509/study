@@ -10,13 +10,13 @@
 
 > 아래와 같이 기능을 중심적으로 바라보는 것이 아니라,
 >
-> ![image-20210302133133304](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210302133133304.png)
+> ![main_oriented](C:\Users\user\Documents\github\stu_backend\images\main_oriented.jpg)
 >
 > 
 >
 > 아래와 같이 부가 기능의 관점에서 바라봤을 때 공통된 요소를 추출하라는 것이다.
 >
-> ![image-20210302133153760](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210302133153760.png)
+> ![aop](C:\Users\user\Documents\github\stu_backend\images\aop.png)
 >
 > 가로 영역의 공통 부분을 자르는 것 이라는 의미로, Cross-Cutting 이라고도 부른다.
 
