@@ -41,4 +41,5 @@
 - 기본 원리
   - 기본적으로 nginx는 하나의 master process와 여러개의 worker process로 구성되어 있다.
     - master process란 worker process를 관리하는 프로세스이다.
+    - ![image-20210323171417911](nginx_process.jpg)
     - worker process는 실질적으로 요청을 처리하는 프로세스 이다.
