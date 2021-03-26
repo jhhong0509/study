@@ -73,3 +73,6 @@ JPA는 **특정 데이터베이스에 종속적이지 않다.**
 > 예를 들어, DATETIME을 저장하는데 MySQL은 일정 버전 위 부터 ms 단위를 저장할 수 있기 때문에 저장할 때 오류가 발생할 수 있다.
 
 참고로, Dialect를 custom 해줄 수 있다.
+
+[JPQL이란](../what_is_jpql.md)
+
