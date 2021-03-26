@@ -10,11 +10,11 @@
 
 JDBC API란 Java Database Connectivity의 약자로, 자바에서 **DB에 접속**하도록 돕는다.
 
-![jdbc](jdbc.png)
+![jdbc](./images/jdbc.png)
 
 즉, JPA 또한 JDBC를 이용하며, 자바의 모든 Database에 access하는 기술의 근간이다.
 
-![jpa_jdbc](jpa_jdbc.png)
+![jpa_jdbc](./images/jpa_jdbc.png)
 
 우리가 JPA를 사용한다고 해서 JDBC를 사용하지 않는것은 아니다.
 
@@ -128,7 +128,7 @@ Team team = member.getTeam();
 
 데이터베이스 모델링에서 이야기하는 **슈퍼타입 - 서브타입**을 이용하면 객체의 상속과 유사한 형태로 테이블을 설계할 수 있다.
 
-![table_model.png](table_model.png)
+![table_model.png](./images/table_model.png)
 
 위와 같은 형태의 테이블은 아래와 같은 객체로 구현할 수 있다.
 
@@ -191,7 +191,7 @@ SELECT I.*, A.* FRO ITEM I
 
   테이블은 **외래 키**를 통해 다른 테이블들과 연관을 맺고, **Join**을 통해 연관된 테이블을 조회한다.
 
-![object_mapping](object_mapping.png)
+![object_mapping](./images/object_mapping.png)
 
 > 연관 관계로 인해서 생기는 패러다임 불일치는 굉장히 복잡하고, 고치기 어렵다.
 
@@ -290,7 +290,7 @@ class Member {
 
 > 객체 그래프 탐색이란, 참조를 통해서 연관된 다른 객체를 찾는 것이다.
 
-![object_graph](object_graph.png)
+![object_graph](./images/object_graph.png)
 
 이렇게 되어 있는 객체 그래프에서 우리는 하나의 객체만 가지고 다른 객체들을 쭈욱 탐색할 수 있어야 한다.
 
@@ -378,7 +378,7 @@ ORM 프레임워크는 객체와 테이블을 매핑시켜 주어서 **패러다
 
 #### JPA의 동작
 
-![jpa_save_pic](jpa_save_pic.png)
+![jpa_save_pic](./images/jpa_save_pic.png)
 
 JPA에서의 저장은 위 그림과 같이 DAO 객체에서 PERSIST를 하게 되면, 아래의 과정을 거친다.
 
@@ -388,7 +388,7 @@ JPA에서의 저장은 위 그림과 같이 DAO 객체에서 PERSIST를 하게 �
 4. JDBC API를 통해 객체를 저장해 준다.
 5. 그 후에 패러다임 불일치 문제를 해결해 준다.
 
-![jpa_find_pic](jpa_find_pic.png)
+![jpa_find_pic](./images/jpa_find_pic.png)
 
 JPA에서 find를 사용할때 또한 다음과 같은 과정을 거친다.
 

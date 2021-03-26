@@ -64,7 +64,7 @@ JPA는 **특정 데이터베이스에 종속적이지 않다.**
 
 > [yaml 파일](#JPA-표준-속성) 에서 dialect 부분이다.
 
-![sql_dialect](sql_dialect.png)
+![sql_dialect](./images/sql_dialect.png)
 
 위 사진과 같이 원하는 데이터베이스의 Dialect를 설정해 주면 Dialect는 그에 맞는 SQL 쿼리를 생성해 준다.
 
