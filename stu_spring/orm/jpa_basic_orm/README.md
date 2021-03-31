@@ -26,6 +26,14 @@
 
 >  이 책을 정리하는 것은 지극히 개인적으로 공부하고 싶어서 이기 때문에, 내가 너무 잘 알고있는 내용이나 eclipse IDE와 같은 나와 큰 상관이 없는 내용은 생략될 수 있다.
 
+
+
+**이 책은 Spring Data Repository가 아닌 Raw JPA 를 이용한다.**
+
+![jpa_data](.\images\jpa_data.png)
+
+> 즉, Repository를 이용하지 않는다는 의미이다.
+
 ### JPA의 장점과 단점
 
 단점
