@@ -113,9 +113,15 @@ spring:
 
 DB의 컬럼과 매핑될 필드임을 명시한다.
 
-> 기본적으로 `@Entity` 밑의 모든 필드들은 매핑된다.
->
-> 하지만 컬럼 길이, 이름 등을 지정해줄 수 있다.
+기본적으로 `@Entity` 밑의 모든 필드들은 매핑된다.
+
+> `@Column` 속성의 기본값이 적용된다.
+
+int와 같이 자바의 기본 타입은 NULL이 오는게 불가능 하기 때문에 자동으로 Not Null로 설정한다.
+
+> int 타입에 `@Column` 어노테이션을 추가했을 때 nullable을 설정하지 않으면 기본값인 true이기 때문에 조심해야 한다.
+
+int 대신 Integer처럼 객체 타입을 사용하면 Not Null이 기본값으로 오지 않는다.
 
 #### @Column 속성
 
@@ -129,10 +135,68 @@ DB의 컬럼과 매핑될 필드임을 명시한다.
 | unique           | 제약 조건. UNIQUE 옵션                                       | false                                 |
 | length           | 문자열의 길이 제한 조절                                      | 255                                   |
 | columnDefinition | DB 컬럼 정보에 직접적으로 지정할때 사용된다.<br />*실제 DB 컬럼 작성하듯이 사용할 수 있다. |                                       |
-| precision        | BigDemical타입과 매핑시킬때 사용된다.<br />소수점을 포함한 전체 자리수를 지정할 수 있다. |                                       |
-| scale            | BigDemical타입과 매핑시킬때 사용한다.<br />소수 자리수를 지정시킨다. |                                       |
+| precision        | BigDemical타입과 매핑시킬때 사용된다.<br />소수점을 포함한 전체 자리수를 지정할 수 있다. | 19                                    |
+| scale            | BigDemical타입과 매핑시킬때 사용한다.<br />소수 자리수를 지정시킨다. | 2                                     |
 
 > `@Column(columnDefinition="VARCHAR(100) NOT NULL")`과 같이 사용할 수 있다.
+
+### @Enumerated
+
+자바의 ENUM과 DB의 ENUM을 매핑시켜 준다.
+
+| 속성  | 기능                                                         | 기본값           |
+| ----- | ------------------------------------------------------------ | ---------------- |
+| value | EnumType.ORDINAL을 하면 enum 순서 즉 정수 값을 DB에 저장한다.<br />EnumType.STRING을 하면 enum의 이름 즉 문자열을 DB에 저장한다. | EnumType.ORDINAL |
+
+- ORDINAL
+
+  저장되는 크기가 작다.
+
+  이미 저장되어 있는 ENUM의 순서가 바뀌거나 추가되었을 때 능동적으로 대응할 수 없다.
+
+- STRING
+
+  저장되는 크기가 크다.
+
+  하지만 순서가 바뀌거나 ENUM이 추가되도 안전하다.
+
+> EnumType을 ORDINAL로 했을 때에는 저장이나 필터링 등에서 문제가 발생할 수 있고, 추가되어도 문제가 발생하지 않는 EnumType.STRING으로 바꾸기를 권장한다.
+
+### @Temporal
+
+자바의 날짜타입을 매핑할 때 사용된다.
+
+- java.util.Date
+
+- java.util.Calendar
+
+> 즉, LocalDate에서는 사용하지 않는다.
+
+> 위 자바의 날짜 타입은 월 처리, Date 처리에 문제가 있어서 잘 사용되지 않는다.
+
+| 속성  | 기능                                                         | 주의사항                             |
+| ----- | ------------------------------------------------------------ | ------------------------------------ |
+| value | TemporalType.DATE - 시간을 제외한 년 - 월 - 일 형태. DB의 date 타입과 매핑<br />TemporalType.TIME - 날짜를 제외한 시간:분:초 형태. DB의 time과 매핑<br />TemporalType.TIMESTAMP - 날짜 시간 모두 저장. DB의 timestamp와 매핑 | TemporalType을 필수로 지정해야 한다. |
+
+### LocalDateTime 매핑
+
+JPA는 LocalDateTime을 자동으로 DB의 DATETIME과 매핑시켜 준다.
+
+즉 **따로 설정할 필요가 없다**.
+
+자바의 다른 날짜 타입보다 **LocalDateTime 타입이 권장**된다.
+
+> DATETIME과 TIMESTAMP의 차이
+>
+> - 최대 날짜 차이
+>   - DATETIME은 1000년 ~ 9999년까지 지원한다.
+>   - TIMESTAMP는 1970 ~ 2038년 까지 지원한다.
+> - 속도 차이
+>   - DATETIME보다 TIMESTAMP가 INDEX 생성 속도가 빠르다.
+> - TIMEZONE
+>   - DATETIME은 TIMEZONE이 바뀌어도 항상 같은 날짜를 유지한다.
+>   - TIMESTAMP는 TIMEZONE을 바꾸면 해당 지역에 맞도록 시간을 바꿔준다.
+>     - **TIMESTAMP는 TIMEZONE에 종속**된다는 의미이다.
 
 ### 기본키 전략
 
@@ -143,6 +207,48 @@ DB의 컬럼과 매핑될 필드임을 명시한다.
 그렇기 때문에 자연스럽게 JPA의 기본 키 생성 방식은 여러가지가 있다.
 
 JPA는 기본적으로 Entity 클래스에 **`@Id` 어노테이션이 붙은 필드를 PK 컬럼으로 인식**한다.
+
+>  식별자는 다음 규칙에 따라야 한다.
+>
+> 1. **Not Null**
+>
+> 2. **유일해야 한다.**
+>
+>    > PK 값은 주민등록번호처럼 중복되면 안된다.
+>
+> 3. **변해선 안된다.**
+>
+>    > **PK 필드는 값이 변하면 안된다.**
+>    >
+>    > 하지만 이름과 같은 필드는 개명 등으로 바뀔 수 있기 때문에 PK가 되면 안된다.
+
+DB 기본키 선택 전략은 2가지로 나뉜다.
+
+- 자연 키
+
+  해당 테이블과 직접적으로 연관된 컬럼중 선택하는 것
+
+  > USER 테이블의 이메일이나 주민등록번호 등
+
+- 대리 키
+
+  해당 테이블과 관련 없이 임의로 만든 필드를 말한다.
+
+  대체 키 라고도 부른다.
+
+  > MySQL의 AUTO_INCREMENT나 ORACLE의 SEQUENCE 등이 포함된다.
+
+  **키 선택 시에는 자연 키 보다는 대리 키가 추천된다.**
+
+  1. 이유는 비지니스 규칙이 생각보다 변하기 쉽기 때문이다.
+
+     >  예를 들어 주민번호는 PK로 사용되었지만, 주민번호를 저장할 수 없도록 법이 바뀌어서 모두 바꾸어야 했다.
+
+  2. 모든 엔티티에서 일관되게 대리 키를 사용하도록 하기를 권장한다.
+
+     > 모든 엔티티에서 자연 키가 있을 것 이라는 보장은 없다.
+     >
+     > 게다가 자연 키는 타입이나 이름 등이 각각 모두 특색있게 다르기 때문에 일관성이 떨어진다.
 
 기본키 전략에는 2가지 종류가 있다.
 
@@ -223,7 +329,7 @@ MySQL의 AUTO_INCREMENT가 대표적이다.
   
   
   1. 시작값과 증감값, 최솟값과 최댓값을 설정해줄 수 있다.
-2. 시작값부터 증감값만큼 계속해서 숫자가 커지는 수열이 만들어 진다.
+  2. 시작값부터 증감값만큼 계속해서 숫자가 커지는 수열이 만들어 진다.
   3. 만약 최댓값을 초과한다면, 처음으로 돌아가는 사이클을 돌건지 여부에 따라 다시 처음으로 돌아간다.
 
   
@@ -273,8 +379,67 @@ IDENTITY와 비슷하지만, SEQUENCE는 persist() 메소드를 호출할 때 �
 
 #### TABLE 전략
 
-키 생성만을 위한 테이블을 만들어서 키 값을 생성하는 방법이다.
+**키 생성만을 위한 테이블을 만들어서 키 값을 생성하는 방법**이다.
 
 > 데이터베이스 시퀀스를 흉내내는 방식이다.
 
-테이블을 따로 사용하기 때문에 
+테이블을 따로 사용하기 때문에 특정 DBMS에서만 작동하는게 아니라, **모든 DBMS에서 적용**할 수 있다.
+
+- 전반적인 동작 방법
+
+1. 다음 값과 어떤 테이블의 값인지 식별해주는 컬럼이 있다.
+
+   ``` sql
+   sequence_name VARCHAR(255) NOT NULL PRIMARY KEY,
+   next_val bigint
+   ```
+
+2. 해당 테이블에서 다음 값(next_val) 필드를 꺼내온다.
+
+3. next_val을 다음에 주고 싶은 key 값으로 update 해준다.
+
+이러한 방식은 DBMS와 관계없이 작동한다는 장점이 있다.
+
+다음과 같이 사용할 수 있다.
+
+``` java
+@Entity
+@TableGenerator(
+	name = "BOARD_SEQ_GENERATOR",	// 필수로 입력해야 하는 식별자 생성기의 이름
+    table = "MY_SEQUENCES",			// 위에서 만든 테이블 이름
+    pkColumnValue = "BOARD_SEQ",	// 시퀀스 컬럼의 이름. 즉, sequence_name에 들어갈 값
+    valueColumnName = "next_val",	// 시퀀스 값의 컬럼명
+    pkColumnName = "sequence_name",	// 키로 사용할 컬럼의 이름. 즉, 위에서 만든 테이블의 PK 컬럼 이름
+    initialValue = 0,				// 초깃값
+    allocationSize = 1,				// 한번에 증가할 값
+    uniqueConstraints = {@UniqueConstraints (	// 유니크 제약 조건
+    		name = "UNIQUE_FILED",
+        	columnNames = {"column1", "column2"}
+    	)
+	}
+)
+public class Board {
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE,
+                   generator = "BOARD_SEQ_GENERATOR")
+}
+```
+
+> 위 엔티티에서 볼 수 있듯이 TABLE 전략을 사용할 때엔 `@GeneratedValue`에서 **generator는 식별자 생성기의 이름**을 넣어준다.
+
+#### AUTO 전략
+
+말 그대로 **JPA가 자동으로 설정**해 준다.
+
+MySQL이면 IDENTITY(AUTO_INCREMENT)를 선택하고, ORACLE이면 SEQUENCE를 선택해 준다.
+
+- 주의사항
+
+  - SEQUENCE나 TABLE 전략이 사용된다면 각각 시퀀스, 키 생성 테이블을 만들어 주어야 한다.
+
+    > 만약 만들어 두지 않고 스키마 자동 생성(generate-ddl: true)을 한다면 기본값을 통해 알아서 만들어 준다.
+
+데이터베이스가 확정되지 않은 개발 초기에 사용하기 좋다.
+
+> DB가 바껴도 GenerationType을 굳이 바꿔줄 필요가 없다.
+
