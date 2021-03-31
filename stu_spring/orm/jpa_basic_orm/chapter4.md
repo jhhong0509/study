@@ -170,6 +170,8 @@ int 대신 Integer처럼 객체 타입을 사용하면 Not Null이 기본값으�
 
 - java.util.Calendar
 
+기본값으론 TIMESTAMP로 매핑된다.
+
 > 즉, LocalDate에서는 사용하지 않는다.
 
 > 위 자바의 날짜 타입은 월 처리, Date 처리에 문제가 있어서 잘 사용되지 않는다.
@@ -197,6 +199,53 @@ JPA는 LocalDateTime을 자동으로 DB의 DATETIME과 매핑시켜 준다.
 >   - DATETIME은 TIMEZONE이 바뀌어도 항상 같은 날짜를 유지한다.
 >   - TIMESTAMP는 TIMEZONE을 바꾸면 해당 지역에 맞도록 시간을 바꿔준다.
 >     - **TIMESTAMP는 TIMEZONE에 종속**된다는 의미이다.
+
+### @Transient
+
+**해당 어노테이션이 붙은 필드는 DB와 매핑되지 않는다.**
+
+조회도, 저장도 하지 않고 객체에 임시로 데이터를 저장할 때 사용된다.
+
+### @Access
+
+**JPA가 DB에 접근하는 방식을 지정**한다.
+
+| 속성                | 기능                                  | 기본값                     |
+| ------------------- | ------------------------------------- | -------------------------- |
+| AccessType.FIELD    | 접근 방식을 FIELD로 지정시켜 준다.    | @Id가 필드에 붙어있을 때   |
+| AccessType.PROPERTY | 접근 방식을 PROPERTY로 지정시켜 준다. | @Id가 Getter에 붙어있을 때 |
+
+Access 어노테이션은 클래스 맨 위에 붙어서 모든 필드를 해당 방식으로 접근하도록 할 수 있다.
+
+하지만 엔티티의 멤버에 붙는다면 해당 메소드 혹은 필드에만 적용할 수 있다.
+
+##### FIELD 접근 방식
+
+FIELD에 접근한다는 의미는 우리가 평소에 사용하던 것 처럼 하나의 필드가 하나의 컬럼과 매핑되고, 메소드는 매핑되지 않고 메소드인 채로 작동하는 것이다.
+
+``` java
+@Id
+private String email;
+```
+
+##### PROPERTY 접근 방식
+
+PROPERTY에 접근한다는 의미는 메소드의 결과 값을 알아서 저장한다는 의미이다.
+
+``` java
+private String firstName;
+
+private String lastName;
+
+@Access(AccessType.PROPERTY)
+public String getFullName() {
+    return firstName + lastName;
+}
+```
+
+위와 같은 방식을 사용하면 first_name, last_name이라는 속성과 full_name 이라는 속성이 생긴다.
+
+> 기본적으로 get은 제외한 이름으로 매핑된다.
 
 ### 기본키 전략
 
