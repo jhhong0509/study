@@ -209,12 +209,87 @@ mappedBy 속성은 반대쪽  매핑의 필드 이름 즉 team을 주면 된다.
 
 반대로, **slave 쪽은 읽기만 가능하다.**
 
+> FK를 수정/삭제/삽입 하는게 불가능 하다.
+>
+> 즉, Team은 Member의 team 컬럼을 수정할 수 없다.
+
 - 주인은 mappedBy를 사용하지 않고, slave 쪽에서 사용하게 된다.
 
 - **주인이 아니면 mappedBy 속성을 통해 값으로 연관 관계의 주인을 지정**한다.
 
   > 자신과 매핑될 주인 테이블을 명시한다.
+  >
+  > 즉 slave 라는 것을 명시한다.
 
 > 쉽게 말해서 외래 키 관리자를 선택하는 것이다.
 
 **연관 관계의 주인은 외래 키를 가지고 있는 엔티티 이다.**
+
+**`mappedBy`는 주인이 자신을 가르키는 참조 필드의 이름을 명시한다.**
+
+> 즉, 우리의 경우에는 Member 객체에는 Team 이라는 필드가 있고, 스네이크 기법으로 Team을 쓰면 team이 되기 때문에 `mappedBy = "team"`을 쓴다.
+
+`mappedBy`는 연관 관계의 slave 쪽에서 사용하게 되는데, **`@ManyToOne`은 항상 master 이기 때문에 `mappedBy`를 사용할 수 없다.**
+
+#### 양방향 연관 관계 주의점
+
+##### 주인 FK 수정
+
+우선 안좋은 예제를 보자
+
+``` java
+team.getMembers().add(member);
+team.getMembers().add(member1);
+```
+
+위 코드는 team의 member에 member 객체를 추가하는 것이다.
+
+언뜻 보면 가능해 보이지만, member에서 team_id를 보면 null이 입력된다.
+
+이유는 간단하다. 위에서 말했듯이 **연관 관계의 주인만 외래 키의 값을 입력할 수 있다.**
+
+하지만 위 예제에선 team 즉 연관 관계의 자식쪽 에서 member의 team_id를 수정하려 했다.
+
+> 우리는 연관 관계의 slave인 team 에는 members에 값을 저장했다.
+>
+> 하지만 정작 연관 관계의 주인에게선 변경하지 않았기 때문에 null이 들어간다.
+
+그렇기 때문에 team에서 member를 추가하는 것이 아니라, member에서 team을 참조하도록 해야한다.
+
+``` java
+member.setTeam(team);
+member1.setTeam(team);
+```
+
+##### 양방향 관계 객체
+
+위 문제만 잘 생각하면 다른 문제는 발생하지 않을 것 같지만, 다른 문제도 있다.
+
+우선 아래쪽의 코드를 보고 생각하자
+
+``` java
+Team team = new Team("team1", "팀");
+Member memeber1 = new Member("Member1", 회원1);
+Member memeber2 = new Member("Member2", 회원2);
+
+member1.setTeam(team);
+member2.setTeam(team);
+
+System.out.println(team.getMembers.size());
+```
+
+위 코드에서 우리가 바라는 결과는 2 였지만, 결과는 0이다.
+
+- JPA를 사용중 이라면 member 객체를 수정한 후에 트랜잭션을 끝낸다.
+
+- JPA를 사용하고 있지 않다면 team 객체 에서도 members에 member 들을 추가한다.
+
+  > 즉, 양방향으로 수정시켜 준다.
+
+만약 team 객체에서 member를 수정한다 하더라도, 객체 그래프 탐색에서만 사용되고 실제로 저장되진 않는다.
+
+> team에서 members 라는 필드는 애초에 저장되지 않는다.
+
+**그냥 Repository를 사용하도록 하자**
+
+> Repository를 사용하면 이런 일을 겪지 않는다.
