@@ -163,7 +163,7 @@ em.remove(team)
 
 지금까진 Member 객체에서 Team 으로만 접근할 수 있는 단방향 매핑을 사용했다.
 
-단방향 연결이기 때문에, Member는 자신의 Team을 찾을 수 있었지만 Team은 자신에게 속한 Member를 찾을 수 없었다.
+단방향 연결이기 때문에, **Member는 자신의 Team을 찾을 수 있었지만 Team은 자신에게 속한 Member를 찾을 수 없었다.**
 
 그렇기 때문에 양방향 연관 관계를 사용한다.
 
@@ -187,7 +187,34 @@ public class Team {
     
     private String name;
     
+    @OneToMany(mappedBy = "team")
+    private List<Member> members = new ArrayList<Member>();
     
 }
 ```
 
+`@OneToMany`는 `@ManyToOne`과 반대로, 일대다 관계를 매핑시키는 어노테이션 이다.
+
+또한 하나의 팀에는 여러 멤버가 올 수 있기 때문에 List\<Member> 를 사용했다.
+
+mappedBy 속성은 반대쪽  매핑의 필드 이름 즉 team을 주면 된다.
+
+#### 연관 관계의 주인
+
+연관 관계에는 규칙이 있는데, 두 연관 관계 중 하나를 주인으로 삼아야 한다.
+
+즉, 연관 관계는 **하나의 master - slave 구조를 가지게 된다.**
+
+**연관 관계의 주인만 DB의 연관 관계와 매핑되고 외래 키를 관리할 수 있다.**
+
+반대로, **slave 쪽은 읽기만 가능하다.**
+
+- 주인은 mappedBy를 사용하지 않고, slave 쪽에서 사용하게 된다.
+
+- **주인이 아니면 mappedBy 속성을 통해 값으로 연관 관계의 주인을 지정**한다.
+
+  > 자신과 매핑될 주인 테이블을 명시한다.
+
+> 쉽게 말해서 외래 키 관리자를 선택하는 것이다.
+
+**연관 관계의 주인은 외래 키를 가지고 있는 엔티티 이다.**
