@@ -183,7 +183,7 @@ public class Team {
     
     @Id
     @Column(name="TEAM_ID")
-    private Stirng id;
+    private String id;
     
     private String name;
     
