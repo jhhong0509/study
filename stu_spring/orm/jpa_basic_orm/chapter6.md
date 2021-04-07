@@ -447,7 +447,7 @@ SELECT * FROM MEMBER_PRODUCT MP
 
 `@ManyToMany` 어노테이션을 통해 복잡했던 다대다 관계 매핑을 훨씬 편하고 간단하게 사용할 수 있다.
 
-##### 양방향
+#### 양방향
 
 ``` java
 @Entity
@@ -511,11 +511,63 @@ public class Product {
 
 ``` java
 @Entity
-@IdClass(MemberProductId.class)
+@IdClass(MemberProductId.class)	// 복합 키를 위한 어노테이션
 public class MemberProduct {
     @Id
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+    
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "PRODUCT_ID")
+    private Product product;
+    
+    private int orderAmount;		// 이런식으로 따로 컬럼이 없다면 @ManyToMany를 사용해도 된다.
 }
 ```
 
+``` java
+public class MemberProductId implements Serializable {	// 복합 키를 위한 클래스는 Serializable을 implement 해야 한다.
+    
+    private String member;
+    private String product;
+    
+    // hashCode and equals 메소드
+    // Lombok의 @EqualsAndHashCode를 사용해도 좋다.
+}
+```
+
+외래 키를 가지고 있는 MemberProduct 객체가 연관관계의 주인이다.
+
+MemberProduct 엔티티를 보면 FK이자 PK로 구성되어 있다.
+
+> 복합 키로 구성되어 있는데, 복합 키에 관한 자세한 내용은 뒤에서 나온다.
+
+이렇게 다른 테이블과 관계를 맺으면서, 해당 테이블의 기본 키를 자신의 기본 키로 사용하는 것을 **식별 관계** 라고 한다.
+
+##### 대리 키 사용
+
+복합 키는 너무 복잡하기 때문에, 대리 키를 사용하는걸 추천한다.
+
+그러면 대리 키를 사용한 코드로 엔티티를 고쳐주어야 한다.
+
+``` java
+@Entity
+public class Order {
+    @Id
+    @GeneratedValue
+    @Column(name = "ORDER_ID")
+    private Long id;
+    
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "PRODUCT_ID")
+    private Product product;
+    
+    private int orderAmount;
+    
+}
+```
+
+이런 식으로 하면 굳이 id 클래스를 만들 필요도 없어서 훨씬 간단하다.
