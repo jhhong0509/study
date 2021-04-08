@@ -589,3 +589,181 @@ public class GrandChild {
 }
 ```
 
+식별 관계는 기본 키와 외래 키를 같이 매핑해야 하기 때문에 엔티티에서 `@Id` 필드에 `@ManyToOne`을 사용했다.
+
+> 즉, 식별자 클래스는 그냥 선언하고 엔티티에서만 명시된다.
+
+##### @EmbeddedId
+
+`@EmbeddedId`로 식별 관계를 구성할 때엔 `@MapsId`를 사용할 수 있다.
+
+``` java
+@Entity
+public class Parent {
+    
+    @Id
+    @Column(name = "PARENT_ID")
+    private String id;
+    private String name;
+}
+
+@Embeddable
+public class ChildId implements Serializable {
+    private String parentId;
+    
+    @Column(name = "CHILD_ID")
+    private String id;
+    
+    (equals and hashCode)
+}
+
+@Entity
+public class Child {
+
+    @MapsId("parendId")		// ChildId.parentId와 매핑
+    @ManyToOne
+    @JoinColumn(name = "PARENT_ID")
+    private Parent parent;	// 책에선 public인데, 이유를 모르겠다.
+    
+    @Id
+    @Column(name = "CHILD_ID")
+    private String childId;
+    
+    private String name;
+}
+
+@Embeddable
+public class GrandChildId implements Serializable {
+    private ChildId childId;
+    
+    @Column(name="GRANDCHILD_ID")
+    private String id;
+    
+    (equals and hashCode)
+}
+
+@Entity
+public class GrandChild {
+    
+    @EmbeddedId
+    private GrandChildId id;
+    
+    @MapsId("childId")
+    @ManyToOne
+    @JoinColumns({
+    		@JoinColumn(name="PARENT_ID")
+        	@JoinColumn(name="CHILD_ID")
+    })
+    @Column(name = "GRANDCHILD_ID")
+    private Child child;
+    
+    private String name;
+}
+```
+
+> 여기서 `@MapsId`는 외래 키 이자 기본 키 인 컬럼을 지정해주는 어노테이션 이다.
+>
+> 위에서 사용한대로 `@MapsId("parendId")`와 같이 사용하면 해당 엔티티의 기본 키 필드(parentId)와 반대쪽 엔티티와 매핑시켜 준다.
+
+#### 비식별 관계로 구현
+
+이전에 만들었던 식별 관계를 비식별 관계로 변경해 보자.
+
+비식별 관계이기 때문에 **복합키를 포함할 필요가 없어졌다**
+
+``` java
+@Entity
+public class Parent {
+    @Id
+    @GenerataedValue
+    private Long id;
+    
+    private String name;
+}
+
+@Entity
+public class Child {
+    @Id
+    @GeneratedValue
+    @Column(name = "CHILD_ID")
+    private Long id;
+    
+    private String name;
+    
+    @ManyToOne
+    @JoinColumn(name = "PARENT_ID")
+    private Parent parent;
+}
+
+@Entity
+public class GrandChild {
+    
+    @Id
+    @GeneratedValue
+    @Column(name = "GRANDCHILD_ID")
+    private Long id;
+    
+    private String name;
+    
+    @ManyToOne
+    @JoinColumn(name = "CHILD_ID")
+    private Child child;
+}
+```
+
+코드 길이나 클래스 개수만 봐도, **훨씬 간단**해진걸 볼 수 있다.
+
+외래 키 매핑이 없어졌기 때문이다.
+
+> 이러한 외래 키 매핑이 점점 더 많아지면 많아질수록 엔티티는 복잡해질 것이다.
+>
+> 그렇기 때문에 **대리 키 사용을 권장한다.**
+
+### 일대일 식별관계
+
+일대일은 식별관계가 조금 특이하다.
+
+![onetoone_identify](.\images\onetoone_identify.jpg)
+
+일대일 식별 관계는 부모의 기본 키를 그대로 가져오기 때문에 **부모 테이블의 기본 키가 복합 키가 아니라면 자식도 복합 키가 아니다.**
+
+``` java
+@Entity
+public class Board {
+    @Id
+    @GeneratedValue
+    @Column(name = "BOARD_ID")
+    private Long id;
+    
+    private String title;
+    
+    @OneToOne(mappedBy = "board")
+    private BoardDetail boardDetail;
+}
+
+@Entity
+public class BoardChild {
+    @Id
+    private Long boardId;
+    
+    @MapsId
+    @OneToOne
+    @JoinColumn(name = "BOARD_ID")
+    private Board board;
+    
+    private String content;
+}
+```
+
+> 식별자가 단순 하나라면 `@MapsId`의 속성값을 비워두면 된다.
+
+### 식별과 비식별 관계 차이
+
+| 식별 관계                                                    | 비식별 관계                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 부모 테이블의 기본 키가 자식으로 전파되면서 계속해서 기본 키 컬럼이 늘어난다.<br />그렇기 때문에**SQL이 복잡해지고, 기본 키 인덱스가 커진다.** | 기본 키가 자식으로 전파되거나 늘어나지 않아서 항상 일정하다.<br />그렇기 때문에 **통일성이 있고, SQL이 복잡해지지 않는다.** |
+| 식별 관계는 **복합 기본 키를 만들어야 하는 경우가 많다.**    | **기본 키가 간단하다.**                                      |
+| 자연 키를 사용하기 때문에 **비지니스 요구사항이 바뀌면 변경되어야 한다.**<br />이러한 자연 키가 자식까지 전파되면 변경이 힘들다. | 반영구적으로 PK를 사용할 수 있다.                            |
+| 테이블 구조를 변경하기 어렵다. 즉 **테이블 구조가 유연하지 않다.**<br />부모 테이블의 키가 수정되면 자식 테이블도 수정되어야 하기 때문이다. | 테이블 구조가 식별관계보단 유연하다                          |
+| 복합 기본 키 클래스를 사용해야 하는데, 복합 키 클래스를 따로 만들어야 한다.<br />그렇기 때문에 **엔티티가 복잡해 진다** | 단순 `@Id` 어노테이션을 붙이면 된다.                         |
+
