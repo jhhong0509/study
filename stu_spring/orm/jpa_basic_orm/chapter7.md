@@ -260,7 +260,7 @@ public class Movie extends Item {
 
 <img src=".\images\mapped_super_class_basic.png" alt="mapped_super_class" style="zoom: 80%;" />
 
-위 사진과 같이 **공통된 속성이 있다면, 계속해서 중복해서 선언해 주어야 한다.**
+위 그림과 같이 **공통된 속성이 있다면, 계속해서 중복해서 선언해 주어야 한다.**
 
 id나 생성일 같은 경우에는 계속해서 사용될 가능성이 높다. 그렇기 때문에 따로 부모 클래스로 구현하고 상속하는 것이 훨씬 깔끔하다.
 
@@ -329,3 +329,263 @@ public class Member extends BaseEntity {
 그렇기 때문에 JPQL에서 사용될 수  없으며, 클래스를 직접 생성해서 사용할 일은 거의 없으므로 **추상 클래스로 만드는걸 권장한다.**
 
 > 참고로 `@Entity`는 `@Entity` 또는 `@MappedSuperclass`로 지정된 클래스만 상속받을 수 있다.
+
+### 복합 키와 식별 관계 매핑
+
+#### 식별 관계
+
+식별 관계란 **부모 테이블의 기본 키를 내려받아서 자식 테이블의 기본 키이자 외래 키로 사용하는 관계를 말한다.**
+
+즉, PARENT_ID가 CHILD 테이블의 PK가 된다는 의미이다.
+
+#### 비식별 관계
+
+<img src=".\images\sikbyeol.png" alt="identifier" style="zoom:150%;" />
+
+비식별 관계란, **부모의 PK를 단순 외래 키로만 사용하는 것을 의미한다.**
+
+외래 키가 NULL을 허용하는지 여부에 따라 필수적 비식별 관계와 선택적 비식별 관계로 나뉜다.
+
+- 필수적 비식별 관계
+
+  필수적 비식별 관계란, **외래 키에 NULL을 허용하지 않는 관계를 의미한다.**
+
+  연관관계를 필수적으로 맺어야 한다.
+
+  > DB 명세에서 동그라미가 없고 선만 있는 형태로 표현된다.
+
+- 선택적 비식별 관계
+
+  선택적 비식별 관계란, **외래 키에 NULL을 허용하는 형태이다.**
+
+  즉, 자식과 연결된 부모가 있을수도 있고 없을수도 있는다는 의미다.
+
+테이블 생성 시에 식별 관계와 비식별 관계중 선택해서 만들게 된다.
+
+하지만 **최대한 비식별 관계로 만들고, 식별 관계를 최소화 하는 추세이다.**
+
+#### 복합키 비식별 관계 매핑
+
+둘 이상의 컬럼으로 구성된 복합 PK는 단순히 `@Id`를 여러 필드에 사용하면 될 것 같지만, 오류가 발생한다.
+
+``` java
+@Entity
+public class Test {
+    @Id
+    private String pk1;
+    
+    @Id
+    private String pk2;	// 오류
+}
+```
+
+JPA에서 Entity의 PK로 영속성 컨텍스트에서 키를 설정한다.
+
+식별자를 찾을 때, 식별자를 비교해 주어야 하는데 기본적으로 Java는 **equals와 hashCode를 통해 동등성 비교**를 한다.
+
+하지만 식별자가 2개 이상이 되면 **별도의 식별자 클래스를 만들어서 따로 equals와 hashCode를 만들어 비교해야 한다.**
+
+
+
+JPA는 복합 키를 위해 `@IdClass`와 `@EmbeddedId`를 제공한다.
+
+**`@IdClass`는 관계형 데이터베이스**에 가깝고, **`@EmbeddedId`는 객체지향**에 가까운 방법이다.
+
+`@IdClass`를 사용하면 Entity에서 `@Id` 필드를 여러개 만들고, 미리 만들어둔 **id 클래스와 해당 필드를 매핑**시켜 준다.
+
+반대로 `@EmbeddedId`는 엔티티에서 식별자 클래스를 필드에 직접 추가하고, **식별자 클래스에서 직접 PK를 매핑한다.**
+
+
+
+##### 식별자 클래스
+
+식별자 클래스는 `@IdClass`와 `@EmbeddedId`로 나뉜다.
+
+- `@IdClass`
+
+  ``` java
+  @NoArgsConstructor
+  @AllArgsContructor
+  public class ParentId implements Serializable {
+      private String pk1;
+      private String pk2;
+      .
+      .
+      .
+  //  equals and hashCode
+  }
+  ```
+
+  특징을 정리하면 다음과 같다.
+
+  1. **Serializable 인터페이스를 구현**해야 한다.
+  2. **equals와 hashCode를 구현**해야 한다.
+  3. **기본 생성자**가 필요하다
+  4. **접근 제한자가 public** 이어야 한다.
+  5. **식별자 클래스의 속성관 엔티티에서 사용하는 속성의 속성 이름이 같아야 한다.**
+
+- `@EmbeddedId`
+
+  ``` java
+  @NoArgsConstructor
+  @AllArgsContructor
+  @Embeddable
+  public class ParentId implements Serializable {
+      
+      @Column(name = "ID1")
+      private String pk1;
+      
+      
+      @Column(name = "ID2")
+      private String pk2;
+      .
+      .
+      .
+  //  equals and hashCode
+  }
+  ```
+
+  > `@IdClass`와 다르게 식별자 클래스가 **엔티티에 직접 매핑된다.**
+
+  특징은 아래와 같다.
+
+  1. `@Embeddable` 어노테이션을 붙여야 한다.
+  2. **equals와 hashCode를 구현**해야 한다.
+  3. **기본 생성자**가 필요하다
+  4. 접근 제한자가 **public** 이어야 한다.
+
+  > 각각 식별자 클래스는 거의 비슷한 특징을 갖는다.
+
+##### equals()와 hashCode()
+
+복합 키는 equals()와 hashCode()를 필수적으로 구현해야 한다.
+
+자바 클래스는 기본적으로 Object를 상속받는데, 여기서 제공하는 equals() 메소드는 동일성 비교. 즉, **==비교**를 하기 때문에
+
+키를 찾을 수 없다.
+
+> 각각의 엔티티에서 어떠한 **식별자를 가진 객체를 찾고 싶을 때, equals() 메소드로 키를 비교**해야 하기 때문에 ==비교라면 찾을 수 없다.
+
+hashCode()도 마찬가지다.
+
+> lombok에선 아래와 같이 사용하면 equals 와 hashCode를 구현해 준다.
+>
+> `@EqualsAndHashCode(exclude = {"id", "paymentMethod", "price"})`
+>
+> 이런 어노테이션을 붙이게 되면 id, paymentMethod, price를 제외한 값들을 비교하는 equals 메소드와 hashCode 메소드를 생성한다.
+
+##### 단점
+
+- `@IdClass`
+
+  - 컬럼 선언이 중복된다.
+
+    > 식별자 클래스와 엔티티 클래스 모두에서 작성되어야 한다.
+
+  - `@MapsId` 사용이 불가능하다.
+
+- `@EmbeddedId`
+
+  - 복합 키 구조가 2개 이상일 때 복잡도가 증가한다.
+
+##### 장점
+
+- `@IdClass`
+
+  - 비지니스 적으로 의미가 있는 키를 명시할 수 있다.
+
+    > 엔티티 내부만 봐도 복합 키들을 한 눈에 볼 수 있다.
+
+  - 식별 관계매핑을 여러 테이블에서 하더라도 객체 연관관계를 간단하게 표현 가능
+
+- `@EmbeddedId`
+
+  - 객체지향적이다.
+
+  - `@MapsId`를 통해 객체 생성이 편리하다.
+
+    > `@MapsId`는 식별관계로 만들어주는 어노테이션이다.
+    >
+    > 즉, PK에 `@MapsId`를 붙이게 되면 해당 PK는 PK이자 FK가 되는 것이다.
+
+전체적으로 `@EmbeddedId`가 객체지향적 이기 때문에 좋아보인다.
+
+> 사실 어떤게 더 낫고 별로인지 확실하지 않다.
+>
+> 책에서는 `@EmbeddedId`를 추천하고, 아래와 같이 설명했다. 취향별로 사용하면 될 것 같다.
+>
+> `단순한 하나의 복합키만 존재한다고 하면 @EmbeddedId 를 사용하라고 권하고 싶습니다. 하지만 복합키를 통한 식별관계 매핑이 여기저기 존재한다면, @IdClass를 이용하라고 권하고 싶습니다.`
+
+#### 복합 키 식별 관계 매핑
+
+![identify_relation](.\images\identify_relation.jpg)
+
+위와 같은 관계는 부모, 자식, 손자까지 기본키를 전달하는 식별 관계이다.
+
+이러한 관계는 `@IdClass` 또는 `@EmbeddedId`로 식별자 매핑을 할 수 있다.
+
+> 일대일 관계는 살짝 다르다.
+
+##### @IdClass
+
+`@IdClass`에서 위 그림과 같은 식별관계는 아래와 같이 표현할 수 있다.
+
+``` java
+@Entity
+public class Parent {
+    
+    @Id
+    @Column(name = "PARENT_ID")
+    private String id;
+    private String name;
+}
+
+public class ChildId implements Serializable {
+    private String parent;
+    private String childId;
+    
+    (equals and hashCode)
+}
+
+@Entity
+@IdClass(ChildId.class)
+public class Child {
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "PARENT_ID")
+    private Parent parent;	// 책에선 public인데, 이유를 모르겠다.
+    
+    @Id
+    @Column(name = "CHILD_ID")
+    private String childId;
+    
+    private String name;
+}
+
+public class GrandChildId implements Serializable {
+    private ChildId childId;
+    
+    private String id;
+    
+    (equals and hashCode)
+}
+@Entity
+@IdClass(GrandChildId.class)
+public class GrandChild {
+    
+    @Id
+    @ManyToOne
+    @JoinColumns({
+    		@JoinColumn(name="PARENT_ID")
+        	@JoinColumn(name="CHILD_ID")
+    })
+    private Child child;
+    
+    @Id
+    @Column(name = "GRANDCHILD_ID")
+    private String id;
+    
+    private String name;
+}
+```
+
