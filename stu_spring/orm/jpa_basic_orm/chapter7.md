@@ -779,4 +779,6 @@ public class BoardChild {
 
 #### 조인 컬럼
 
-테이블의 연관 관계를 갖는 방법중 하나이로, JoinColumn 이라고 부르는 외래 키 컬럼으로 관리한다.
+테이블의 연관 관계를 갖는 방법중 하나로, JoinColumn 이라고 부르는 외래 키 컬럼으로 관리한다.
+
+![joinColumn](.\images\joinColumn.png)
