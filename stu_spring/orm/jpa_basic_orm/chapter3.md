@@ -41,7 +41,7 @@ EntityManager를 닫으면 DB Connection을 Connection Pool에 반환한다.
 
 필요할때는 꺼내서 **사용**하고, 사용한 후에는 다시 **Connection pool에 넣어둔다.**
 
-<img src="./images/connection_pool.png" alt="connection_pool" style="zoom:67%;" />
+<img src="./images/connection_pool.jpg" alt="connection_pool" style="zoom:67%;" />
 
 보통 JPA의 구현체들은 **EntityManagerFactory를 생성**할 때 커넥션 풀을 생성한다.
 
@@ -297,9 +297,9 @@ COMMIT은 **커밋할때만** 플러시가 된다.
 
 준영속 상태가 되면, 1차 캐시에서 해당 객체가 모두 삭제된다.
 
-![jpa_detached_1](.\images\jpa_detached_1.png)
+![jpa_detached_1](.\images\jpa_detached_1.jpg)
 
-![jpa_detached_1](.\images\jpa_detached_2.png)
+![jpa_detached_1](.\images\jpa_detached_2.jpg)
 
 또한  쓰기지연 SQL 저장소에서도 해당 객체 관련 SQL이 삭제된다.
 
@@ -309,7 +309,7 @@ detach()  메소드는 하나의 엔티티를 준영속 상태로 만들어 준�
 
 하지만 clear() 메소드는 영속성 컨텍스트의 모든 엔티티를 준영속 상태로 만들어 준다.`
 
-![jpa_detached_3](.\images\jpa_detached_3.png)
+![jpa_detached_3](.\images\jpa_detached_3.jpg)
 
 detach() 메소드와 비교했을 때, detach() 메소드는 지정한 특정 객체만 날렸지만 clear() 메소드는 모든 영속 객체를 지웠다.
 
@@ -349,7 +349,7 @@ Member member = em.merge(member);
 
 위 메소드는 아래와 같은 순서로 작동한다.
 
-![jpa_merge](.\images\jpa_merge.png)
+![jpa_merge](.\images\jpa_merge.jpg)
 
 1. merge 메소드 실행
 

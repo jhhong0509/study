@@ -78,7 +78,7 @@ final, enum, interface, inner 클래스에선 사용할 수 없다.
 >
 >   개념 스키마의 물리적 저장 구조를 정의한다.
 >
-> <img src="./images/schema.png" alt="schema" style="zoom:67%;" />
+> <img src="./images/schema.jpg" alt="schema" style="zoom:67%;" />
 
 ### 스키마 자동 생성
 

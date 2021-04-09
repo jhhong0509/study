@@ -53,7 +53,7 @@ JPA는 두 객체 연관관계 중 하나를 정해서 외래 키를 관리한�
 
 다대일 관계는 아래와 같은 형태를 말한다.
 
-![onetomany_one](.\images\onetomany_one.png)
+![onetomany_one](.\images\onetomany_one.jpg)
 
 다대일 단방향 관계란 외래 키를 관리하는 객체 즉 **Member쪽에서 team 객체를 참조하는 형태**를 가진다.
 
@@ -81,7 +81,7 @@ public class Member {
 
 단방향 매핑은 객체 그래프 탐색에서 불리하게 작용한다.
 
-![onetomany_two](.\images\onetomany_two.png)
+![onetomany_two](.\images\onetomany_two.jpg)
 
 > 실선이 연관관계의 주인, 점선이 자식이다.
 
@@ -144,7 +144,7 @@ public class Team {
 
 일대다 단방향 관계매핑은 JPA 2.0부터 지원된다. 늦게 추가된 만큼 크게 필요하지 않다는 의미이다.
 
-![onetomany_four](.\images\onetomany_four.png)
+![onetomany_four](.\images\onetomany_four.jpg)
 
 이렇듯 Team 객체가 MEMBER 테이블을 관리하는 특이한 형태를 가진다.
 
@@ -187,7 +187,7 @@ UPDATE 쿼리가 발생하는 이유는 Member 엔티티는 Team을 모르기 �
 
 방법이 아예 없는 것은 아니다.
 
-<img src=".\images\onetomany_three.png" alt="onetomany_three" style="zoom:50%;" />
+<img src=".\images\onetomany_three.jpg" alt="onetomany_three" style="zoom:50%;" />
 
 위와 같이 Team - Member 객체를 양방향으로 매핑하고, Member는 읽기 전용으로 관계를 맺었다.
 
@@ -235,7 +235,7 @@ UPDATE 쿼리가 발생하는 이유는 Member 엔티티는 Team을 모르기 �
 
 일대일 단방향 매핑은 아래와 같은 관계를 가진다.
 
-<img src=".\images\onetoone_one.png" alt="onetomany_two" style="zoom:67%;" />
+<img src=".\images\onetoone_one.jpg" alt="onetomany_two" style="zoom:67%;" />
 
 Member 객체의 Locker가 MEMBER 테이블의 LOCKER_ID와 관계를 가지는 형태이다.
 
@@ -277,7 +277,7 @@ public class Locker {
 
 ##### 양방향
 
-<img src=".\images\onetoone_two.png" alt="onetomany_one" style="zoom:50%;" />
+<img src=".\images\onetoone_two.jpg" alt="onetomany_one" style="zoom:50%;" />
 
 위와 같이 Member 객체는 Locker와 양방향 관계를 가진다.
 
@@ -326,7 +326,7 @@ public class Locker {
 
 결론부터 말하면, **불가능하다.**
 
-<img src=".\images\onetoone_three.png" alt="onetoone_three"  />
+<img src=".\images\onetoone_three.jpg" alt="onetoone_three"  />
 
 일대일 단방향은 이런 모습으로 매핑할수도, 표현할수도 없다.
 
@@ -334,7 +334,7 @@ public class Locker {
 
 ##### 양방향
 
-![onetoone_four](.\images\onetoone_four.png)
+![onetoone_four](.\images\onetoone_four.jpg)
 
 주 테이블이 외래 키를 가지는 형태의 양방향 매핑에서 연관관계의 주인만 바꿔주면 된다.
 
@@ -402,7 +402,7 @@ JPA에서 JOIN을 하는 방법중 하나이다.
 
 위 엔티티는 아래와 같이 매핑딘다.
 
-![many_to_many_1](.\images\many_to_many_1.png)
+![many_to_many_1](.\images\many_to_many_1.jpg)
 
 자동으로 Member_Product 라는 이름의 테이블을 생성해 준다.
 
