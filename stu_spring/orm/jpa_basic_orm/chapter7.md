@@ -781,4 +781,22 @@ public class BoardChild {
 
 테이블의 연관 관계를 갖는 방법중 하나로, JoinColumn 이라고 부르는 외래 키 컬럼으로 관리한다.
 
-![onetoone_identify](.\images\joinColumn.jpg)
+<img src=".\images\joinColumn.jpg" alt="onetoone_identify" style="zoom:150%;" />
+
+MEMBER 테이블에서 LOCKER 테이블과 **연결되는 컬럼을 만들고, 해당 컬럼을 통해 다른 테이블과 연결된다.**
+
+위와 같이 LOCKER_ID, 즉 **외래 키 컬럼에 null을 허용하는 관계를 선택적 비식별 관계라고 한다.**
+
+선택적 비식별 관계는 **INNER JOIN을 했을 때 관계를 갖지 않은 컬럼을 조회되지 않는다.**
+
+> 위 상황에선 M_ID1, M_ID2, M_ID3 이라는 튜플이 관계를 갖지 않기 때문에, 다음과 같은 결과가 나온다.
+>
+> | MEMBER_ID | USERNAME | LOCKER_ID | NAME    |
+> | --------- | -------- | --------- | ------- |
+> | M_ID4     | 회원4    | L_ID1     | 사물함1 |
+> | M_ID5     | 회원5    | L_ID2     | 사물함2 |
+>
+> 만약 MEMBER와 LOCKER의 목록을 출력하고 싶은데, INNER JOIN을 사용한다면 회원4와 회원5밖에 안나오는 문제가 생긴다
+
+그렇기 때문에 **선택적 비식별 관계는 OUTER N을 사용해야 한다.**
+
