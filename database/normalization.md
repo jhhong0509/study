@@ -32,7 +32,7 @@
 
 - 예제
 
-![no_normal](..\images\no_normal.png)
+![no_normal](no_normal.png)
 
 > 위와 같은 형태는 이름, 학번, 메일, 대학이 중복되어 있다.
 >

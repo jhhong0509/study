@@ -10,7 +10,7 @@
 >
 > 사실 서버에 전송되는 데이터는 내가 쓴 글이 아닌 hidden 타입으로 숨어있던 데이터가 들어가게 된다.
 
-![csrf_attack](.\images\csrf_attack.png)
+![csrf_attack](./images/csrf_attack.png)
 
 이렇게 위조된 페이지에서 요청을 보내는걸 막기 위해 많은 방법들이 있지만 그 중 하나가 CSRF Token 이다.
 
@@ -20,7 +20,7 @@
 
 > 즉 **내가 의도한 곳에서 온 요청이 맞는지 검증**한다.
 
-![csrf_attack](.\images\csrf.png)
+![csrf_attack](./images/csrf.png)
 
 1. 서버에 권한을 인증 받는다.
 2. 글쓰기 화면을 요청한다.

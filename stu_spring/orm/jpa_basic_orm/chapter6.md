@@ -235,7 +235,7 @@ UPDATE 쿼리가 발생하는 이유는 Member 엔티티는 Team을 모르기 �
 
 일대일 단방향 매핑은 아래와 같은 관계를 가진다.
 
-<img src=".\images\onetoone_one.jpg" alt="onetomany_two" style="zoom:67%;" />
+<img src="./images/onetoone_one.jpg" alt="onetomany_two" style="zoom:67%;" />
 
 Member 객체의 Locker가 MEMBER 테이블의 LOCKER_ID와 관계를 가지는 형태이다.
 
@@ -277,7 +277,7 @@ public class Locker {
 
 ##### 양방향
 
-<img src=".\images\onetoone_two.jpg" alt="onetomany_one" style="zoom:50%;" />
+<img src="/images/onetoone_two.jpg" alt="onetomany_one" style="zoom:50%;" />
 
 위와 같이 Member 객체는 Locker와 양방향 관계를 가진다.
 
@@ -326,7 +326,7 @@ public class Locker {
 
 결론부터 말하면, **불가능하다.**
 
-<img src=".\images\onetoone_three.jpg" alt="onetoone_three"  />
+<img src="./images/onetoone_three.jpg" alt="onetoone_three"  />
 
 일대일 단방향은 이런 모습으로 매핑할수도, 표현할수도 없다.
 
@@ -334,7 +334,7 @@ public class Locker {
 
 ##### 양방향
 
-![onetoone_four](.\images\onetoone_four.jpg)
+![onetoone_four](./images/onetoone_four.jpg)
 
 주 테이블이 외래 키를 가지는 형태의 양방향 매핑에서 연관관계의 주인만 바꿔주면 된다.
 
@@ -402,7 +402,7 @@ JPA에서 JOIN을 하는 방법중 하나이다.
 
 위 엔티티는 아래와 같이 매핑딘다.
 
-![many_to_many_1](.\images\many_to_many_1.jpg)
+![many_to_many_1](./images/many_to_many_1.jpg)
 
 자동으로 Member_Product 라는 이름의 테이블을 생성해 준다.
 

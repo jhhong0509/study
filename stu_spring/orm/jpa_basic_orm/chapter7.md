@@ -6,7 +6,7 @@
 
 하지만 비슷한 개념으로 **슈퍼타입 - 서브타입 관계(Super-Type Sub-Type Relationship)** 라는게 있다.
 
-![super_sub](.\images\super_sub.jpg)
+![super_sub](./images/super_sub.jpg)
 
 #### 슈퍼타입 서브타입 관계
 
@@ -22,7 +22,7 @@
 
 그렇기 때문에 **타입을 구분하는 컬럼을 추가**하고, 타입에 따라서 다르게 JOIN하면 된다.
 
-![super_sub_join](.\images\super_sub_join.jpg)
+![super_sub_join](./images/super_sub_join.jpg)
 
 DTYPE이란 컬럼을 통해 어느 테이블과 매핑될지 정하고, 매핑될 테이블과 연결시켜 주는 형태이다.
 
@@ -145,7 +145,7 @@ public class Movie extends Item {
 
 테이블 하나만 사용하는 전략이다.
 
-![super_sub_one](.\images\super_sub_one.jpg)
+![super_sub_one](./images/super_sub_one.jpg)
 
 ``` java
 @Entity
@@ -227,7 +227,7 @@ public class Movie extends Item {
 
 이런식으로 만들면 아래와 같은 테이블 구조를 갖는다.
 
-![super_sub_every](.\images\super_sub_every.jpg)
+![super_sub_every](./images/super_sub_every.jpg)
 
 이런 식으로 **Item 테이블는 생성되지 않고, ITEM의 속성들을 가지고 있는 3개의 엔티티가 생긴다.**
 
@@ -258,7 +258,7 @@ public class Movie extends Item {
 >
 > 즉 그냥 필드 선언의 중복을 줄이기 위해 따로 빼내는 것이다.
 
-<img src=".\images\mapped_super_class_basic.jpg" alt="mapped_super_class" style="zoom: 80%;" />
+<img src="./images/mapped_super_class_basic.jpg" alt="mapped_super_class" style="zoom: 80%;" />
 
 위 그림과 같이 **공통된 속성이 있다면, 계속해서 중복해서 선언해 주어야 한다.**
 
@@ -340,7 +340,7 @@ public class Member extends BaseEntity {
 
 #### 비식별 관계
 
-<img src=".\images\sikbyeol.jpg" alt="identifier" style="zoom:150%;" />
+<img src="./images/sikbyeol.jpg" alt="identifier" style="zoom:150%;" />
 
 비식별 관계란, **부모의 PK를 단순 외래 키로만 사용하는 것을 의미한다.**
 
@@ -518,7 +518,7 @@ hashCode()도 마찬가지다.
 
 #### 복합 키 식별 관계 매핑
 
-![identify_relation](.\images\identify_relation.jpg)
+![identify_relation](./images/identify_relation.jpg)
 
 위와 같은 관계는 부모, 자식, 손자까지 기본키를 전달하는 식별 관계이다.
 
@@ -723,7 +723,7 @@ public class GrandChild {
 
 일대일은 식별관계가 조금 특이하다.
 
-![onetoone_identify](.\images\onetoone_identify.jpg)
+![onetoone_identify](./images/onetoone_identify.jpg)
 
 일대일 식별 관계는 부모의 기본 키를 그대로 가져오기 때문에 **부모 테이블의 기본 키가 복합 키가 아니라면 자식도 복합 키가 아니다.**
 
@@ -781,7 +781,7 @@ public class BoardChild {
 
 테이블의 연관 관계를 갖는 방법중 하나로, JoinColumn 이라고 부르는 외래 키 컬럼으로 관리한다.
 
-<img src=".\images\joinColumn.jpg" alt="onetoone_identify" style="zoom:150%;" />
+<img src="./images/joinColumn.jpg" alt="onetoone_identify" style="zoom:150%;" />
 
 MEMBER 테이블에서 LOCKER 테이블과 **연결되는 컬럼을 만들고, 해당 컬럼을 통해 다른 테이블과 연결된다.**
 
@@ -804,4 +804,4 @@ MEMBER 테이블에서 LOCKER 테이블과 **연결되는 컬럼을 만들고, �
 
 조인 테이블이란, **조인을 위한 별도의 테이블**로 조인을 관리하는 것이다.
 
-![join_table](.\images\join_table.jpg)
+![join_table](./images/join_table.jpg)

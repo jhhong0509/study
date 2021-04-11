@@ -16,7 +16,7 @@
 
   > 일대다 관계
 
-![mapping_basic](.\images\mapping_basic.jpg)
+![mapping_basic](./images/mapping_basic.jpg)
 
 - 객체 연관관계
 

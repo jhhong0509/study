@@ -32,4 +32,4 @@
 
 @ControllerAdvice와 같지만, @RestController 어노테이션이 붙은 클래스들을 감지한다.
 
-![exception](.\images\exception.png)
+![exception](./images/exception.png)
