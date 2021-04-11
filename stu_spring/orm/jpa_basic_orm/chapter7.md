@@ -802,6 +802,214 @@ MEMBER 테이블에서 LOCKER 테이블과 **연결되는 컬럼을 만들고, �
 
 #### 조인 테이블
 
+> [챕터6](./chapter6#@JoinTable)에서 다대다를 설명할 때 `@JoinTable`에 대해 설명했었다.
+
 조인 테이블이란, **조인을 위한 별도의 테이블** 로 조인을 관리하는 것이다.
 
 ![join_table](./images/join_table.jpg)
+
+> 관계형 데이터베이스에서 다대다 매핑이 대표적인 조인 테이블 관계다.
+
+관계를 관리하는 조인 테이블을 추가하고 여기서 테이블의 외래 키를 가지고 연관 관계를 관리한다.
+
+조인 테이블은 FK에 null이 저장되지 않는다는 장점이 있지만, **테이블을 따로 추가해야 한다는 단점이 있다.**
+
+이렇게 테이블이 늘어나면 복잡해지기 때문에 웬만하면 Join Column을 사용하고, 필요하다 판단되면 Join Table을 사용하는걸 추천한다.
+
+> 조인 테이블을 연결 테이블 또는 링크 테이블 이라고도 부른다.
+
+##### 일대일
+
+일대일 관계도 조인 테이블을 이용할 수 있다.
+
+<img src="./images/onetoone_table.jpg" alt="onetoone_table" style="zoom: 25%;" />
+
+PARENT_ID와 CHILD_ID는 모두 UNIQUE 제약조건을 추가해야 한다.
+
+위에서 조인 테이블을 코드로 짜면 아래와 같다.
+
+``` java
+@Entity
+public class Parent {
+    @Id
+    @GeneratedValuue
+    @Column(name = "PARENT_ID")
+    private Long id;
+    
+    private String name;
+    
+    @OneToOne
+    @JoinTable(name = "PARENT_CHILD",
+              joinColumns = @JoinColumn(name = "PARENT_ID"),
+              inverseJoinColumns = @JoinColumn(name = "CHILD_ID"))
+    private Child child;
+}
+
+@Entity
+public class Child {
+    @Id
+    @GeneratedValue
+    @Column(name = "CHILD_ID")
+    private Long id;
+    
+    private String name;
+    
+    @OneToOne(mappedBy = "child")
+    private Parent parent;
+}
+```
+
+부모 엔티티를 보면 `@JoinColumn`도 사용되었지만 `@JoinTable`을 사용하는 특이한 구조다.
+
+<img src="./images/onetomany_table.jpg" alt="jointable" style="zoom: 25%;" />
+
+위 그림에서 볼 수 있듯이, 조인 테이블에서 자식쪽에서 UNIQUE 제약조건을 사용해야 한다.
+
+> 하나의 CHILD 엔티티가 여러 PARENT 엔티티를 가질 수 없기 때문이다.
+
+``` java
+@Entity
+public class Parent {
+    @Id
+    @GeneratedValuue
+    @Column(name = "PARENT_ID")
+    private Long id;
+    
+    private String name;
+    
+    @OneToMany
+    @JoinTable(name = "PARENT_CHILD",
+              joinColumns = @JoinColumn(name = "PARENT_ID"),
+              inverseJoinColumns = @JoinColumn(name = "CHILD_ID"))
+    private List<Child> child;
+}
+
+@Entity
+public class Child {
+    @Id
+    @GeneratedValue
+    @Column(name = "CHILD_ID")
+    private Long id;
+    
+    private String name;
+}
+```
+
+> 보다싶이, 일대일 관계와 굉장히 비슷하다.
+
+##### 다대일
+
+일대다 관계에서 방향만 바꾸어 주면 된다.
+
+``` java
+@Entity
+public class Parent {
+    @Id
+    @GeneratedValuue
+    @Column(name = "PARENT_ID")
+    private Long id;
+    
+    private String name;
+    
+    @OneToMany(mappedBy = "parent")
+    private List<Child> child;
+}
+
+@Entity
+public class Child {
+    @Id
+    @GeneratedValue
+    @Column(name = "CHILD_ID")
+    private Long id;
+    
+    private String name;
+    
+    @ManyToOne(optional = false)
+	@JoinTable(name = "PARENT_CHILD",
+              joinColumns = @JoinColumn(name = "PARENT_ID"),
+              inverseJoinColumns = @JoinColumn(name = "CHILD_ID"))
+    private Parent parent;
+}
+```
+
+##### 다대다
+
+다대다 조인 테이블의 두 컬럼을 합쳐서 하나의 유니크 제약 조건을 걸어야 한다.
+
+``` java
+@Entity
+public class Parent {
+    @Id
+    @GeneratedValuue
+    @Column(name = "PARENT_ID")
+    private Long id;
+    
+    private String name;
+    
+	@ManyToMany
+    @JoinTable(name = "PARENT_CHILD",
+              joinColumns = @JoinColumn(name = "PARENT_ID"),
+              inverseJoinColumns = @JoinColumn(name = "CHILD_ID"))
+    private List<Child> child;
+}
+
+@Entity
+public class Child {
+    @Id
+    @GeneratedValue
+    @Column(name = "CHILD_ID")
+    private Long id;
+    
+    private String name;
+}
+```
+
+> 만약 조인 테이블에 컬럼을 추가하면 `@JoinTable`을 사용할 수 없고 따로 엔티티를 매핑해 주어야 한다.
+
+### @SecondaryTable
+
+~~잘 사용되진 않는다.~~
+
+하나의 엔티티에 여러 테이블을 매핑시킬 수 있다.
+
+이렇게 말하니 무슨 뜻인지 모르겠으니 먼저 코드를 보자.
+
+``` java
+@Entity
+@Table(name = "BOARD")
+@SecondaryTable(name = "BOARD_DETAIL",
+               pkJoinColumns = @PrimaryKeyJoinColumn(name = "BOARD_DETAIL_ID"))
+public class Board {
+    
+    @Id
+    @GeneratedValue
+    @Column(name = "BOARD_ID")
+    private Long id;
+    
+    private String title;
+    
+    @Column(table = "BOARD_DETAIL")
+    private String content;
+}
+```
+
+위와 같이 **하나의 엔티티가 BOARD 테이블과 BOARD_DETAIL 테이블에 매핑**된다.
+
+두 테이블은 일대일 관계로 매핑된 상태이다.
+
+`@SecondaryTable`의 속성은 다음과 같다.
+
+| 속성          | 설명                                            |
+| ------------- | ----------------------------------------------- |
+| name          | 해당 엔티티에서 추가적으로 관리할 테이블의 이름 |
+| pkJoinColumns | 다른 테이블의 기본 키 컬럼 속성                 |
+
+`@Column`에서는 속성중에서 table 속성을 지정해서 어떤 테이블과 매핑될지 정한다.
+
+> 지정하지 않으면 그냥 본래 테이블과 매핑된다.
+
+이러한 방법은 **추천되지 않는다.**
+
+차라리 엔티티를 하나 더 만들어서 1대1 매핑을 하는편이 최적화에 유리하다.
+
+> 항상 두 테이블을 조회해야 하기 때문이다.

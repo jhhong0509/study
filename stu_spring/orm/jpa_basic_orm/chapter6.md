@@ -400,7 +400,7 @@ JPA에서 JOIN을 하는 방법중 하나이다.
 | joinColumns        | 현재 방향인 Member와 매핑할 조인 컬럼 정보 지정. |
 | inverseJoinColumns | 반대 방향인 Product와 매핑할 조인 컬럼 지정      |
 
-위 엔티티는 아래와 같이 매핑딘다.
+위 엔티티는 아래와 같이 매핑된다.
 
 ![many_to_many_1](./images/many_to_many_1.jpg)
 
