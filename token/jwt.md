@@ -16,7 +16,7 @@ Json Web Token의 약자로, **웹 표준** 이다.
 
 ### JWT 토큰의 구성
 
-JWT 토큰은 3가지 파트(header, payload, signature) 로 나뉘며, 각 파트는 **.**으로 구분된다.
+JWT 토큰은 3가지 파트(header, payload, signature) 로 나뉘며, 각 파트는 **.** 으로 구분된다.
 
 ![image-20210330110711582](jwt_content.png)
 
