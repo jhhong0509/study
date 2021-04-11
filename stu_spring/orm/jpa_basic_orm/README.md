@@ -30,7 +30,7 @@
 
 **이 책은 Spring Data Repository가 아닌 Raw JPA 를 이용한다.**
 
-![jpa_data](.\images\jpa_data.jpg)
+![jpa_data](./images/jpa_data.jpg)
 
 > 즉, Repository를 이용하지 않는다는 의미이다.
 
