@@ -132,3 +132,74 @@ Phone을 new 키워드로 인스턴스를 만들어 보면, 오류가 나는걸 
 해당 추상 클래스를 상속하면 **해당 메소드를 오버라이딩 해야만 하기 때문이다.**
 
 > 하지 않으면 컴파일 도중 오류가 발생한다.
+
+#### 예제
+
+``` java
+package class_2021_04_12_02;
+
+public abstract class Animal {
+	
+	public String kind;
+	
+	public void breathe() {
+		System.out.println("숨 쉰다.");
+	}
+	
+	public abstract void sound();
+}
+```
+
+``` java
+package class_2021_04_12_02;
+
+public class Cat extends Animal {
+	
+	public Cat() {
+		this.kind = "포유류";
+	}
+	
+	@Override
+	public void sound() {
+		System.out.println("냥");
+	}
+}
+```
+
+여기서 sound를 override 하지 않으면 오류가 발생한다.
+
+``` java
+package class_2021_04_12_02;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Dog dog = new Dog();
+		Cat cat = new Cat();
+		dog.sound();
+		cat.sound();
+		
+		Animal animal = null;
+		animal = dog;
+		animal.sound();
+
+        animal = cat;
+		animal.sound();
+	}
+
+}
+```
+
+여기서 animal에서 dog를 사용할 수 있다.
+
+이것이 **다형성**의 예제중 하나로, animal 에는 cat도, dog도 올 수 있다.
+
+``` java
+public static void animalSound(Animal animal) {
+	animal.sound();
+}
+```
+
+이런식으로 메소드를 생성하게 되면 매개변수에 cat이나 dog을 넣게 되더라도 작동하게 된다.
+
+animal이 부모이기 때문에 자동 타입 변환이 일어나기 때문이다.
