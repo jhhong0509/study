@@ -1,12 +1,18 @@
 # 토큰 검증
 
-### 발생 이유
+### 문제 발생
 
 프로젝트 개발 도중 다른 언어에서 발급한 토큰을 검증할 일이 있었다.
 
-하지만 계속해서 토큰을 파싱하는 도중 INVALID TOKEN Exception이 발생했고, 아래와 같은 reason이 출력됐다.
+하지만 계속해서 토큰을 파싱하는 도중 INVALID TOKEN Exception이 발생했다.
+
+### 발생 이유
+
+아래와 같은 reason이 출력됐다.
 
 `JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.`
+
+위를 보면, signature가 맞지 않다는 의미이다.
 
 ### 해결 과정
 
