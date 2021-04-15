@@ -330,6 +330,16 @@ public class Member extends BaseEntity {
 
 > 참고로 `@Entity`는 `@Entity` 또는 `@MappedSuperclass`로 지정된 클래스만 상속받을 수 있다.
 
+
+
+`@MappedSuperclass`를 사용하면 중복이 최소화 되기 때문에 굉장히 좋아보인다.
+
+하지만 `@MappedSuperclass`를 사용하면 여기서 정의한 속성들에는 접근이 불가능하다.
+
+만약 접근하고 싶다면 setter 메소드로 접근해야 하는데 Entity 에 setter 메소드는 굉장히 비추천되는 방식임으로, 따로 수정이 필요 없는 `@Id`나 수정/작성일 등만 사용하는게 좋다.
+
+> Getter 처럼 조회는 가능하다.
+
 ### 복합 키와 식별 관계 매핑
 
 #### 식별 관계
