@@ -137,10 +137,18 @@ docker run -c 2048
 docker run --cpuset=0,1,2
 ```
 
-### --dns
+### --dns 옵션
 
 웹 서버에서 사용할 dns 서버를 명시한다.
 
 ``` 
 docker run --dns="8.8.8.8"
+```
+
+### --rm 옵션
+
+주로 1회성 컨테이너에서 사용하게 되는데, 컨테이너 종료 시 모든 데이터를 깔끔히 지워준다.
+
+``` dockerfile
+docker run --rm
 ```
