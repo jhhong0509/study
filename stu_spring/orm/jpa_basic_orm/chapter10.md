@@ -74,14 +74,38 @@ SELECT m FROM Member AS m WHERE m.username = 'hello'
 
 > JPA 구현체로 Hibernate를 사용하면 HQL 이라는걸 사용할 수 있는데, 여기선 별칭을 사용하지 않아도 된다.
 
-#### TypeQuery, Query
 
-JPQL을 실행하려면 쿼리 객체를 만들어야 한다.
 
-여기서 TypeQuery와 Query로 나뉘게 된다.
 
-- TypeQuery
 
-  
+### JPQL과 Criteria는 생략
 
-- Query
+#### QueryDSL
+
+Criteria는 복잡하다는 큰 단점이 있었는데, 작성이 쉽고 간결하고, 쿼리와 비슷한 형태로 개발할 수 있는 프로젝트가 QueryDSL이다.
+
+QueryDSL은 **JPQL 빌더** 역할을 수행하는 오픈소스 프로젝트로, 자바 컬렉션이나 JPA, JDBC, 몽고DB 등 다양하게 지원한다.
+
+> 참고로 QueryDSL은 데이터를 조회하는 기능에 특화되어 있다.
+
+
+
+#### QueryDSL 설정
+
+필수 라이브러리는 다음과 같다.
+
+``` groovy
+compile("com.querydsl:querydsl-jpa")
+annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
+```
+
+- querydsl-jpa
+
+  QueryDSL의 JPA 라이브러리를 받아온다.
+
+- querydsl-apt
+
+  AnnotationProcessor 즉 컴파일 단계에서 쿼리 타입을 생성할 때 필요한 라이브러리 이다.
+
+  QUser 과 같이, Q가 붙은 클래스들을 자동으로 생성해 준다.
+
