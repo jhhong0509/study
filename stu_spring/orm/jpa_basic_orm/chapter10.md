@@ -108,4 +108,28 @@ annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedPr
   AnnotationProcessor 즉 컴파일 단계에서 쿼리 타입을 생성할 때 필요한 라이브러리 이다.
 
   QUser 과 같이, Q가 붙은 클래스들을 자동으로 생성해 준다.
+  
+  >  querydsl은 entity 클래스를 사용하지 않기 때문에 따로 생성해 주어야 한다.
+
+쿼리타입은 사용의 편리를 위해 기본적인 인스턴스를 포함하고 있다.
+
+
+
+쿼리 타입의 기본 인스턴스를 사용하면 쿼리 타입을 훨씬 간결하게 할 수 있다.
+
+``` java
+import static ㅁㅁㅁㅁ.ㅁㅁㅁㅁ.ㅁㅁㅁㅁ.QEntity.entity;
+```
+
+이렇게 하면 따로 생성자 호출 등의 작업이 필요 없다.
+
+
+
+#### 검색 조건 쿼리
+
+QueryDSL은 먼저 아래와 같은 형태를 가진다.
+
+``` java
+JPAQueryFactory jpaQueryFactory
+```
 
