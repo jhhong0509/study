@@ -28,7 +28,9 @@ public abstract class BaseId {
 
 ### 주의
 
-**`@MappedSuperclass`에 `@Id`를 사용하면 AUTO_INCREMENT가 공유된다.**
+**`@MappedSuperclass`에 `@Id`를 사용하면 AUTO_INCREMENT가 공유되는게 아니다.**
+
+단순히 MySQL의 기본 `GeneratedValue` 속성값이 Sequence일 뿐이다.
 
 쉽게 말해서 보통 A 테이블에 데이터 두개, B 테이블에 하나 넣으면 아래와 같이 ID가 개별적으로 들어간다.
 
@@ -46,9 +48,7 @@ public abstract class BaseId {
 | 1    | 망함      |
 | 2    | 이게뭐람  |
 
-하지만 `@MappedSuperclass`를 사용하게 되면 아래와 같이 데이터가 들어가게 된다.
-
-
+하지만 `Sequence`를 사용하게 되면 아래와 같이 데이터가 들어가게 된다.
 
 - A테이블
 
@@ -67,5 +67,9 @@ public abstract class BaseId {
 보다싶이, PK가 모두 공유해서 올라가게 된다.
 
 ### 기타 지식
+
+`Sequence` 방식은 하나의 테이블이 키 생성을 맡는 방식이다.
+
+즉 여러 테이블이 하나의 Sequence 테이블을 사용하게 되면, 공유해서 키가 증가하게 된다.
 
 `@Embedded`를 참고하면 좋다.
