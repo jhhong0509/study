@@ -15,10 +15,10 @@
 
 ### 리팩토링
 
-- [리팩토링이란?](https://github.com/jhhong0509/study/blob/master/refactoring/what_is.md)
-- [언제 리팩토링 해야 하는가?](https://github.com/jhhong0509/study/blob/master/refactoring/when_we_should_do.md)
-- [어디를 리팩토링 해야 하는가](https://github.com/jhhong0509/study/blob/master/refactoring/where_we_should.md)
-- [어떻게 리팩토링 해야 하는가](https://github.com/jhhong0509/study/blob/master/refactoring/how_we_should.md)
+- [리팩토링이란?](https://github.com/jhhong0509/study/blob/master/refactoring/1. what_is.md)
+- [언제 리팩토링 해야 하는가?](https://github.com/jhhong0509/study/blob/master/refactoring/1.when_we_should_do.md)
+- [어디를 리팩토링 해야 하는가](https://github.com/jhhong0509/study/blob/master/refactoring/3.where_we_should.md)
+- [어떻게 리팩토링 해야 하는가](https://github.com/jhhong0509/study/blob/master/refactoring/4.how_we_should.md)
 
 
 
