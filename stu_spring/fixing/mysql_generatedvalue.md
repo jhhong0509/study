@@ -24,8 +24,6 @@ public abstract class BaseId {
 
 ### 후기
 
-`@MappedSuperclass`가 단순히 필드를 상속하도록 돕는건줄 알았는데 생각보다 복잡한 것 같았다.
-
 ### 주의
 
 **`@MappedSuperclass`에 `@Id`를 사용하면 AUTO_INCREMENT가 공유되는게 아니다.**
