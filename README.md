@@ -130,7 +130,7 @@
 
 - [상식](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/orm_stu.md)
 - [Query DSL이란?](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/what_is_query_dsl.md)
-- [Query DSL 세팅하기](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/query_dsl_setting.md)
+- [Query DSL 세팅하기](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/query_dsl_settings.md)
 - [JPQL이란](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/what_is_jpql.md)
 
 
@@ -202,7 +202,7 @@
 - [테스트 코드에 대해](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/testcode.md)
 - CODE
   - [컨트롤러](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/controller.md)
-  - [DTO와 Entity](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/DTOs_and_Enti.md)
+  - [DTO와 Entity](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/DTOs_and_Entity.md)
   - [JPA](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/jpa.md)
   - [서비스 레이어](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/service.md)
   - [템플릿(mustache)](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/template.md)
