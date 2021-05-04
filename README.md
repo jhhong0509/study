@@ -97,7 +97,7 @@
 
 #### ETC
 
-- [객체지향](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/stu_object_oriented.md) (비추) (변경 예정)
+- [객체지향](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/stu_object_oriented.md)
 - [빈 등록 어노테이션](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean_annotation.md)
 - [build.gradle 관련 설명](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/build.gradle.md)
 - [CORS와 SOP](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/cors_and_sop.md)
