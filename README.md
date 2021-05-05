@@ -64,7 +64,7 @@
 
 #### DB 최적화
 
-- [INDEX](https://github.com/jhhong0509/study/blob/master/stu_spring/faster_db/index.md)
+- [INDEX](https://github.com/jhhong0509/study/blob/master/stu_spring/faster_db/index.md) (심화)
 
 
 
