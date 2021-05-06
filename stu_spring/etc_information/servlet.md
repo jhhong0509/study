@@ -16,7 +16,7 @@ Servlet 클래스는 HttpServlet 클래스를 상속받아서 사용하며, Serv
 
 ## 구조
 
-![servlet_extends](.\images\servlet_extends.png)
+![servlet_extends](./images/servlet_extends.png)
 
 위와 그림과 같이 `GenericServlet` 이라는 클래스가 `Servlet`과 `ServletConfig` 라는 클래스를 상속받아 사용한다.
 
