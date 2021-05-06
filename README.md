@@ -107,6 +107,7 @@
 - [Json Path 사용](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/json_path.md) (비추)
 - [QueryParameter와 PathParameter 차이](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/query_vs_path.md)
 - [직렬화](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/serialization.md)
+- [서블릿](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/servlet.md)
 
 
 
