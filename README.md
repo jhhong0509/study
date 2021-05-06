@@ -98,16 +98,16 @@
 #### ETC
 
 - [객체지향](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/stu_object_oriented.md)
-- [빈 등록 어노테이션](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean_annotation.md)
-- [build.gradle 관련 설명](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/build.gradle.md)
-- [CORS와 SOP](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/cors_and_sop.md)
-- [CSRF](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/csrf.md)
+- [빈 등록 어노테이션](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/bean_annotation.md)
+- [build.gradle 관련 설명](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/spring_basic/build.gradle.md)
+- [CORS와 SOP](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/security/cors_and_sop.md)
+- [CSRF](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/security/csrf.md)
 - [커스텀 HEADER 네이밍 규칙](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/custom_header_naming.md)
-- [Exception Handler](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/exceptionhandler.md)
-- [Json Path 사용](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/json_path.md) (비추)
-- [QueryParameter와 PathParameter 차이](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/query_vs_path.md)
+- [Exception Handler](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/coding_ways/exceptionhandler.md)
+- [Json Path 사용](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/coding_ways/json_path.md) (비추)
+- [QueryParameter와 PathParameter 차이](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/coding_waysquery_vs_path.md)
 - [직렬화](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/serialization.md)
-- [서블릿](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/servlet.md)
+- [서블릿](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/spring_basic/servlet.md)
 
 
 
