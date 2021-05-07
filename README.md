@@ -98,6 +98,7 @@
 #### ETC
 
 - [객체지향](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/stu_object_oriented.md)
+- [빈 이란](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/what_is.md)
 - [빈 등록 어노테이션](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/bean_annotation.md)
 - [build.gradle 관련 설명](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/spring_basic/build.gradle.md)
 - [CORS와 SOP](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/security/cors_and_sop.md)
