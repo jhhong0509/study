@@ -66,7 +66,7 @@ Index란 **지정한 컬럼**을 기준으로 **목차**를 생성하는 것으�
 
 그림으로 보면 다음과 같다.
 
-![index_basic](.\images\index_basic.jpg)
+<img src=".\images\index_basic.jpg" alt="index_basic" style="zoom:100%;" />
 
 즉 인덱스를 사용하게 되면 직접 테이블에 접근하는게 아니라, **INDEX를 통해 실제 테이블에 간접적으로 접근한다.**
 
