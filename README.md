@@ -4,14 +4,14 @@
 
 > 공사중
 
-
+---
 
 ### 토큰
 
 - [JWT](https://github.com/jhhong0509/study/blob/master/token/jwt.md)
 - [JWS](https://github.com/jhhong0509/study/blob/master/token/jws.md)
 
-
+---
 
 ### 리팩토링
 
@@ -20,7 +20,7 @@
 - [어디를 리팩토링 해야 하는가](https://github.com/jhhong0509/study/blob/master/refactoring/3.where_we_should.md)
 - [어떻게 리팩토링 해야 하는가](https://github.com/jhhong0509/study/blob/master/refactoring/4.how_we_should.md)
 
-
+---
 
 ### NGINX
 
@@ -29,7 +29,7 @@
 
 > 언젠가 공사 예정
 
-
+---
 
 ### DOCKER
 
@@ -42,7 +42,7 @@
 
 > 공사 예정
 
-
+---
 
 ### 데이터베이스
 
@@ -52,21 +52,23 @@
 
 > 주기적으로 공사 예정
 
-
+---
 
 ### SPRING 공부
+
+---
 
 #### 디자인 패턴
 
 - [FACADE 패턴](https://github.com/jhhong0509/study/blob/master/stu_spring/design_pattern/facade.md)
 
-
+---
 
 #### DB 최적화
 
 - [INDEX](https://github.com/jhhong0509/study/blob/master/stu_spring/faster_db/index.md) (심화)
 
-
+---
 
 #### FILE SERVER
 
@@ -75,7 +77,7 @@
 
 > 파일 다운로드 추가 예정
 
-
+---
 
 #### 오류 해결
 
@@ -94,7 +96,7 @@
   1. [AUTO_INCREMENT 이상](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/mysql_generatedvalue.md)
   2. [도커 MySQL 접속](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/mysql_connect.md)
 
-
+---
 
 #### ETC
 
@@ -111,7 +113,7 @@
 - [직렬화](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/serialization.md)
 - [서블릿](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/spring_basic/servlet.md)
 
-
+---
 
 #### 라이브러리
 
@@ -127,7 +129,7 @@
 - REST TEMPLATE
   - [Rest Template](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/rest_template.md)
 
-
+---
 
 #### ORM
 
@@ -136,7 +138,7 @@
 - [Query DSL 세팅하기](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/query_dsl_settings.md)
 - [JPQL이란](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/what_is_jpql.md)
 
-
+---
 
 ##### 자바 ORM 표준 JPA 프로그래밍
 
@@ -153,25 +155,25 @@
 
 > 업데이트 예정
 
-
+---
 
 #### FIREBASE를 통한 푸쉬 알림 구현
 
 > 곧 할 예정
 
-
+---
 
 #### REDIS
 
 - [Spring Data Redis](https://github.com/jhhong0509/study/blob/master/stu_spring/redis/redis.md)
 
-
+---
 
 #### REFLECTION
 
 - [Reflection 이란](https://github.com/jhhong0509/study/blob/master/stu_spring/reflection_and_aop/what_is_reflection.md)
 
-
+--
 
 #### AOP
 
@@ -180,7 +182,7 @@
 - [AOP 표현식](https://github.com/jhhong0509/study/blob/master/stu_spring/reflection_and_aop/aop_expression.md)
 - [AOP 사용](https://github.com/jhhong0509/study/blob/master/stu_spring/reflection_and_aop/aop_code.md)
 
-
+---
 
 #### 소켓
 
@@ -189,13 +191,13 @@
 
 > 실제 코드는 추가 예정
 
-
+---
 
 #### JWT
 
 - [JWT 코드 설명](https://github.com/jhhong0509/study/blob/master/stu_spring/token/stu_token.md)
 
-
+---
 
 ### 스프링 부트와 AWS로 혼자 구현하는 웹 서비스
 
