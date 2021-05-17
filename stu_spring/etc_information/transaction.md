@@ -55,6 +55,50 @@ Spring에서 트랜잭션은 Database와 비슷하지만 별개로 작동하는 
 
 
 
+### InnoDB의 Lock
+
+---
+
+InnoDB는 ACID 원칙을 지키기 위해 **Lock**을 지원한다.
+
+
+
+#### Shared Lock
+
+---
+
+Shared Lock은 Read를 허용하는 Lock이다.
+
+만약 한 트랜잭션이 Shared Lock을 가지고 있고, 다른 트랜잭션이 Shared Lock을 요청한다면, 즉시 승인하게 된다.
+
+따라서 둘 모두 Shared Lock을 가지게 된다.
+
+하지만 만약 Exclusive Lock을 요청한다면 즉시 승인하지 않는다.
+
+
+
+#### Exclusive Lock
+
+---
+
+Exclusive Lock은 update 또는 delete를 허용하는 Lock이다.
+
+만약 한 트랜잭션이 Exclusive Lock을 가지고 있다면 다른 트랜잭션에서 Shared Lock이든 Exclusive Lock이든 요청을 거부한다.
+
+또한 다른 트랜잭션은 Lock을 가지고 있는 트랜잭션이 끝날때까지 기다려야 한다.
+
+
+
+#### Intention Lock
+
+---
+
+InnoDB는 테이블에 걸린 Lock과 로우에 걸린 Lock을 공존하게 해주는 `Multiple Granularity Locking`을 지원한다.
+
+MGL을 위해 InnoDB는 Intention Lock을 사용하는데, Intention Lock은 **테이블 단위의 Lock**이다.
+
+
+
 ### 트랜잭션의 격리 수준
 
 ---
@@ -123,22 +167,42 @@ Repeatable Read는 처음 Read 작업을 했을 때, **Snapshot을 구축한다.
 
 
 
+하지만 `PhantomRead(유령 읽기)`현상은 발생한다.
+
+이유는 스냅샷에서 정보를 가져오긴 하지만, **INSERT 및 DELETE에선 정합성을 보장하지 않기 때문**이다.
+
+UPDATE된 정보는 스냅샷에서 정보를 가져오기 때문에 문제가 없지만, 다른 트랜잭션에서 INSERT/DELETE가 발생했다면 해당 정보를 읽어올 수 있다.
+
+해당 트랜잭션에서 ROLLBACK이 발생했다면 다시 정보가 사라지게 된다.
 
 
-A와 B 트랜잭션이 있다고 가정하면, 다음과 같은 순서를 거친다.
 
-1. A 트랜잭션 생성(id = 1)
+> `This is the default isolation level for InnoDB. Consistent reads within the same transaction read the snapshot established by the first read`
 
-2. B 트랜잭션 생성(id = 2)
 
-3. B 트랜잭션에서 a를 b로 수정한다.
 
-4. A 트랜잭션에서 B 트랜잭션에 접근한다.
+<img src="./images/repeatable_read_1.png" alt="Repeatable Read" style="zoom:50%;" />
 
-   A 트랜잭션의 id가 B 트랜잭션보다 작기 때문에 **변경 사항이 적용된 채로 반환된다.**
 
-5. B 트랜잭션에서 A 트랜잭션으로 접근한다.
 
-   B 트랜잭션의 id가 A 트랜잭션보다 작기 때문에 
+#### Serializable
 
-   
+**가장 엄격한 격리 수준**으로 **동시성을 포기하고 안정성에 비중**을 두었다.
+
+우리가 일반적인 SELECT문을 작성하면, Serializable에선 SELECT ... FOR SHARE 로 변환한다.
+
+FOR SHARE의 의미는 **shared lock을 건다는 의미**이다.
+
+따라서 **해당 트랜잭션이 끝나기 전까지 해당 SELECT의 대상을 수정/삭제 할 수 없다.**
+
+
+
+만약 UPDATE 를 하려 하면, 계속해서 대기 상태에 들어가게 된다.
+
+> 일정 시간 이후 timeout이 발생한다.
+
+
+
+### 발생 문제 정리
+
+![isol_problem](./images/isol_problem.png)

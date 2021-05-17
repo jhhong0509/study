@@ -112,6 +112,8 @@
 - [QueryParameter와 PathParameter 차이](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/coding_ways/query_vs_path.md)
 - [직렬화](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/serialization.md)
 - [서블릿](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/spring_basic/servlet.md)
+- [var](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/var.md)
+- [트랜잭션](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/transaction.md)
 
 ---
 
