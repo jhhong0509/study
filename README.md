@@ -114,6 +114,7 @@
 - [서블릿](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/spring_basic/servlet.md)
 - [var](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/var.md)
 - [트랜잭션](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/transaction.md)
+- [불변 객체](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/immutable_object.md)
 
 ---
 
