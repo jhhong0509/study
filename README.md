@@ -226,4 +226,5 @@
 ### WebFlux
 
 1. [Reactive Stream 기초](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/1.reactive_basic.md)
+2. [Observer Pattern](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/2.observer_pattern.md)
 
