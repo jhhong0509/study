@@ -55,6 +55,8 @@ Spring에서 트랜잭션은 Database와 비슷하지만 별개로 작동하는 
 
 
 
+### 
+
 ### InnoDB의 Lock
 
 ---
