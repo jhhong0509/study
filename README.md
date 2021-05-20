@@ -82,7 +82,7 @@
 #### 오류 해결
 
 - JWT
-  1. [다른 언어에서 발급된 토큰 검증
+  1. [다른 언어에서 발급된 토큰 검증](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/token_validate.md)
   2. [필터에서 Exception처리](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/token_filter_exception.md)
 - 테스트코드
   1. [다른 테스트 간섭 문제](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/testcode_gradlew_not_work.md)
@@ -176,7 +176,7 @@
 
 - [Reflection 이란](https://github.com/jhhong0509/study/blob/master/stu_spring/reflection_and_aop/what_is_reflection.md)
 
---
+---
 
 #### AOP
 
