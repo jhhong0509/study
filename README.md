@@ -229,3 +229,7 @@
 2. [Observer Pattern](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/2.observer_pattern.md)
 3. [Non Block & Block & Async & Sync](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/3.non_block_block.md)
 
+> tmi
+>
+> [Reactor Pattern](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/ex.reactor_pattern.md)
+

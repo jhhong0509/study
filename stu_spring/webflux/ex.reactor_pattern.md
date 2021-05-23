@@ -8,6 +8,10 @@
 
 동시에 들어오는 여러 클라이언트들의 요청을 처리한다.
 
+> 나중에 알게되었지만, Project Reactor과는 별 관계가 없다.
+>
+> 초기 모델에서 Reactor Pattern의 장점들을 모아서 만들긴 했다고 한다.
+
 
 
 ## 구성
@@ -18,7 +22,7 @@
 
 ### Reactor
 
-Reactor는 싱글쓰레드로, 이벤트 루프를 돌며 받은 이벤트를 Dispatcher에게 전달한다.
+Reactor는 개별 Thread에서 실행되며, 이벤트 루프를 돌며 받은 이벤트를 Dispatcher에게 전달한다.
 
 Event Queue에 이벤트를 등록/삭제 한다.
 
@@ -50,25 +54,3 @@ Event와 그에 맞는 Handler가 저장되는 Queue이다.
 ### Event Handler Map
 
 Event Handler를 담고있는 객체이다.
-
-
-
-## 소개
-
----
-
-Reactor는 JVM 기반의 언어에서 **Non-Blocking으로 개발**할 수 있도록 하는 프로그래밍 기법이다.
-
-**효율적으로 요청을 처리**하기 위해 등장했다.
-
-Reactor는 Java8의 함수형 프로그래밍을 기반으로 되어있다.
-
-
-
-## Reactor Reactive Programming
-
----
-
-> Reactive Programming은 Spring5 이후부터 가능하다.
-
-오랫동안 자바 개발자들의 
