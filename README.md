@@ -228,6 +228,8 @@
 1. [Reactive Stream 기초](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/1.reactive_basic.md)
 2. [Observer Pattern](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/2.observer_pattern.md)
 3. [Non Block & Block & Async & Sync](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/3.non_block_block.md)
+4. [함수형 프로그래밍](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/4.functional_programming.md)
+5. [Stream API](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/5.stream_api.md)
 
 > tmi
 >
