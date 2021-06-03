@@ -43,8 +43,7 @@ public class Test {
                 .andExpect(status().isOk())
                 .andReturn();
 
-        String value = objectMapper.readValue(result.getResponse().getContentAsString(), String.class);
-        Assertions.assertEquals(value, "hello");
+        Assertions.assertEquals(result.getResponse().getContentAsString(), "hello");
     }
 
     @org.junit.jupiter.api.Test
@@ -54,7 +53,6 @@ public class Test {
                 .andExpect(status().isOk())
                 .andReturn();
 
-        String value = objectMapper.readValue(result.getResponse().getContentAsString(), String.class);
-        Assertions.assertEquals(value, "not hello");
+        Assertions.assertEquals(result.getResponse().getContentAsString(), "not hello");
     }
 }
