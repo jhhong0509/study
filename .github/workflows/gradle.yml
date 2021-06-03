@@ -20,7 +20,7 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
     - name: Change Directory
-      run: cd codecov
+      run: cd ./codecov/
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
