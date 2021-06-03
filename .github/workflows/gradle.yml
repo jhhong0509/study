@@ -6,6 +6,8 @@ name: Java CI with Gradle
 on:
   push:
     branches: [ master ]
+    paths:
+      - "./codecov/**"
 
 jobs:
   build:
@@ -19,10 +21,12 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+    - name: Change Directory
+      run: cd codecov
     - name: Grant execute permission for gradlew
-      run: chmod +x ./codecov/gradlew
+      run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./codecov/gradlew test
+      run: gradlew test
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
