@@ -20,12 +20,12 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
     - name: Grant execute permission for gradlew
-      run: chmod +x ./gradlew
+      run: chmod +x gradlew
       working-directory: ./cicd/codecov
 
     - name: Build with Gradle
-      working-directory: ./cicd/codecov
       run: gradlew test
+      working-directory: ./cicd/codecov
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
