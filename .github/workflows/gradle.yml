@@ -6,8 +6,8 @@ name: Java CI with Gradle
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    paths:
+      - "./codecov/**"
 
 jobs:
   build:
@@ -24,4 +24,10 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x ./codecov/gradlew
     - name: Build with Gradle
-      run: ./codecov/gradlew build
+      run: ./codecov/gradlew test
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./codecov/build/reports/jacoco/test/jacocoTestReport.xml
+
