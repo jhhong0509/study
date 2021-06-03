@@ -24,7 +24,7 @@ jobs:
       working-directory: ./cicd/codecov
 
     - name: Build with Gradle
-      run: ./gradlew test
+      run: ./gradlew jacocoTestReport
       working-directory: ./cicd/codecov
 
     - name: Upload coverage to Codecov
