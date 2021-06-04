@@ -24,6 +24,14 @@ AWS Secret Manager란, DB 접근 정보와 같이 **유출되면 안되는 정�
 
 하지만 지원되지 않는 DB라면 람다 함수를 지원하지 않는다.
 
+<br>
+
+Secrets Manager가 지원하는 DB라면 **Secrets Manager가 Parsing 부터 모든 과정을 대신 해준다.**
+
+하지만 만약 지원하지 않는 DB라면, secret 텍스트를 어떻게 찾아서 어떻게 사용할지 조정해야 한다.
+
+<br>
+
 ### 예제
 
 ``` json
@@ -37,7 +45,17 @@ AWS Secret Manager란, DB 접근 정보와 같이 **유출되면 안되는 정�
 }
 ```
 
+> Secret Manager는 binary data를 지원하지 않지만, CLI 환경이라면 Secret에 binary data를 저장할 수 있다.
 
+<br>
+
+## 기본 구조
+
+![structure](./secret_manager_structure.png)
+
+> 파란 부분이 Meta Data, 
+
+<br>
 
 ## 용어
 
