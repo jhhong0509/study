@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  pear:
+    image: secret-test-build
+    ports:
+      - "8080:8080"
+    volumes:
+      - /home/hong/projects/user_backend_v2/log:/logs/*.log
