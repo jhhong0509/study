@@ -2,8 +2,11 @@ version: '3'
 
 services:
   pear:
+    build:
+      context: .
     image: secret-test-build
     ports:
       - "8080:8080"
     volumes:
       - /home/hong/projects/user_backend_v2/log:/logs/*.log
+    container_name: test-secret-manager
