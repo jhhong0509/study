@@ -1,0 +1,4 @@
+aws:
+  secretsmanager:
+    name: pear_db_secret
+    region: ap-northeast-2
