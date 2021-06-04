@@ -49,11 +49,51 @@ Secrets Manager가 지원하는 DB라면 **Secrets Manager가 Parsing 부터 모
 
 <br>
 
+### Scenario
+
+![scenario](./aws_secret_manager.png)
+
+1. DB 관리자가 **데이터베이스를 위한 인증 정보**들을 생성한다.
+
+2. DB 관리자가 Secrets Manager에 **인증 정보를 저장**한다.
+
+   저장할 때 암호화 되어 보호받게 된다.
+
+3. 내 Application이 DB에 접근할 때 Application이 SecretsManager에게 **인증 정보를 요청**한다.
+
+4. Secrets Manager는 **인증 정보를 찾고, 복호화 한 후에 HTTPS로 반환**하게 된다.
+
+5. Application이 **인증 정보와 접속 정보를 Parsing**하고 그 정보들로 DB에 접근하게 된다.
+
+<br>
+
 ## 기본 구조
 
 ![structure](./secret_manager_structure.png)
 
-> 파란 부분이 Meta Data, 
+> 파란 부분이 Meta Data, 밑쪽이 Version이다.
+
+### Meta Data
+
+Meta Data는 secret의 이름과 같은 **기본적인 정보**들을 담고있다.
+
+AWS Keys Management Service의 ARN은 Secrets Manager가 **암호화 혹은 복호화**를 할 때 사용된다.
+
+지정하지 않으면 **해당 계정의 KMS를 사용**한다.
+
+또한 **유저가 지정한 태그**들을 통해 Grouping 할 수 있다.
+
+<br>
+
+### Versions
+
+말 그대로 하나 이상의 **암호화된 키들의 버전들**을 의미한다.
+
+활성화된 키가 하나만 존재하더라도, **rotation에 의해 여러의 version들은 존재할 수 있다.**
+
+또한 사용자가 직접 secret을 바꿔도 새로운 버전이 생성된다.
+
+**각각의 버전을 식별하기 위한 하나 이상의 labels를 가진다.**
 
 <br>
 
@@ -70,3 +110,4 @@ Secret Manager에서 secret은 **인증 정보의 모음**이라고 할 수 있�
 Secret들을 관리해주는 것으로, **IAM 인증 방식**을 사용하여 **인증된 사용자만 secret에 접근 및 수정**할 수 있도록 **보장**한다.
 
 이러한 권한들은 특정 유저가 어떤 secret들에만 접근할 수 있을지 제한을 걸 수 있다.
+
