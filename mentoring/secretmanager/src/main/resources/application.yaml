@@ -1,5 +1,5 @@
 spring:
   datasource:
-    username: jhhong0509
+    username: pear_db_secret
     url: jdbc-secretsmanager:mysql://host:port/dbname
     driver-class-name: com.amazonaws.secretsmanager.sql.AWSSecretsManagerMySQLDriver
