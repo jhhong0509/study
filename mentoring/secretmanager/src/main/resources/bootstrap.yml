@@ -1,6 +1,6 @@
 aws:
   secretsmanager:
-    name: arn:aws:iam::537331658860:user/jhhong0509/pear_db_secret
+    name: arn:aws:secretsmanager:ap-northeast-2:537331658860:secret:pear_db_secret-Abow5j
     region: ap-northeast-2
 cloud:
   aws:
