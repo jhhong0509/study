@@ -1,5 +1,5 @@
 spring:
   datasource:
-    username: secret/rotation
+    username: jhhong0509
     url: jdbc-secretsmanager:mysql://host:port/dbname
     driver-class-name: com.amazonaws.secretsmanager.sql.AWSSecretsManagerMySQLDriver
