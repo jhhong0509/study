@@ -12,7 +12,7 @@ services:
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_REGION=${AWS_REGION}
     env_file:
-      - secretmanager.env
+      - ./secretmanager.env
     volumes:
       - /home/hong/projects/user_backend_v2/log:/logs/*.log
     container_name: test-secret-manager
