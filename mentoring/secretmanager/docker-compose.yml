@@ -7,6 +7,9 @@ services:
     image: secret-test-build
     ports:
       - "8080:8080"
+    environment:
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
     volumes:
       - /home/hong/projects/user_backend_v2/log:/logs/*.log
     container_name: test-secret-manager
