@@ -1,0 +1,10 @@
+aws:
+  secretsmanager:
+    name: pear_db_secret
+    prefix:
+    profile-separator: 
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+      
