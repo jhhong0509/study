@@ -2,8 +2,7 @@ spring:
   datasource:
     url: jdbc-secretsmanager:mysql://pear.c6gcx2prjdrq.ap-northeast-2.rds.amazonaws.com:3306/test_mydb?serverTimezone=UTC&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
     driver-class-name: com.amazonaws.secretsmanager.sql.AWSSecretsManagerMySQLDriver
-    hikari:
-      username: arn:aws:secretsmanager:ap-northeast-2:537331658860:secret:pear_db_secret-Abow5j
+    username: arn:aws:secretsmanager:ap-northeast-2:537331658860:secret:pear_db_secret-Abow5j
   jpa:
     generate-ddl: true
     hibernate:
