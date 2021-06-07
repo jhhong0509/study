@@ -3,5 +3,5 @@ spring:
     username: pear_db_secret
     url: jdbc-secretsmanager:mysql://host:port/mydb
     driver-class-name: com.amazonaws.secretsmanager.sql.AWSSecretsManagerMySQLDriver
-  jooq:
-    sql-dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
