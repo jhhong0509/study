@@ -5,7 +5,6 @@ spring:
     hikari:
       username: arn:aws:secretsmanager:ap-northeast-2:537331658860:secret:pear_db_secret-Abow5j
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5Dialect
     generate-ddl: true
     hibernate:
       ddl-auto: update
