@@ -1,6 +1,5 @@
 aws:
   secretsmanager:
     region: ap-northeast-2
-    name: secret/study/webflux
-    prefix: ""
-    enabled: true
+    name: study/webflux
+    prefix: secret
