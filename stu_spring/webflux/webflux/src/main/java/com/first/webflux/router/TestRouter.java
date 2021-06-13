@@ -15,20 +15,18 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 @RequiredArgsConstructor
 public class TestRouter {
 
-    private final TestService testService;
     private final TestHandler testHandler;
 
     @Bean
     public RouterFunction<ServerResponse> getTestByIdRoute() {
         return route(GET("/test/{id}")
-                        .and(accept(MediaType.APPLICATION_JSON)), id -> testService.findById(id)
-                .switchIfEmpty(ServerResponse.notFound().build()));
+                        .and(accept(MediaType.APPLICATION_JSON)), testHandler::getTest);
     }
 
     @Bean
     public RouterFunction<ServerResponse> getTestsRoute() {
         return route(GET("/tests")
-                .and(accept(MediaType.APPLICATION_JSON)), testService::findAll);
+                .and(accept(MediaType.APPLICATION_JSON)), testHandler::getTestList);
     }
 
     @Bean
