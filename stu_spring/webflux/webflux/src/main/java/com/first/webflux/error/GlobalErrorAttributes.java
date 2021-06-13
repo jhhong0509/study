@@ -21,8 +21,8 @@ public class GlobalErrorAttributes extends DefaultErrorAttributes {
         Throwable error = getError(request);
         if (error instanceof GlobalException) {
             GlobalException exception = (GlobalException) error;
-            map.put("error", exception.getMessage());
-            map.put("code", exception.getErrorCode());
+            map.put("error", exception.getErrorCode().getError());
+            map.put("code", exception.getErrorCode().getStatus());
         } else {
             map.put("error", "Unknown Error");
             map.put("code", 500);

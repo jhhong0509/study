@@ -9,7 +9,7 @@ import com.first.webflux.exception.TestAlreadyExistException;
 import com.first.webflux.exception.TestNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.server.ServerRequest;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
@@ -30,7 +30,7 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public Mono<TestListResponse> findAll(ServerRequest request) {
+    public Mono<TestListResponse> findAll() {
         return testRepository.findAll()
                 .flatMap(test -> Mono.just(TestResponse.builder()
                         .content(test.getContent())
@@ -49,6 +49,23 @@ public class TestServiceImpl implements TestService {
                 .filter(bool -> !bool)
                 .switchIfEmpty(Mono.error(new TestAlreadyExistException()))
                 .flatMap(bool -> createTest(testRequest));
+    }
+
+    @Override
+    public Mono<Void> delete(String id) {
+        return testRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public Mono<Void> update(String id, TestRequest request) {
+        return testRepository.findById(id)
+                .flatMap(test -> {
+                    test.update(request);
+                    return testRepository.save(test);
+                })
+                .switchIfEmpty(Mono.error(TestNotFoundException::new))
+                .then();
     }
 
     private Mono<Void> createTest(TestRequest testRequest) {

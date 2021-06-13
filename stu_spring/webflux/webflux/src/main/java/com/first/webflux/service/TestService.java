@@ -8,6 +8,8 @@ import reactor.core.publisher.Mono;
 
 public interface TestService {
     Mono<TestResponse> findById(String id);
-    Mono<TestListResponse> findAll(ServerRequest request);
+    Mono<TestListResponse> findAll();
     Mono<Void> save(TestRequest request);
+    Mono<Void> delete(String id);
+    Mono<Void> update(String id, TestRequest request);
 }

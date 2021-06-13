@@ -26,6 +26,7 @@ dependencies {
 	testImplementation 'io.projectreactor:reactor-test'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive:2.5.0'
 	implementation "org.springframework.cloud:spring-cloud-starter-aws-secrets-manager-config:2.2.6.RELEASE"
+	implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
 
 }
 
