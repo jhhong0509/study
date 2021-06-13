@@ -6,7 +6,6 @@ import com.first.webflux.entity.TestRepository;
 import com.first.webflux.exception.TestAlreadyExistException;
 import com.first.webflux.exception.TestNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -36,13 +35,19 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public Mono<Void> save(TestRequest testRequest) {
-        return testRepository.findById(testRequest.getId())
-                .switchIfEmpty(Mono.just(Test.builder()
-                        .id(testRequest.getId())
-                        .title(testRequest.getTitle())
+        return testRepository.existsById(testRequest.getId())
+                .filter(bool -> !bool)
+                .switchIfEmpty(Mono.error(new TestAlreadyExistException()))
+                .flatMap(bool -> createTest(testRequest));
+    }
+
+    private Mono<Void> createTest(TestRequest testRequest) {
+        return testRepository.save(
+                Test.builder()
                         .content(testRequest.getContent())
-                        .build()))
-                .flatMap(testRepository::save)
+                        .title(testRequest.getTitle())
+                        .id(testRequest.getId())
+                        .build())
                 .then();
     }
 

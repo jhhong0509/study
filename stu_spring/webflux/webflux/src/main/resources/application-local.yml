@@ -1,0 +1,7 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: myFirstDatabase
+  profiles: local

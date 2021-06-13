@@ -4,3 +4,5 @@ spring:
       authentication-database: admin
       database: myFirstDatabase
       auto-index-creation: true
+  profiles:
+    active: local
