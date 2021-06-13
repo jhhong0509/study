@@ -1,15 +1,15 @@
 package com.first.webflux.service;
 
+import com.first.webflux.dto.TestListResponse;
 import com.first.webflux.dto.TestRequest;
+import com.first.webflux.dto.TestResponse;
 import com.first.webflux.entity.Test;
 import com.first.webflux.entity.TestRepository;
 import com.first.webflux.exception.TestAlreadyExistException;
 import com.first.webflux.exception.TestNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.server.ServerRequest;
-import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
@@ -19,18 +19,28 @@ public class TestServiceImpl implements TestService {
     private final TestRepository testRepository;
 
     @Override
-    public Mono<ServerResponse> findById(ServerRequest request) {
-        return ServerResponse.ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(testRepository.findById(request.pathVariable("id")), Test.class)
-                .switchIfEmpty(ServerResponse.notFound().build());
+    public Mono<TestResponse> findById(String id) {
+        return testRepository.findById(id)
+                .flatMap(test -> Mono.just(TestResponse.builder()
+                        .content(test.getContent())
+                        .title(test.getTitle())
+                        .id(test.getId())
+                        .build()))
+                .switchIfEmpty(Mono.error(TestNotFoundException::new));
     }
 
     @Override
-    public Mono<ServerResponse> findAll(ServerRequest request) {
-        return ServerResponse.ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(testRepository.findAll(), Test.class);
+    public Mono<TestListResponse> findAll(ServerRequest request) {
+        return testRepository.findAll()
+                .flatMap(test -> Mono.just(TestResponse.builder()
+                        .content(test.getContent())
+                        .title(test.getTitle())
+                        .id(test.getId())
+                        .build()))
+                .collectList()
+                .flatMap(testResponses -> Mono.just(TestListResponse.builder()
+                        .testResponses(testResponses)
+                        .build()));
     }
 
     @Override
