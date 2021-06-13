@@ -32,7 +32,7 @@ public class TestHandler {
     }
 
     public Mono<ServerResponse> getTestList(ServerRequest serverRequest) {
-        Mono<TestListResponse> result = testService.findAll(serverRequest);
+        Mono<TestListResponse> result = testService.findAll();
         return ServerResponse.ok().body(result, TestResponse.class);
     }
 }
