@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  data:
+    mongodb:
+      port: 27017
+      host: localhost
+      database: test
