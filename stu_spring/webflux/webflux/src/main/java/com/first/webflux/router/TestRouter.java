@@ -34,4 +34,16 @@
 //        return route(POST("/test")
 //                .and(accept(MediaType.APPLICATION_JSON)), testHandler::save);
 //    }
+//
+//    @Bean
+//    public RouterFunction<ServerResponse> updateTestRoute() {
+//        return route(PATCH("/test/{id}")
+//                .and(accept(MediaType.APPLICATION_JSON)), testHandler::updateTest);
+//    }
+//
+//    @Bean
+//    public RouterFunction<ServerResponse> deleteTestRoute() {
+//        return route(DELETE("/test/{id}")
+//                .and(accept(MediaType.APPLICATION_JSON)), testHandler::deleteTest);
+//    }
 //}

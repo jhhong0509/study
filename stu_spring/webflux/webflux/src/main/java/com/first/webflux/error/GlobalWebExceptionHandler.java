@@ -19,7 +19,7 @@ import java.util.Map;
 @Component
 public class GlobalWebExceptionHandler extends AbstractErrorWebExceptionHandler {
     public GlobalWebExceptionHandler(
-            GlobalErrorAttributes errorAttributes, ResourceProperties resources,
+            GlobalErrorAttributes errorAttributes,
             ApplicationContext applicationContext, ServerCodecConfigurer configurer) {
         super(errorAttributes, new ResourceProperties(), applicationContext);
         super.setMessageWriters(configurer.getWriters());
@@ -32,7 +32,7 @@ public class GlobalWebExceptionHandler extends AbstractErrorWebExceptionHandler 
 
     private Mono<ServerResponse> renderErrorResponse(ServerRequest request) {
         Map<String, Object> errorPropertiesMap = getErrorAttributes(request, ErrorAttributeOptions.defaults());
-        int status = (int)errorPropertiesMap.get("code");
+        int status = Integer.parseInt(errorPropertiesMap.get("code").toString());
         return ServerResponse.status(status)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(errorPropertiesMap));

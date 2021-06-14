@@ -3,13 +3,13 @@ package com.first.webflux.service;
 import com.first.webflux.dto.TestListResponse;
 import com.first.webflux.dto.TestRequest;
 import com.first.webflux.dto.TestResponse;
+import com.first.webflux.dto.TestUpdateRequest;
 import com.first.webflux.entity.Test;
 import com.first.webflux.entity.TestRepository;
 import com.first.webflux.exception.TestAlreadyExistException;
 import com.first.webflux.exception.TestNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
@@ -53,12 +53,14 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public Mono<Void> delete(String id) {
-        return testRepository.deleteById(id);
+        return testRepository.findById(id)
+                .switchIfEmpty(Mono.error(TestNotFoundException::new))
+                .flatMap(testRepository::delete)
+                .then();
     }
 
     @Override
-    @Transactional
-    public Mono<Void> update(String id, TestRequest request) {
+    public Mono<Void> update(String id, TestUpdateRequest request) {
         return testRepository.findById(id)
                 .flatMap(test -> {
                     test.update(request);

@@ -9,7 +9,6 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
-import static org.springframework.web.reactive.function.server.RouterFunctions.nest;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
@@ -20,10 +19,14 @@ public class NestedTestRouter {
 
     @Bean
     public RouterFunction<ServerResponse> testRoute() {
-        return nest(path("/test"),
-                route(GET("/{id}"), testHandler::getTest)
-                        .andRoute(GET("/"), testHandler::getTestList)
-                        .andRoute(POST("/").and(contentType(MediaType.APPLICATION_JSON)), testHandler::save));
+        return route().path("/test", builder ->
+                builder.nest(accept(MediaType.APPLICATION_JSON), routes -> routes
+                        .POST("", testHandler::save)
+                        .GET("/{id}", testHandler::getTest)
+                        .GET("", testHandler::getTestList)
+                        .PATCH("/{id}", testHandler::updateTest)
+                        .DELETE("/{id}", testHandler::deleteTest)))
+                .build();
     }
 }
 

@@ -3,7 +3,7 @@ package com.first.webflux.service;
 import com.first.webflux.dto.TestListResponse;
 import com.first.webflux.dto.TestRequest;
 import com.first.webflux.dto.TestResponse;
-import org.springframework.web.reactive.function.server.ServerRequest;
+import com.first.webflux.dto.TestUpdateRequest;
 import reactor.core.publisher.Mono;
 
 public interface TestService {
@@ -11,5 +11,5 @@ public interface TestService {
     Mono<TestListResponse> findAll();
     Mono<Void> save(TestRequest request);
     Mono<Void> delete(String id);
-    Mono<Void> update(String id, TestRequest request);
+    Mono<Void> update(String id, TestUpdateRequest request);
 }

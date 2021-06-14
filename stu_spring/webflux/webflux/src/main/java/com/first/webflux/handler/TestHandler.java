@@ -3,11 +3,10 @@ package com.first.webflux.handler;
 import com.first.webflux.dto.TestListResponse;
 import com.first.webflux.dto.TestRequest;
 import com.first.webflux.dto.TestResponse;
-import com.first.webflux.exception.TestAlreadyExistException;
+import com.first.webflux.dto.TestUpdateRequest;
 import com.first.webflux.service.TestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
@@ -34,5 +33,17 @@ public class TestHandler {
     public Mono<ServerResponse> getTestList(ServerRequest serverRequest) {
         Mono<TestListResponse> result = testService.findAll();
         return ServerResponse.ok().body(result, TestResponse.class);
+    }
+
+    public Mono<ServerResponse> deleteTest(ServerRequest serverRequest) {
+        String id = serverRequest.pathVariable("id");
+        return ServerResponse.status(204).body(testService.delete(id), Void.class);
+    }
+
+    public Mono<ServerResponse> updateTest(ServerRequest serverRequest) {
+        String id = serverRequest.pathVariable("id");
+        Mono<Void> result = serverRequest.bodyToMono(TestUpdateRequest.class)
+                .flatMap(request -> testService.update(id, request));
+        return ServerResponse.ok().body(result, Void.class);
     }
 }
