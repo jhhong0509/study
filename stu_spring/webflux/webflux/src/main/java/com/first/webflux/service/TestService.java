@@ -1,12 +1,15 @@
 package com.first.webflux.service;
 
+import com.first.webflux.dto.TestListResponse;
 import com.first.webflux.dto.TestRequest;
-import org.springframework.web.reactive.function.server.ServerRequest;
-import org.springframework.web.reactive.function.server.ServerResponse;
+import com.first.webflux.dto.TestResponse;
+import com.first.webflux.dto.TestUpdateRequest;
 import reactor.core.publisher.Mono;
 
 public interface TestService {
-    Mono<ServerResponse> findById(ServerRequest request);
-    Mono<ServerResponse> findAll(ServerRequest request);
+    Mono<TestResponse> findById(String id);
+    Mono<TestListResponse> findAll();
     Mono<Void> save(TestRequest request);
+    Mono<Void> delete(String id);
+    Mono<Void> update(String id, TestUpdateRequest request);
 }

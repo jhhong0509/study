@@ -1,7 +1,5 @@
 package com.first.webflux.error;
 
-import com.first.webflux.exception.TestAlreadyExistException;
-import com.first.webflux.exception.TestNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
@@ -21,11 +19,11 @@ public class GlobalErrorAttributes extends DefaultErrorAttributes {
         Throwable error = getError(request);
         if (error instanceof GlobalException) {
             GlobalException exception = (GlobalException) error;
-            map.put("error", exception.getMessage());
-            map.put("code", exception.getErrorCode());
+            map.put("error", exception.getErrorCode().getError());
+            map.put("code", exception.getErrorCode().getStatus());
         } else {
-            map.put("error", "Unknown Error");
-            map.put("code", 500);
+            map.put("error", error.getMessage().substring(3));
+            map.put("code", error.getMessage().substring(0,3));
         }
         return map;
 
