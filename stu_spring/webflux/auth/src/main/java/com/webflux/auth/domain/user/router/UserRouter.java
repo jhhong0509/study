@@ -18,10 +18,12 @@ public class UserRouter {
     private final UserHandler userHandler;
 
     @Bean
-    public RouterFunction<ServerResponse> userRouter() {
+    public RouterFunction<ServerResponse> userRoute() {
         return route().path("/user",
                 builder -> builder.nest(accept(MediaType.APPLICATION_JSON), routes -> routes
-                        .POST("", userHandler::saveUser)))
+                        .POST("", userHandler::saveUser)
+                        .GET("", userHandler::getUserList)))
                 .build();
     }
+
 }

@@ -1,6 +1,7 @@
 package com.webflux.auth.domain.user.handler;
 
 import com.webflux.auth.domain.user.payload.request.CreateUserRequest;
+import com.webflux.auth.domain.user.payload.response.UserListResponse;
 import com.webflux.auth.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -22,5 +23,11 @@ public class UserHandler {
 
         return ServerResponse.created(URI.create("/user"))
                 .body(result, Void.class);
+    }
+
+    public Mono<ServerResponse> getUserList(ServerRequest request) {
+        Mono<UserListResponse> result = userService.getUserList();
+
+        return ServerResponse.ok().body(result, UserListResponse.class);
     }
 }
