@@ -5,6 +5,6 @@ spring:
       port: ${DB_PORT}
       database: ${DB_NAME}
       auto-index-creation: true   # ddl-auto
-      authentication-database: ${AUTHENTICATION_DB}
+      authentication-database: admin
   profiles:
     active: local
