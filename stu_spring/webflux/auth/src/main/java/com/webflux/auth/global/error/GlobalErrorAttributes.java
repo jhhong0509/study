@@ -27,9 +27,9 @@ public class GlobalErrorAttributes extends DefaultErrorAttributes {
             return map;
         }
 
-        map.put("message", error.getMessage().substring(3));
-        map.put("code", error.getMessage().substring(0,3));
-        map.put("error", "Unknown Server Error");
+        map.put("message", error.getMessage());
+        map.put("status", 500);
+        map.put("error", "Unexpected Server Error");
         return map;
     }
 }
