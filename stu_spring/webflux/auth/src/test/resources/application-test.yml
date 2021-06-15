@@ -1,0 +1,10 @@
+spring:
+  data:
+    mongodb:
+      host: ${DB_HOST}
+      port: ${DB_PORT}
+      database: ${DB_NAME}
+      auto-index-creation: true   # ddl-auto
+      authentication-database: ${AUTHENTICATION_DB}
+  profiles:
+    active: local
