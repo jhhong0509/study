@@ -30,7 +30,7 @@ public class JwtVerifier {
     private Mono<Claims> validateToken(Mono<Claims> claims) {
         return claims
                 .filter(claim ->
-                        claim.get("type").equals(TokenType.ACCESS.getType()) ||
+                        claim.get("type").equals(TokenType.ACCESS.getType()) &&
                                 claim.getExpiration().after(new Date()))
                 .switchIfEmpty(Mono.error(InvalidTokenException::new));
     }
