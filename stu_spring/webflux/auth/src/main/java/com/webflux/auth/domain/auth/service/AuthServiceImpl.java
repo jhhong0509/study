@@ -28,8 +28,11 @@ public class AuthServiceImpl implements AuthService {
 
         return accessToken
                 .flatMap(access -> jwtTokenProvider.generateToken(request.getEmail(), TokenType.REFRESH))
-                .flatMap(refresh -> accessToken
-                        .flatMap(access -> Mono.just(new TokenResponse(access, refresh)))
-                );
+                .flatMap(refresh -> buildToken(refresh, accessToken));
+    }
+
+    private Mono<TokenResponse> buildToken(String refreshToken, Mono<String> accessToken) {
+        return accessToken
+                .flatMap(access -> Mono.just(new TokenResponse(access, refreshToken)));
     }
 }
