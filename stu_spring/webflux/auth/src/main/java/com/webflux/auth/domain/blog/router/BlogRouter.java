@@ -1,6 +1,6 @@
-package com.webflux.auth.domain.auth.router;
+package com.webflux.auth.domain.blog.router;
 
-import com.webflux.auth.domain.auth.handler.AuthHandler;
+import com.webflux.auth.domain.blog.handler.BlogHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
@@ -13,15 +13,16 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 
 @RequiredArgsConstructor
 @Component
-public class AuthRouter {
+public class BlogRouter {
 
-    private final AuthHandler authHandler;
+    private final BlogHandler blogHandler;
 
     @Bean
-    public RouterFunction<ServerResponse> authRoute() {
-        return route().path("/auth",
-                builder -> builder.nest(accept(MediaType.APPLICATION_JSON), routes -> routes
-                        .POST("", authHandler::generateToken)))
+    public RouterFunction<ServerResponse> blogRoute() {
+        return route().path("/blog", builder ->
+                builder.nest(accept(MediaType.APPLICATION_JSON), routes -> routes
+                        .POST("", blogHandler::createBlog)))
                 .build();
     }
+
 }

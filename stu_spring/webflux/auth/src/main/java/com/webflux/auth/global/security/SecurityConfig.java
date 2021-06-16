@@ -1,6 +1,7 @@
 package com.webflux.auth.global.security;
 
 import com.webflux.auth.domain.user.entity.UserRepository;
+import com.webflux.auth.global.security.auth.CustomAuthenticationEntryPoint;
 import com.webflux.auth.global.security.auth.JwtAuthenticationManager;
 import com.webflux.auth.global.security.auth.JwtVerifier;
 import com.webflux.auth.global.security.jwt.JwtTokenExtractor;
@@ -32,6 +33,9 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().disable()
                 .addFilterAt(getAuthenticationFilter(), SecurityWebFiltersOrder.AUTHENTICATION)       // AUTHENTICATION 작업 중 해당 필터 수행
+                .exceptionHandling()
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+                .and()
                 .authorizeExchange()
                     .pathMatchers(HttpMethod.POST, "/user").permitAll()
                     .pathMatchers(HttpMethod.POST, "/auth").permitAll()
