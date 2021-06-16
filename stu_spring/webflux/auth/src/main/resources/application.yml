@@ -8,3 +8,11 @@ spring:
       authentication-database: admin
   profiles:
     active: local
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+auth:
+  secret: ${JWT_SECRET}
+  exp:
+    access: ${ACCESS_EXP}
+    refresh: ${REFRESH_EXP}

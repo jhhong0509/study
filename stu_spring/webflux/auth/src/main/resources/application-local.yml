@@ -9,3 +9,11 @@ spring:
       database: test
       username: root
       password: root
+  redis:
+    host: localhost
+    port: 6379
+auth:
+  secret: localTestSecret
+  exp:
+    access: 10000
+    refresh: 1000000
