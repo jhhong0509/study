@@ -32,11 +32,7 @@ public class TestServiceImpl implements TestService {
     @Override
     public Mono<TestListResponse> findAll() {
         return testRepository.findAll()
-                .flatMap(test -> Mono.just(TestResponse.builder()
-                        .content(test.getContent())
-                        .title(test.getTitle())
-                        .id(test.getId())
-                        .build()))
+                .flatMap(this::buildTestResponse)
                 .collectList()
                 .flatMap(testResponses -> Mono.just(TestListResponse.builder()
                         .testResponses(testResponses)
@@ -78,6 +74,14 @@ public class TestServiceImpl implements TestService {
                         .id(testRequest.getId())
                         .build())
                 .then();
+    }
+
+    private Mono<TestResponse> buildTestResponse(Test test) {
+        return Mono.just(TestResponse.builder()
+                .content(test.getContent())
+                .title(test.getTitle())
+                .id(test.getId())
+                .build());
     }
 
 }
