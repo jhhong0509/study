@@ -3,3 +3,6 @@ aws:
     region: ap-northeast-2
     name: study/webflux
     prefix: secret
+spring:
+  profiles:
+    active: local

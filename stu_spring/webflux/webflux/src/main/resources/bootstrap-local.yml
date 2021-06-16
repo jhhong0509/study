@@ -1,0 +1,5 @@
+aws:
+  secretsmanager:
+    enabled: false
+spring:
+  profiles: local

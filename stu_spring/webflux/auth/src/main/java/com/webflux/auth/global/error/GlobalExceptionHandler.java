@@ -1,6 +1,6 @@
-package com.first.webflux.error;
+package com.webflux.auth.global.error;
 
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.boot.autoconfigure.web.reactive.error.AbstractErrorWebExceptionHandler;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.reactive.error.ErrorAttributes;
@@ -15,13 +15,12 @@ import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
-@Order(-2)  // 원래 Exception Handler가 -1이기 떄문에 그것보다 빨리 해준다.
+@Order(-2)
 @Component
-public class GlobalWebExceptionHandler extends AbstractErrorWebExceptionHandler {
-    public GlobalWebExceptionHandler(
-            GlobalErrorAttributes errorAttributes,
-            ApplicationContext applicationContext, ServerCodecConfigurer configurer) {
-        super(errorAttributes, new ResourceProperties(), applicationContext);
+public class GlobalExceptionHandler extends AbstractErrorWebExceptionHandler {
+    public GlobalExceptionHandler(GlobalErrorAttributes errorAttributes,
+                                  ApplicationContext applicationContext, ServerCodecConfigurer configurer) {
+        super(errorAttributes, new WebProperties.Resources(), applicationContext);
         super.setMessageWriters(configurer.getWriters());
     }
 
@@ -32,10 +31,9 @@ public class GlobalWebExceptionHandler extends AbstractErrorWebExceptionHandler 
 
     private Mono<ServerResponse> renderErrorResponse(ServerRequest request) {
         Map<String, Object> errorPropertiesMap = getErrorAttributes(request, ErrorAttributeOptions.defaults());
-        int status = Integer.parseInt(errorPropertiesMap.get("code").toString());
+        int status = (int)errorPropertiesMap.get("status");
         return ServerResponse.status(status)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(errorPropertiesMap));
     }
-
 }

@@ -1,0 +1,18 @@
+spring:
+  data:
+    mongodb:
+      host: ${DB_HOST}
+      port: ${DB_PORT}
+      database: ${DB_NAME}
+      auto-index-creation: true   # ddl-auto
+      authentication-database: admin
+  profiles:
+    active: local
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+auth:
+  secret: ${JWT_SECRET}
+  exp:
+    access: ${ACCESS_EXP}
+    refresh: ${REFRESH_EXP}
