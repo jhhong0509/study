@@ -2,7 +2,9 @@ package com.webflux.auth.domain.blog.service;
 
 import com.webflux.auth.domain.blog.entity.Blog;
 import com.webflux.auth.domain.blog.entity.BlogRepository;
+import com.webflux.auth.domain.blog.exception.BlogNotFoundException;
 import com.webflux.auth.domain.blog.payload.request.CreateBlogRequest;
+import com.webflux.auth.domain.blog.payload.response.BlogContentResponse;
 import com.webflux.auth.domain.blog.payload.response.BlogListResponse;
 import com.webflux.auth.domain.blog.payload.response.BlogResponse;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +38,23 @@ public class BlogServiceImpl implements BlogService {
 
         return blogs.count()
                 .flatMap(count -> buildBlogListResponse(count, blogs));
+    }
+
+    @Override
+    public Mono<BlogContentResponse> getBlog(String blogId) {
+        return blogRepository.findById(blogId)
+                .flatMap(this::buildResponse)
+                .switchIfEmpty(Mono.error(BlogNotFoundException::new));
+    }
+
+    private Mono<BlogContentResponse> buildResponse(Blog blog) {
+        return Mono.just(
+                BlogContentResponse.builder()
+                        .content(blog.getContent())
+                        .title(blog.getTitle())
+                        .userEmail(blog.getUserEmail())
+                        .build()
+        );
     }
 
     private Mono<BlogResponse> buildBlogResponse(Blog blog) {

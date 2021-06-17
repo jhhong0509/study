@@ -2,6 +2,7 @@ package com.webflux.auth.domain.blog.handler;
 
 import com.webflux.auth.domain.blog.exception.QueryParameterNotFoundException;
 import com.webflux.auth.domain.blog.payload.request.CreateBlogRequest;
+import com.webflux.auth.domain.blog.payload.response.BlogContentResponse;
 import com.webflux.auth.domain.blog.payload.response.BlogListResponse;
 import com.webflux.auth.domain.blog.service.BlogService;
 import com.webflux.auth.global.security.auth.facade.AuthenticationFacade;
@@ -48,6 +49,13 @@ public class BlogHandler {
 
         return ServerResponse.created(URI.create("/blog"))
                 .body(blogListResponse, BlogListResponse.class);
+    }
+
+    public Mono<ServerResponse> getBlogResponse(ServerRequest request) {
+        Mono<BlogContentResponse> blog = blogService.getBlog(request.pathVariable("blogId"));
+
+        return ServerResponse.ok()
+                .body(blog, BlogContentResponse.class);
     }
 
     private Mono<Void> getCreateBlogResult(CreateBlogRequest request, Mono<String> email) {

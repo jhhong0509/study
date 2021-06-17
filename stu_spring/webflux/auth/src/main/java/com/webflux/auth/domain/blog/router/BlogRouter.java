@@ -22,7 +22,8 @@ public class BlogRouter {
         return route().path("/blog", builder ->
                 builder.nest(accept(MediaType.APPLICATION_JSON), routes -> routes
                         .POST("", blogHandler::createBlog))
-                        .GET("/list", blogHandler::getBlogList))
+                        .GET("/list", blogHandler::getBlogList)
+                        .GET("", blogHandler::getBlogResponse))
                 .build();
     }
 
