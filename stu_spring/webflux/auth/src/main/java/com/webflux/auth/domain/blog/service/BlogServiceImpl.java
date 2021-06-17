@@ -41,6 +41,7 @@ public class BlogServiceImpl implements BlogService {
     private Mono<BlogResponse> buildBlogResponse(Blog blog) {
         return Mono.just(
                 BlogResponse.builder()
+                        .id(blog.getId())
                         .title(blog.getTitle())
                         .userEmail(blog.getUserEmail())
                         .build()
