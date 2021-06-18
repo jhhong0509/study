@@ -47,6 +47,16 @@ public class BlogServiceImpl implements BlogService {
                 .switchIfEmpty(Mono.error(BlogNotFoundException::new));
     }
 
+    @Override
+    public Mono<Void> deleteBlog(String blogId) {
+        return null;
+    }
+
+    @Override
+    public Mono<Void> updateBlog(CreateBlogRequest request, String blogId) {
+        return null;
+    }
+
     private Mono<BlogContentResponse> buildResponse(Blog blog) {
         return Mono.just(
                 BlogContentResponse.builder()

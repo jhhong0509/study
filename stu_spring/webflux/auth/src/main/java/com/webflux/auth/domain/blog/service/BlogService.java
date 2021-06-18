@@ -12,4 +12,8 @@ public interface BlogService {
     Mono<BlogListResponse> getBlogList(Pageable pageable);
 
     Mono<BlogContentResponse> getBlog(String blogId);
+
+    Mono<Void> deleteBlog(String blogId);
+
+    Mono<Void> updateBlog(CreateBlogRequest request, String blogId);
 }
