@@ -18,7 +18,7 @@ public class CustomAuthenticationEntryPoint implements ServerAuthenticationEntry
         
         String str = "{\n" +
                 "  \"status\": 401,\n" +
-                "  \"message\": \"Not authenticated.\"\n" +
+                "  \"message\": \"Not Authenticated.\"\n" +
                 "}";
 
         var buffer = exchange.getResponse().bufferFactory().wrap(str.getBytes());
