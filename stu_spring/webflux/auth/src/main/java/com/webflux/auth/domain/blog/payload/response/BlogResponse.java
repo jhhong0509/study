@@ -9,6 +9,8 @@ import lombok.Getter;
 @Builder
 public class BlogResponse {
 
+    private final String id;
+
     private final String title;
 
     private final String userEmail;
