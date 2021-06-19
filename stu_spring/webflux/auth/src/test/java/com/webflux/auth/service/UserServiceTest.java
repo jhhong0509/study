@@ -11,6 +11,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import reactor.test.StepVerifier;
+
+import static reactor.core.publisher.Mono.when;
 
 @ExtendWith(SpringExtension.class)
 @DisplayName("User 서비스 단위 테스트")
@@ -41,25 +44,35 @@ public class UserServiceTest {
                 .email("email")
                 .password("password")
                 .build();
-        Assertions.assertDoesNotThrow(() -> service.createUser(request));
+        service.createUser(request)
+                .onErrorMap(throwable -> {throw new UserAlreadyExistException();})
+                .subscribe();
     }
 
     @Test
     @DisplayName("Create User 이미 존재하는 유저 Exception 발생")
     void createUserFailureTest() {
-        userRepository.save(
-                User.builder()
-                        .email("email")
-                        .password("asdf")
-                        .build()
-        );
+
+        User user = User.builder()
+                .email("email")
+                .password("asdf")
+                .build();
+
+        when(userRepository.save(user).thenReturn(user));
 
         CreateUserRequest request =  CreateUserRequest.builder()
                 .email("email")
                 .password("password")
                 .build();
 
-        Assertions.assertThrows(UserAlreadyExistException.class, () -> service.createUser(request));
+        StepVerifier.create(request)
+                .thenConsumeWhile(result-> {
+                    Assertions.assertEquals(result.getName(),"쿠앤크");
+                    Assertions.assertEquals(result.getPrice(),1000);
+                    return true;
+                })
+                .verifyComplete();
+
     }
 
 }
