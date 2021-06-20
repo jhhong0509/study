@@ -48,8 +48,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Mono<Void> deleteBlog(String blogId) {
-        return null;
+    public Mono<Void> deleteBlog(String blogId, String userEmail) {
+        return blogRepository.findById(blogId)
+                .filter(blog -> blog.getUserEmail().equals(userEmail))
+                .flatMap(blogRepository::delete)
+                .switchIfEmpty(Mono.error(BlogNotFoundException::new));
     }
 
     @Override

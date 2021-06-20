@@ -1,6 +1,5 @@
 package com.webflux.auth.domain.blog.handler;
 
-import com.webflux.auth.domain.blog.exception.QueryParameterNotFoundException;
 import com.webflux.auth.domain.blog.payload.request.CreateBlogRequest;
 import com.webflux.auth.domain.blog.payload.response.BlogContentResponse;
 import com.webflux.auth.domain.blog.payload.response.BlogListResponse;
@@ -22,23 +21,22 @@ import java.util.Map;
 @Component
 public class BlogHandler {
 
+    private static final String PAGE = "page";
+    private static final String SIZE = "size";
     private final BlogService blogService;
     private final QueryParameter param;
     private final AuthenticationFacade authenticationFacade;
 
-    private static final String PAGE = "page";
-    private static final String SIZE = "size";
-
     public Mono<ServerResponse> createBlog(ServerRequest request) {
         Mono<Void> createBlogRequest = request.bodyToMono(CreateBlogRequest.class)
-                .flatMap(req -> getCreateBlogResult(req, authenticationFacade.getUserEmail(request)));
+                .zipWith(authenticationFacade.getUserEmail(request))
+                .flatMap(req -> blogService.createBlog(req.getT1(), req.getT2()));
 
         return ServerResponse.created(URI.create("/blog"))
                 .body(createBlogRequest, Void.class);
     }
 
     public Mono<ServerResponse> getBlogList(ServerRequest request) {
-
         Map<String, Integer> params = new HashMap<>();
         param.getQueryParameter(request, PAGE, SIZE)
                 .forEach((key, value) -> params.put(key, Integer.parseInt(value)));
@@ -51,6 +49,12 @@ public class BlogHandler {
                 .body(blogListResponse, BlogListResponse.class);
     }
 
+    public Mono<ServerResponse> deleteBlog(ServerRequest serverRequest) {
+        Mono<Void> result = authenticationFacade.getUserEmail(serverRequest)
+                .flatMap(email -> blogService.deleteBlog(serverRequest.pathVariable("blogId"), email));
+        return ServerResponse.status(204).body(result, Void.class);
+    }
+
     public Mono<ServerResponse> getBlogResponse(ServerRequest request) {
         Mono<BlogContentResponse> blog = blogService.getBlog(request.pathVariable("blogId"));
 
@@ -58,9 +62,4 @@ public class BlogHandler {
                 .body(blog, BlogContentResponse.class);
     }
 
-    private Mono<Void> getCreateBlogResult(CreateBlogRequest request, Mono<String> email) {
-        return email
-                .flatMap(userEmail -> blogService.createBlog(request, userEmail));
-    }
-    
 }
