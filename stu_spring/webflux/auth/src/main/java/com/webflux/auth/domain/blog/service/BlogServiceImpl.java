@@ -36,8 +36,8 @@ public class BlogServiceImpl implements BlogService {
         Flux<BlogResponse> blogs = blogRepository.findAllBy(pageable)
                 .flatMap(this::buildBlogResponse);
 
-        return blogs.count()
-                .flatMap(count -> buildBlogListResponse(count, blogs));
+        return Mono.zip(blogs.collectList(), blogs.count())
+                .flatMap(objects -> Mono.just(new BlogListResponse(objects.getT2(), objects.getT1())));
     }
 
     @Override
@@ -45,7 +45,6 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.findById(blogId)
                 .flatMap(this::buildResponse)
                 .switchIfEmpty(Mono.error(BlogNotFoundException::new));
-
     }
 
     @Override
@@ -76,11 +75,6 @@ public class BlogServiceImpl implements BlogService {
                         .userEmail(blog.getUserEmail())
                         .build()
         );
-    }
-
-    private Mono<BlogListResponse> buildBlogListResponse(long count, Flux<BlogResponse> blogResponseFlux) {
-        return blogResponseFlux.collectList()
-                .flatMap(blogResponses -> Mono.just(new BlogListResponse(count, blogResponses)));
     }
 
 }
