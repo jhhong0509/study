@@ -1,5 +1,6 @@
 package com.webflux.auth.domain.blog.entity;
 
+import com.webflux.auth.domain.blog.payload.request.CreateBlogRequest;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
@@ -13,10 +14,15 @@ public class Blog {
     @Id
     private final String id;
 
-    private final String title;
+    private String title;
 
-    private final String content;
+    private String content;
 
     private final String userEmail;
+
+    public void updateBlog(CreateBlogRequest request) {
+        this.title = request.getTitle();
+        this.content = request.getContent();
+    }
 
 }

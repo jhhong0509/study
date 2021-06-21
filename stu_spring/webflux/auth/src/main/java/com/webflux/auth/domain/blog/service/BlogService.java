@@ -13,8 +13,8 @@ public interface BlogService {
 
     Mono<BlogContentResponse> getBlog(String blogId);
 
-    Mono<Void> deleteBlog(String blogId);
+    Mono<Void> deleteBlog(String blogId, String email);
 
-    Mono<Void> updateBlog(CreateBlogRequest request, String blogId);
+    Mono<Void> updateBlog(CreateBlogRequest request, String blogId, String userEmail);
 
 }
