@@ -23,7 +23,10 @@ public class BlogRouter {
                 builder.nest(accept(MediaType.APPLICATION_JSON), routes -> routes
                         .POST("", blogHandler::createBlog))
                         .GET("/list", blogHandler::getBlogList)
-                        .GET("", blogHandler::getBlogResponse))
+                        .GET("{blogId}", blogHandler::getBlogResponse)
+                        .DELETE("/{blogId}", blogHandler::deleteBlog)
+                        .PATCH("/{blogId}", blogHandler::updateBlog)
+        )
                 .build();
     }
 

@@ -36,8 +36,8 @@ public class BlogServiceImpl implements BlogService {
         Flux<BlogResponse> blogs = blogRepository.findAllBy(pageable)
                 .flatMap(this::buildBlogResponse);
 
-        return blogs.count()
-                .flatMap(count -> buildBlogListResponse(count, blogs));
+        return Mono.zip(blogs.collectList(), blogs.count())
+                .flatMap(objects -> Mono.just(new BlogListResponse(objects.getT2(), objects.getT1())));
     }
 
     @Override
@@ -45,17 +45,25 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.findById(blogId)
                 .flatMap(this::buildResponse)
                 .switchIfEmpty(Mono.error(BlogNotFoundException::new));
-
     }
 
     @Override
-    public Mono<Void> deleteBlog(String blogId) {
-        return null;
+    public Mono<Void> deleteBlog(String blogId, String userEmail) {
+        return blogRepository.findById(blogId)
+                .filter(blog -> blog.getUserEmail().equals(userEmail))
+                .flatMap(blogRepository::delete)
+                .switchIfEmpty(Mono.error(BlogNotFoundException::new));
     }
 
     @Override
-    public Mono<Void> updateBlog(CreateBlogRequest request, String blogId) {
-        return null;
+    public Mono<Void> updateBlog(CreateBlogRequest request, String blogId, String userEmail) {
+        return blogRepository.findById(blogId)
+                .filter(blog -> blog.getUserEmail().equals(userEmail))
+                .doOnNext(blog -> blog.updateBlog(request))       // doOnNext 는 부수효과가 존재할 수 있다 또한 받은 것을 그대로 반환해 준다.
+//                .doOnNext(blog -> System.out.println(blog.getUserEmail()))  // 이런 식으로 콘솔에 출력하는데에 유용하다.
+                .flatMap(blogRepository::save)
+                .switchIfEmpty(Mono.error(BlogNotFoundException::new))
+                .then();
     }
 
     private Mono<BlogContentResponse> buildResponse(Blog blog) {
@@ -76,11 +84,6 @@ public class BlogServiceImpl implements BlogService {
                         .userEmail(blog.getUserEmail())
                         .build()
         );
-    }
-
-    private Mono<BlogListResponse> buildBlogListResponse(long count, Flux<BlogResponse> blogResponseFlux) {
-        return blogResponseFlux.collectList()
-                .flatMap(blogResponses -> Mono.just(new BlogListResponse(count, blogResponses)));
     }
 
 }
