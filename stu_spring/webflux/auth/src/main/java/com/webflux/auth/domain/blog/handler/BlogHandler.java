@@ -45,13 +45,21 @@ public class BlogHandler {
 
         Mono<BlogListResponse> blogListResponse = blogService.getBlogList(page);
 
-        return ServerResponse.created(URI.create("/blog"))
+        return ServerResponse.ok()
                 .body(blogListResponse, BlogListResponse.class);
     }
 
     public Mono<ServerResponse> deleteBlog(ServerRequest serverRequest) {
         Mono<Void> result = authenticationFacade.getUserEmail(serverRequest)
                 .flatMap(email -> blogService.deleteBlog(serverRequest.pathVariable("blogId"), email));
+        return ServerResponse.status(204).body(result, Void.class);
+    }
+
+    public Mono<ServerResponse> updateBlog(ServerRequest serverRequest) {
+        Mono<Void> result = serverRequest.bodyToMono(CreateBlogRequest.class)
+                .zipWith(authenticationFacade.getUserEmail(serverRequest))
+                .flatMap(zip -> blogService.updateBlog(zip.getT1(), serverRequest.pathVariable("blogId"), zip.getT2()));
+
         return ServerResponse.status(204).body(result, Void.class);
     }
 

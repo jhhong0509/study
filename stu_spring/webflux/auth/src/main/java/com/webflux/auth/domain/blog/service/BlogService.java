@@ -15,6 +15,6 @@ public interface BlogService {
 
     Mono<Void> deleteBlog(String blogId, String email);
 
-    Mono<Void> updateBlog(CreateBlogRequest request, String blogId);
+    Mono<Void> updateBlog(CreateBlogRequest request, String blogId, String userEmail);
 
 }

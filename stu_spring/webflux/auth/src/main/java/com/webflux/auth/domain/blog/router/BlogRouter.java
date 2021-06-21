@@ -25,6 +25,7 @@ public class BlogRouter {
                         .GET("/list", blogHandler::getBlogList)
                         .GET("{blogId}", blogHandler::getBlogResponse)
                         .DELETE("/{blogId}", blogHandler::deleteBlog)
+                        .PATCH("/{blogId}", blogHandler::updateBlog)
         )
                 .build();
     }

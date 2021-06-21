@@ -56,8 +56,14 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Mono<Void> updateBlog(CreateBlogRequest request, String blogId) {
-        return null;
+    public Mono<Void> updateBlog(CreateBlogRequest request, String blogId, String userEmail) {
+        return blogRepository.findById(blogId)
+                .filter(blog -> blog.getUserEmail().equals(userEmail))
+                .doOnNext(blog -> blog.updateBlog(request))       // doOnNext 는 부수효과가 존재할 수 있다 또한 받은 것을 그대로 반환해 준다.
+//                .doOnNext(blog -> System.out.println(blog.getUserEmail()))  // 이런 식으로 콘솔에 출력하는데에 유용하다.
+                .flatMap(blogRepository::save)
+                .switchIfEmpty(Mono.error(BlogNotFoundException::new))
+                .then();
     }
 
     private Mono<BlogContentResponse> buildResponse(Blog blog) {
