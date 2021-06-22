@@ -51,7 +51,7 @@ Secrets Manager가 지원하는 DB라면 **Secrets Manager가 Parsing 부터 모
 
 ### Scenario
 
-![scenario](./aws_secret_manager.png)
+![scenario](https://github.com/jhhong0509/study/blob/master/mentoring/aws_secret_manager.png?raw=true)
 
 1. DB 관리자가 **데이터베이스를 위한 인증 정보**들을 생성한다.
 
@@ -69,7 +69,7 @@ Secrets Manager가 지원하는 DB라면 **Secrets Manager가 Parsing 부터 모
 
 ## 기본 구조
 
-![structure](./secret_manager_structure.png)
+![structure](https://github.com/jhhong0509/study/blob/master/mentoring/secret_manager_structure.png?raw=true)
 
 > 파란 부분이 Meta Data, 밑쪽이 Version이다.
 
