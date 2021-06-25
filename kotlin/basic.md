@@ -80,4 +80,4 @@ fun test(a: Int?): Int? {
 }
 ```
 
-위와 같이 a를 ?를 붙여서 nullable로 선언해 주고, null이면 null이, 값이 있으면 2를 뺀 값이 반환되는 메소드 이다.	
+위와 같이 a를 ?를 붙여서 nullable로 선언해 주고, null이면 null이, 값이 있으면 2를 뺀 값이 반환되는 메소드 이다.
