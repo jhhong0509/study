@@ -125,3 +125,39 @@ fun main() {
 1. protected인 메소드나 properties에는 사용할 수 없다.
 2. 관련 지식 없이는 이해가 어려워진다.
 
+<br>
+
+#### 정적 도구 클래스
+
+우리는 평소에 하나의 클래스에 국한되지 않고, 애플리케이션 레벨에서 사용할 수 있도록 **정적 메소드**를 사용한다.
+
+Kotlin에서는 Extension을 통해 간결한 처리가 가능하다.
+
+Extension은 **인스턴스에서 접근**할 수 있고 **final 클래스를 수정**할 수도 있다.
+
+```kotlin
+fun String.double(): String {		// String은 final이지만, 수정할 수 있다.
+    return this + this
+}
+
+fun main() {
+    "asdf".double()					// Java보다 간결한 접근이 가능하다
+}
+```
+
+위 예제에서 볼 수 있듯이, String에 정적 메소드를 추가해서 접근할 수 있다.
+
+java 코드는 다음과 같다.
+
+``` java
+public final class StringExtKt {
+	@NotNull
+	public static final String double(@NotNull String $receiver) {
+  		Intrinsics
+  					.checkParameterIsNotNull($receiver, "$receiver");
+		return $receiver + $reveiver;
+    }
+}
+
+StringExtKt.double("asdf");
+```
