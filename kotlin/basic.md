@@ -80,4 +80,39 @@ fun test(a: Int?): Int? {
 }
 ```
 
-위와 같이 a를 ?를 붙여서 nullable로 선언해 주고, null이면 null이, 값이 있으면 2를 뺀 값이 반환되는 메소드 이다.
+a를 ?를 붙여서 nullable로 선언해 주고, null이면 null이, 값이 있으면 2를 뺀 값이 반환되는 메소드 이다.
+
+<br>
+
+그리고 만약 null일 경우의 처리를 따로 해주고 싶다면 **`?:`**을 사용하면 된다.
+
+``` kotlin
+fun test(a: Int?): Int {
+    return a?.minus(2) ?: 0
+}
+```
+
+위와 같이 하면 null이 아니면 2를 뺀 값, null이면 0이 반환되는 메소드 이다.
+
+> 참고로 반환 타입이었던 Int? 가 Int가 되었는데, Null을 반환하지 않게 되었기 때문이다.
+
+만약 Exception을 발생시키고 싶다면 다음과 같이 하면 된다.
+
+``` kotlin
+fun test(a: Int?): Int {
+    return a?.minus(2) ?: throw NullPointerException()
+}
+```
+
+## 형 변환
+
+코틀린에서 형 변환은 `as`로 가능하다.
+
+``` kotlin
+```
+
+
+
+코틀린에서는 형 변환에 실패했을 때에 처리를 돕는 **안전한 형 변환**을 지원한다.
+
+만약 형 변환이 실패한다면 `
