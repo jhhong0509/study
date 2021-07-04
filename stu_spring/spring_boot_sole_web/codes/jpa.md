@@ -1,4 +1,5 @@
 # JPA
+
 - ORM이란?
     - Object Relational Mapping 의 약자로, 관계형 데이터베이스에 매핑해주는 기술이다.
     - 객체 지향 프로그래밍 언어와 데이터베이스 간의 매핑이기 때문에 자바에만 있지 않다.
@@ -19,7 +20,9 @@
     - 테이블보다 더 많은 객체를 만들게 될 수 있다.
     - 탐색과 순회에서 자바는 객체간의 연결을 통해, RDBMS는 쿼리를 최적화해서 탐색한다.
         - 그래서 JPA는 속도가 느려질 수 있다.
+
 # Entity 객체의 생명주기
+
 <img src = "https://t1.daumcdn.net/cfile/tistory/233A5A475551AB5617">
 
 - Entity 객체의 생명주기
@@ -42,7 +45,7 @@
         - 영속 객체가 될 수 있는 merge 메소드가 있다.
         - Detached 가 되는 경우
             - 트랜잭션 commit
-            - clear 메소드 실행 
+            - clear 메소드 실행
             - flush 메소드 실행
 - Persistence Context(영속성 컨텍스트)
     - 영속 객체가 영속성 컨텍스트에서 관리된다.

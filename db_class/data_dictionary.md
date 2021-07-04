@@ -16,31 +16,28 @@
 
 물리적 공간은 data file 이라고 부르고, 이것 또한 딕셔너리 뷰에 저장된다.
 
-
-
 - 오브젝트 관련
 
-  - DBA_OBJECTS
-  - DBA_TABLES
-  - DBA_INDEXES
+    - DBA_OBJECTS
+    - DBA_TABLES
+    - DBA_INDEXES
 
 - 유저/권한 관련
 
-  - DBA_USER
-  - DBA_ROLES
+    - DBA_USER
+    - DBA_ROLES
 
 - 스토리지
 
-  - DBA_TABLESPACES
+    - DBA_TABLESPACES
 
-    논리적 공간을 의미한다.
+      논리적 공간을 의미한다.
 
-    SELECT 해 보면 여러개의 논리적 공간이 나오게 되는데, 그중 우리가 사용할건 USER이다.
+      SELECT 해 보면 여러개의 논리적 공간이 나오게 되는데, 그중 우리가 사용할건 USER이다.
 
-  - DBA_DATA_FILES
-    논리적 공간에서 매핑되는 물리적 데이터 파일을 의미하게 된다.
+    - DBA_DATA_FILES 논리적 공간에서 매핑되는 물리적 데이터 파일을 의미하게 된다.
 
-    어떠한 TABLESPACE와 매핑되었는지, 어떤 경로에 저장되었는지 알 수 있다.
+      어떠한 TABLESPACE와 매핑되었는지, 어떤 경로에 저장되었는지 알 수 있다.
 
 ### 동적 성능 뷰
 

@@ -114,7 +114,7 @@ class A {
 
 #### 주 생성자
 
-주 생성자는 **클래스 이름 뒤**에 `constructor` 키워드로 선언할 수  있다.
+주 생성자는 **클래스 이름 뒤**에 `constructor` 키워드로 선언할 수 있다.
 
 ``` kotlin
 class A private constructor(var a: Int)
@@ -260,7 +260,7 @@ val a = KotlinUtil()
 val b = a as MotherClass
 ```
 
-여기서 
+여기서
 
 as에 ?를 붙여서 **Null일수도 있다는걸 명시**해줄 수 있다.
 

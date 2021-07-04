@@ -26,8 +26,6 @@ SELECT * FROM dba_user
 
 dba의 권한으로 user 테이블의 모든 유저들을 불러오게 된다.
 
-
-
 만약 username만 불러오고 싶다면 아래와 같이 하면 된다.
 
 ``` sql
@@ -65,8 +63,6 @@ GRANT connect, resource, dba TO dsm;
 connect와 resource 권한은 각각 연결, 소스 접근을 위한 권한이기 때문에 필수적으로 주어야 한다.
 
 그리고 dba는 dba와 같은 수준의 권한을 준다는 의미로, 공부할 때에는 어차피 DBA 계정을 사용하면 되기 때문에 dba 권한을 준다.
-
-
 
 추가 후에는 아래와 같이 확인할 수 있다.
 

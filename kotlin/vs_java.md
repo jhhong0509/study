@@ -77,7 +77,7 @@ Composition + Forwarding 이라고도 할 수 있는데, Composition이란 **상
 
 하지만 반대로 Delegation을 한다고 해서 **부모 클래스에 영향을 주지 않는다.**
 
-또한 상위 클래스의 API에 결함이 있을 때 **Delegation은 이를 숨길 수 있다.** Override를 통해 동작을 변경하는건 가능하지만, **접근 제한자를 더 private하게 바꿀 수  없다.**
+또한 상위 클래스의 API에 결함이 있을 때 **Delegation은 이를 숨길 수 있다.** Override를 통해 동작을 변경하는건 가능하지만, **접근 제한자를 더 private하게 바꿀 수 없다.**
 
 **코틀린은 상속보다 Delegation을 추천**한다.
 

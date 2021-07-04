@@ -1,4 +1,5 @@
 # WAS
+
 - Web Server란
     - Web Server는 web 서버가 설치되어 있는 컴퓨터 이다.
     - 정적인 컨텐츠를 제공해 준다.

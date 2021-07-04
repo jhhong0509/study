@@ -15,7 +15,7 @@ public class CustomAuthenticationEntryPoint implements ServerAuthenticationEntry
     public Mono<Void> commence(ServerWebExchange exchange, AuthenticationException ex) {
         exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
         exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
-        
+
         String str = "{\n" +
                 "  \"status\": 401,\n" +
                 "  \"message\": \"Not Authenticated.\"\n" +

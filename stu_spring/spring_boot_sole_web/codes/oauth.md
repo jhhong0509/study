@@ -36,52 +36,52 @@ spring:
 
 - 서비스를 시작하기 위해서는 우선 인증 정보를 발급받아야 한다.
 - 구글
-  - 해당 <a href="https://console.cloud.google.com">주소</a>로 이동한다.
-  - 프로젝트 선택 탭을 클릭한다.
-  - 새 프로젝트 버튼을 누른다.
-  - 프로젝트 이름
-    - 다른 이름과 관련 없이 자유로운 이름
-  - 해당 프로젝트로 이동한다.
-  - 왼쪽 위의 메뉴 탭을 누른다.
-  - API및 서비스 카테고리에 마우스를 올려둔다.
-  - 사용자 인증 정보 를 클릭한다.
-  - 사용자 인증 정보 만들기를 눌러준다.
-  - OAuth 클라이언트 ID를 선택해 준다.
-  - 동의 화면 구성을 눌러준다.
-    - 애플리케이션 이름을 적어준다.
-      - 구글 로그인 시에, 사용자가 보게 될 이름
-      - 이 역시 그냥 이름이니 맘대로 지어도 된다.
-    - 지원 이메일
-      - 사용자 동의 화면에서 노출될 이메일
-      - 주로 help 이메일같은걸 사용한다.
-      - 하지만 여기서는 그냥 본인의 이메일을 적으면 된다.
-    - Google API의 범위
-      - 구글 서비스에서 사용할 범위의 목록
-      - 구글 서비스에서 정보를 가져올 때, 어떤것들을 가져올지 여부
-  - 모든 설정이 끝났다면 OAuth 클라이언트 ID 만들기 화면으로 이동한다.
-  - 애플리케이션 유형을 웹 애플리케이션으로 설정해 준다.
-  - 승인된 리디렉션 URI
-    - 서비스에서 인증을 성공 했을 때 리다이렉트할 URL
-    - 스프링 부트2 시큐리티에서는 /login/oauth2/code/{소셜 서비스 코드}를 지운하고 있다.
-      - 해당 URL은 시큐리티에서 규현되어 있다.
-    - 아직 개발중이니 http://localhost:8080/login/oauth2/code/google 로 등록해 준다.
+    - 해당 <a href="https://console.cloud.google.com">주소</a>로 이동한다.
+    - 프로젝트 선택 탭을 클릭한다.
+    - 새 프로젝트 버튼을 누른다.
+    - 프로젝트 이름
+        - 다른 이름과 관련 없이 자유로운 이름
+    - 해당 프로젝트로 이동한다.
+    - 왼쪽 위의 메뉴 탭을 누른다.
+    - API및 서비스 카테고리에 마우스를 올려둔다.
+    - 사용자 인증 정보 를 클릭한다.
+    - 사용자 인증 정보 만들기를 눌러준다.
+    - OAuth 클라이언트 ID를 선택해 준다.
+    - 동의 화면 구성을 눌러준다.
+        - 애플리케이션 이름을 적어준다.
+            - 구글 로그인 시에, 사용자가 보게 될 이름
+            - 이 역시 그냥 이름이니 맘대로 지어도 된다.
+        - 지원 이메일
+            - 사용자 동의 화면에서 노출될 이메일
+            - 주로 help 이메일같은걸 사용한다.
+            - 하지만 여기서는 그냥 본인의 이메일을 적으면 된다.
+        - Google API의 범위
+            - 구글 서비스에서 사용할 범위의 목록
+            - 구글 서비스에서 정보를 가져올 때, 어떤것들을 가져올지 여부
+    - 모든 설정이 끝났다면 OAuth 클라이언트 ID 만들기 화면으로 이동한다.
+    - 애플리케이션 유형을 웹 애플리케이션으로 설정해 준다.
+    - 승인된 리디렉션 URI
+        - 서비스에서 인증을 성공 했을 때 리다이렉트할 URL
+        - 스프링 부트2 시큐리티에서는 /login/oauth2/code/{소셜 서비스 코드}를 지운하고 있다.
+            - 해당 URL은 시큐리티에서 규현되어 있다.
+        - 아직 개발중이니 http://localhost:8080/login/oauth2/code/google 로 등록해 준다.
 - 네이버
-  - 해당 <a href="https://developers.naver.com/apps/#/register?api=nvlogin">주소</a>로 이동해 준다.
-  - 빈칸들을 채운다.
-    - 애플리케이션 이름
-      - 그냥 이름
-    - 사용 API
-      - 네이버 아이디로 로그인
-    - 제공 정보 선택
-      - 이름, 이메일, 프로필 사진을 필수로 가져온다.
-      - 우리가 네이버로 부터 받아올 정보를 의미한다.
-    - 환경
-      - PC 웹
-    - 서비스 URL
-      - 현재 개발 단계 이기 때문에 https://localhost:8080/ 을 적어준다.
-    - Callback URL
-      - 구글의 리다이렉션 URL과 같다.
-      - http://localhost:8080/login/oauth2/code/naver 로 등록해 준다.
+    - 해당 <a href="https://developers.naver.com/apps/#/register?api=nvlogin">주소</a>로 이동해 준다.
+    - 빈칸들을 채운다.
+        - 애플리케이션 이름
+            - 그냥 이름
+        - 사용 API
+            - 네이버 아이디로 로그인
+        - 제공 정보 선택
+            - 이름, 이메일, 프로필 사진을 필수로 가져온다.
+            - 우리가 네이버로 부터 받아올 정보를 의미한다.
+        - 환경
+            - PC 웹
+        - 서비스 URL
+            - 현재 개발 단계 이기 때문에 https://localhost:8080/ 을 적어준다.
+        - Callback URL
+            - 구글의 리다이렉션 URL과 같다.
+            - http://localhost:8080/login/oauth2/code/naver 로 등록해 준다.
 
 ### OAuth 2.0 구현
 
@@ -90,12 +90,12 @@ spring-security-oauth2-autoconfigure
 ```
 
 - 우리가 OAuth 1.5에서 OAuth 2.0으로 넘어오게 되면서, 연동 방법이 크게 변경되었다.
-- 하지만,  위 라이브러리를 사용함으로써, 1.5의 방식을 가져올 수 있다.
-  - 많은 개발자가 기존의 방식을 추구하기 때문에 해당 방식을 이용한다
+- 하지만, 위 라이브러리를 사용함으로써, 1.5의 방식을 가져올 수 있다.
+    - 많은 개발자가 기존의 방식을 추구하기 때문에 해당 방식을 이용한다
 - 우리가 공부할 방법은 위 코드를 사용하지 않고, OAuth 2.0을 직접 사용할 예정이다.
-  - 스프링 팀에서 OAuth 1.5는 버그 수정 정도만 할 예정이고, 신규 기능은 OAuth 2.0에서만 지원할 것이라고 선언했다.
-  - 스프링 부트용 라이브러리가 출시되었다.
-  - 확장이 간편하다
+    - 스프링 팀에서 OAuth 1.5는 버그 수정 정도만 할 예정이고, 신규 기능은 OAuth 2.0에서만 지원할 것이라고 선언했다.
+    - 스프링 부트용 라이브러리가 출시되었다.
+    - 확장이 간편하다
 
 #### yml 또는 properties 파일 구현
 
@@ -124,10 +124,10 @@ spring.security.oauth2.client.registration.google.scope=profile,email
 ```
 
 - scope의 의미
-  - 원래 기본값은 openid, email, profile이다.
-  - 하지만 openid가 scope의 값으로 들어가면 Open Id Provider로 인식하게 된다.
-  - 그렇게 된다면 openid 서비스를 지원하는 구글과 같은 서비스와, 그렇지 않은 네이버와 카카오 등의 서비스를 나눠서 따로 만들어 줘야 한다.
-  - 그렇기 때문에 강제로 openid를 제외한 email과 profile값만 넣어준다.
+    - 원래 기본값은 openid, email, profile이다.
+    - 하지만 openid가 scope의 값으로 들어가면 Open Id Provider로 인식하게 된다.
+    - 그렇게 된다면 openid 서비스를 지원하는 구글과 같은 서비스와, 그렇지 않은 네이버와 카카오 등의 서비스를 나눠서 따로 만들어 줘야 한다.
+    - 그렇기 때문에 강제로 openid를 제외한 email과 profile값만 넣어준다.
 
 #### security config 구현
 
@@ -225,14 +225,14 @@ http.csrf().disable().headers().frameOptions().disable()
 ```
 
 - 소셜 로그인에 성공했을 때, UserService에서 후속 조치를 진행한다.
-  - 해당 클래스는 직접 구현해 줘야 한다.
+    - 해당 클래스는 직접 구현해 줘야 한다.
 
 #### User 구현
 
 - ENUM
-  - spring security에서 권한을 나타내는 ENUM은 항상 ROLE_GUEST처럼 ROLE_를 붙여야 한다.
+    - spring security에서 권한을 나타내는 ENUM은 항상 ROLE_GUEST처럼 ROLE_를 붙여야 한다.
 - Repository
-  - 꼭 PK가 아닌, email처럼 unique한 값을 PK처럼 사용해도 된다.
+    - 꼭 PK가 아닌, email처럼 unique한 값을 PK처럼 사용해도 된다.
 
 #### CustomOAuth2UserService 구현
 
@@ -287,7 +287,7 @@ String registrationId = userRequest.getClientRegistration().getRegistrationId();
 ```
 
 - request에서 어떤 요청인지 추출해 준다.
-  - 구글인지, 네이버 인지 등 어떤 소셜 로그인을 이용했는지에 대한 정보
+    - 구글인지, 네이버 인지 등 어떤 소셜 로그인을 이용했는지에 대한 정보
 
 ``` java
 String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails()
@@ -310,7 +310,7 @@ httpSession.setAttribute("user", new SessionUser(user));
 
 - 사용자 정보를 세션에 저장하기 위한 DTO
 - User 클래스를 사용하면, 직렬화 문제가 발생하기 때문에 SessionUser를 만들었다.
-  - DB와 직접적으로 연결되는 엔티티는, 직렬화시에 자식 엔티티를 가질 수 있기 때문에 성능 이슈가 발생할 수 있다.
+    - DB와 직접적으로 연결되는 엔티티는, 직렬화시에 자식 엔티티를 가질 수 있기 때문에 성능 이슈가 발생할 수 있다.
 
 ``` java
 private User saveOrUpdate(OAuthAttributes attributes){
@@ -372,9 +372,9 @@ public class OAuthAttributes {
 ```
 
 - toEntity
-  - User 엔티티를 생성한다.
-  - 처음 가입할 때 생성된다.
-  - 기본 권한은 GUEST 이기 때문에, role에는 GUEST값을 넣는다.
+    - User 엔티티를 생성한다.
+    - 처음 가입할 때 생성된다.
+    - 기본 권한은 GUEST 이기 때문에, role에는 GUEST값을 넣는다.
 
 ``` java
 @Getter
@@ -408,35 +408,35 @@ public @interface LoginUser {
 - 커스텀 어노테이션 이다.
 - config.user 패키지에 들어간다.
 - @Target()
-  - 이 어노테이션을 적용시킬 위치
-  - 범위 종류
-    - PACKAGE
-      - 패키지 선언할 때
-    - TYPE
-      - 클래스, 인터페이스, ENUM 선언할 때
-    - CONSTRUCTOR
-      - 생성자 선언할 때
-    - FIELD
-      - 멤버 변수 선언할 때
-    - METHOD
-      - 메소드 선언할 때
-    - ANNOTATION_TYPE
-      - 어노테이션 타입 선언할 때
-    - LOCAL_VARIABLE
-      - 지역변수 선언할 때
-    - PARAMETER
-      - 파라미터 선언할 때
-    - TYPE_PARAMETER
-      - 파라미터 타입 선언할 때
+    - 이 어노테이션을 적용시킬 위치
+    - 범위 종류
+        - PACKAGE
+            - 패키지 선언할 때
+        - TYPE
+            - 클래스, 인터페이스, ENUM 선언할 때
+        - CONSTRUCTOR
+            - 생성자 선언할 때
+        - FIELD
+            - 멤버 변수 선언할 때
+        - METHOD
+            - 메소드 선언할 때
+        - ANNOTATION_TYPE
+            - 어노테이션 타입 선언할 때
+        - LOCAL_VARIABLE
+            - 지역변수 선언할 때
+        - PARAMETER
+            - 파라미터 선언할 때
+        - TYPE_PARAMETER
+            - 파라미터 타입 선언할 때
 - @Retention()
-  - 해당 어노테이션이 어디까지 유효할지 선언해 주는 것.
-  - 유효 범위 종류
-    - SOURCE
-    - CLASS
-    - RUNTIME
+    - 해당 어노테이션이 어디까지 유효할지 선언해 주는 것.
+    - 유효 범위 종류
+        - SOURCE
+        - CLASS
+        - RUNTIME
 - @interface
-  - 이 파일을 어노테이션 클래스로 지정한다.
-  - 해당 이름(LoginUser)을 가진 어노테이션이 생성된다.
+    - 이 파일을 어노테이션 클래스로 지정한다.
+    - 해당 이름(LoginUser)을 가진 어노테이션이 생성된다.
 
 #### LoginUserArgumentResolver
 
@@ -471,8 +471,8 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
 
 - 개발자가 작성한 클래스를 Bean으로 등록하기 위한 어노테이션
 - @Component vs @Bean
-  - @Component는 말했듯이, 개발자가 직접 작성한 클래스를 Bean에 등록한다.
-  - @Bean은 개발자가 직접적으로 제어가 불가능한 외부 라이브러리 같은 것 들을 Bean에 등록한다.
+    - @Component는 말했듯이, 개발자가 직접 작성한 클래스를 Bean에 등록한다.
+    - @Bean은 개발자가 직접적으로 제어가 불가능한 외부 라이브러리 같은 것 들을 Bean에 등록한다.
 
 ``` java
 implements HandlerMethodArgumentResolver
@@ -480,20 +480,20 @@ implements HandlerMethodArgumentResolver
 
 - 해당 클래스는 HandlerMethodArgumentResolver 라는 인터페이스를 구현한 클래스 이다.
 
-  - ```java
+    - ```java
     boolean supportsParameter(MethodParameter var1)
     ```
 
-    - 쉽게 말해, 해당 resolver가 이걸 하려고 만들어 진건지 여부를 검사한다.
-    - 이 클래스 에서는, @LoginUser 어노테이션이 붙어있고 파라미터 클래스 타입이 SessionUser.class 인 경우에만 true를 반환한다.
+        - 쉽게 말해, 해당 resolver가 이걸 하려고 만들어 진건지 여부를 검사한다.
+        - 이 클래스 에서는, @LoginUser 어노테이션이 붙어있고 파라미터 클래스 타입이 SessionUser.class 인 경우에만 true를 반환한다.
 
-  - ```java
+    - ```java
     Object resolveArgument(MethodParameter var1, @Nullable ModelAndViewContainer var2, NativeWebRequest var3, @Nullable WebDataBinderFactory var4) throws Exception
     ```
 
-    - 실제 객체를 리턴한다.
+        - 실제 객체를 리턴한다.
 
-    - 여기서는 세션에서 객체를 가져와서 반환해 준다.
+        - 여기서는 세션에서 객체를 가져와서 반환해 준다.
 
 - HandlerMethodArgumentResolver 은 한가지 기능을 지원하는데, 조건이 맞을 경우 메소드가 있다면 해당 인터페이스의 구현체가 지정한 값을 파라미터로 넘길 수 있다.
 
@@ -503,37 +503,37 @@ private final HttpSession httpSession;
 
 - 우리가 반환할 값이 세션에서 값을 꺼내오는 것이기 때문에, HttpSession이 필요하다.
 - 장점
-  - 상태값의 종류, 크기, 개수에 제한이 없다.
-  - 보안상 유리하다
+    - 상태값의 종류, 크기, 개수에 제한이 없다.
+    - 보안상 유리하다
 - 단점
-  - 서버에 무리가 갈 수 있다.
+    - 서버에 무리가 갈 수 있다.
 
 - 메소드
-  - setAttribute(키, 값)
-    - 키는 나중에 해당 세션을 불러오기 위한 이름
-    - 값은 자료형을 예측할 수 없어서 Object이다.
-  - getAttribute(키)
-    - 키를 통해 값을 찾는다.
-    - 키로 값을 찾았는데, 없다면 null이 반환된다.
-  - getSession(boolean)
-    - true
-      - 세션이 있다면 돌려주고,없다면 생성한다.
-    - false
-      - 세션이 있다면 돌려주고, 없으면 null을 돌려준다.
-  - getCreationTime()
-    - 해당 세션이 생성된 시간
-    - mile second 단위
-  - getLastAccessedTime()
-    - 마지막 세션 시간
-  - setMaxInactiveInterval(int second)
-    - 해당 시간(초) 동안 클라이언트에서 요청이 없다면 세션이 만료된다.
-  - getMaxInactiveInterval()
-    - 세션 만료 시간을 가져온다.
-  - invalidate()
-    - 세션 종료
-    - 유효하지 않아짐
-  - getId()
-    - 처음 요청했을 때 생긴 세션의 아이디를 문자열로 반환
+    - setAttribute(키, 값)
+        - 키는 나중에 해당 세션을 불러오기 위한 이름
+        - 값은 자료형을 예측할 수 없어서 Object이다.
+    - getAttribute(키)
+        - 키를 통해 값을 찾는다.
+        - 키로 값을 찾았는데, 없다면 null이 반환된다.
+    - getSession(boolean)
+        - true
+            - 세션이 있다면 돌려주고,없다면 생성한다.
+        - false
+            - 세션이 있다면 돌려주고, 없으면 null을 돌려준다.
+    - getCreationTime()
+        - 해당 세션이 생성된 시간
+        - mile second 단위
+    - getLastAccessedTime()
+        - 마지막 세션 시간
+    - setMaxInactiveInterval(int second)
+        - 해당 시간(초) 동안 클라이언트에서 요청이 없다면 세션이 만료된다.
+    - getMaxInactiveInterval()
+        - 세션 만료 시간을 가져온다.
+    - invalidate()
+        - 세션 종료
+        - 유효하지 않아짐
+    - getId()
+        - 처음 요청했을 때 생긴 세션의 아이디를 문자열로 반환
 
 ``` java
 parameter.getParameterAnnotation(LoginUser.class)
@@ -602,16 +602,16 @@ argumentResolvers.add(loginUserArgumentResolver)
 - 하지만 내장 톰캣의 경우 배포를 할때마다 초기화 된다.
 - 또한, 2대 이상의 서버를 사용하고 있다면, 톰캣마다 세션 동기화 설정을 해야 한다.
 - 해결법
-  - 그냥 톰캣 세션을 사용한다.
-    - 기본적인 방식
-    - 2대 이상의 WAS가 구동될 때엔, 톰캣들간의 세션 공유를 위한 설정이 필요하다.
-  - 데이터베이스를 세션 저장소로 사용한다.
-    - 가장 쉬운 방법이다.
-    - 로그인 요청마다 DB에 IO가 발생하기 때문에, 성능 이슈가 발생할 수 있다.
-    - 우리가 사용할 방법이다.
-    - 비용 절감을 위해서 이다.
-  - Redis, Memcached와 같은 메모리 DB를 사용한다.
-    - 실제 서비스에서는 Embedded Redis와 달리, 외부 메모리 서버를 사용해야 한다.
+    - 그냥 톰캣 세션을 사용한다.
+        - 기본적인 방식
+        - 2대 이상의 WAS가 구동될 때엔, 톰캣들간의 세션 공유를 위한 설정이 필요하다.
+    - 데이터베이스를 세션 저장소로 사용한다.
+        - 가장 쉬운 방법이다.
+        - 로그인 요청마다 DB에 IO가 발생하기 때문에, 성능 이슈가 발생할 수 있다.
+        - 우리가 사용할 방법이다.
+        - 비용 절감을 위해서 이다.
+    - Redis, Memcached와 같은 메모리 DB를 사용한다.
+        - 실제 서비스에서는 Embedded Redis와 달리, 외부 메모리 서버를 사용해야 한다.
 
 ##### 구현
 
@@ -634,7 +634,7 @@ spring.session.store-type=jdbc
 ```
 
 - 아직은 계속해서 초기화 된다.
-  - H2를 이용하고 있는데, H2가 재시작 되기 때문
+    - H2를 이용하고 있는데, H2가 재시작 되기 때문
 - 실제 배포에선 RDS를 이용할 것이기 때문에 문제가 되지 않음
 
 ### 네이버 로그인 구현
@@ -701,7 +701,8 @@ private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String,
 
 - 기존의 테스트들은 작동하지 않는다.
 - 설정값들을 가져올 수 없기 때문이다.
-- test에 application.properties 파일이 없다면 main에서 가져오게 되는데, 정말 application.properties 만을 가져오기 때문에, application-oauth.properties 파일은 가져오지 않기 때문이다.
+- test에 application.properties 파일이 없다면 main에서 가져오게 되는데, 정말 application.properties 만을 가져오기 때문에,
+  application-oauth.properties 파일은 가져오지 않기 때문이다.
 - 그래서 테스트를 위한 가짜 설정값들을 넣어주면 된다.
 
 ``` yaml
@@ -764,10 +765,10 @@ public void setup() {
 ##### CustomOAuth2UserService 스캔 오류
 
 - @WebMvcTest가 스캔하는 것
-  - WebSecurityConfigurerAdapter
-  - WebMvcConfigurer
-  - @ControllerAdvice
-  - @Controller
+    - WebSecurityConfigurerAdapter
+    - WebMvcConfigurer
+    - @ControllerAdvice
+    - @Controller
 - 즉, @Repository, @Service, @Component를 스캔하지 않는다.
 - 그렇기 때문에 SecurityConfig를 스캔했지만, SecurityConfig에 필요한 CustomOAuth2UserService를 읽어오지 못해서 발생한 문제이다.
 - 그러므로, SecurityConfig를 스캔하지 않도록 한다.

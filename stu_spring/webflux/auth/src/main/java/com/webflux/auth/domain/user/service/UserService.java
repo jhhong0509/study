@@ -6,5 +6,6 @@ import reactor.core.publisher.Mono;
 
 public interface UserService {
     Mono<Void> createUser(CreateUserRequest request);
+
     Mono<UserListResponse> getUserList();
 }

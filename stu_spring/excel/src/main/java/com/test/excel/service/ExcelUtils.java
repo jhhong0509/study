@@ -27,7 +27,7 @@ public class ExcelUtils {
         List<Test> tests = new ArrayList<>();
         try {
             Workbook workbook = new XSSFWorkbook(inputStream);
-            Sheet sheet =  workbook.getSheetAt(0);
+            Sheet sheet = workbook.getSheetAt(0);
             System.out.println("Number Of Sheets: " + workbook.getNumberOfSheets());
             System.out.println("Number Of Columns: " + sheet.getRow(0).getLastCellNum());
 
@@ -45,6 +45,7 @@ public class ExcelUtils {
 
         return tests;
     }
+
     private Test getTestFromList(List<String> value) {
         return Test.builder()
                 .title(value.get(0))

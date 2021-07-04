@@ -36,7 +36,7 @@ Base64.getEncoder().encodeToString(secretKey)
 Jwts.parser().setSigningKey(Base64.getEncoder().encodeToString(secretKey)).parseClaimsJws(token).getBody().getSubject();
 ```
 
-이렇게 secretKey는 base64로 인코딩 되어야 하는데, 토큰 파싱 뿐만 아니라 토큰 발급 시에도 사용되어야  한다.
+이렇게 secretKey는 base64로 인코딩 되어야 하는데, 토큰 파싱 뿐만 아니라 토큰 발급 시에도 사용되어야 한다.
 
 기존에는 secretKey로 혼자서 토큰 발급/파싱을 했기 때문에 문제가 발생하지 않았지만, **다른 언어와 토큰을 공유할 때엔 꼭 해주어야 한다.**
 

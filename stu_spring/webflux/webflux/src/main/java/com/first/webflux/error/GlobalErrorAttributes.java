@@ -23,7 +23,7 @@ public class GlobalErrorAttributes extends DefaultErrorAttributes {
             map.put("code", exception.getErrorCode().getStatus());
         } else {
             map.put("error", error.getMessage().substring(3));
-            map.put("code", error.getMessage().substring(0,3));
+            map.put("code", error.getMessage().substring(0, 3));
         }
         return map;
 

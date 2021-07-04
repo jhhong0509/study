@@ -8,9 +8,9 @@
 
 공식 문서에는 다음과 같이 설명한다.
 
-`In practice, that convention causes more problems than it solves.  Therefore, this document deprecates the convention for newly defined parameters with textual (as opposed to numerical) names in application protocols.`
+`In practice, that convention causes more problems than it solves. Therefore, this document deprecates the convention for newly defined parameters with textual (as opposed to numerical) names in application protocols.`
 
-> 이러한 협약은 이것이 문제를 해결하는 것 보다 야기하는게 많습니다. 그러므로,  이 문서에선 새로운  application protocol에서 사용자 정의 헤더에 대해 그 협약을 배척한다.
+> 이러한 협약은 이것이 문제를 해결하는 것 보다 야기하는게 많습니다. 그러므로, 이 문서에선 새로운 application protocol에서 사용자 정의 헤더에 대해 그 협약을 배척한다.
 
 즉 더이상 `X-`는 표준이 아니고, prefix 없이 자유롭게 사용하면 된다.
 
