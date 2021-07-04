@@ -1,12 +1,14 @@
 # ORM
 
 ## ORM을 정리하게된 이유
+
 - 이유
     - 처음 springboot에 입문했을 때, findById, findByEmail 같은 글자를 보고, 전혀 이게 db에 연동되는 orm인줄 몰랐다.
     - 그리고 인터넷에서 나름 열심히 찾아봤는데 검색어가 잘 못 된 것인지 JPA ORM을 사용하는 방법을 찾을 수 없었다.
     - 스프링 부트를 공부하며 느꼈는데, 가장 생각을 많이 해야 하는 가장 어려운 부분이라고 생각해서
 
 ## JPA와 ORM이란
+
 - JPA란?
     - Java Persistence API의 약자로 자바 진영의 표준 ORM 기술이다.
 - JPA의 특징

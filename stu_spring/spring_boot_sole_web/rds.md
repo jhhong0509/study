@@ -7,9 +7,9 @@
 - 그렇기 때문에 개발자 또한 어느정도의 데이터베이스를 알아야 하는데, 직접 데이터베이스를 사용하진 않는다.
 - 왜냐하면 모니터링, 알람, 백업, HA 구성 등 모두 직접 해야만 하는데, 처음 하기에는 매우 어려운 일이다.
 - 그렇기 때문에 앞에서 말한 모든 작업들을 지원하는 RDS(Relational Database Service)를 이용할 것이다.
-  -  클라우드 기반 관계형 데이터베이스 이다.
-  - 잦은 운영 작업을 자동화 해 준다.
-  - 예상치 못한 많은 데이터가 쌓이게 되어도 비용만 내면 정상적으로 이용할 수 있다.
+    - 클라우드 기반 관계형 데이터베이스 이다.
+    - 잦은 운영 작업을 자동화 해 준다.
+    - 예상치 못한 많은 데이터가 쌓이게 되어도 비용만 내면 정상적으로 이용할 수 있다.
 
 ### RDS 인스턴스 생성
 
@@ -17,29 +17,29 @@
 
 - 데이터베이스 생성
 
-  - MariaDB와 Mysql, PostgreSQL을 추천한다.
+    - MariaDB와 Mysql, PostgreSQL을 추천한다.
 
-  - 그중에서 MariaDB가 가장 추천된다.
+    - 그중에서 MariaDB가 가장 추천된다.
 
-    - 가격이 싸다
+        - 가격이 싸다
 
-    - Amazon Aurora로 교체되기 쉽다.
+        - Amazon Aurora로 교체되기 쉽다.
 
-      - AmazonAurora는 AWS에서 여러 DB를 클라우드 기반에 맞게 재구성한 DB이다.
+            - AmazonAurora는 AWS에서 여러 DB를 클라우드 기반에 맞게 재구성한 DB이다.
 
-      - 다른 DB보다 훨씬 빠르다.
-      - AWS에서 직접 엔지니어링 하고있기 때문에 계속 발전하고 있다.
-      - 하지만 월 10만원 이상이기 때문에 부담스럽고, 그렇기 때문에 프리티어의 MariaDB를 이용하다가 교체되기 쉽다.
+            - 다른 DB보다 훨씬 빠르다.
+            - AWS에서 직접 엔지니어링 하고있기 때문에 계속 발전하고 있다.
+            - 하지만 월 10만원 이상이기 때문에 부담스럽고, 그렇기 때문에 프리티어의 MariaDB를 이용하다가 교체되기 쉽다.
 
-    - 모두들 가장 인기있는 오픈소스 DB를 고르라고 하면 MySQL을 고른다.
+        - 모두들 가장 인기있는 오픈소스 DB를 고르라고 하면 MySQL을 고른다.
 
-    - 2010년 오라클과 썬마이크로 시스템즈가 합병되면서 개발자들이 떠나게 된다.
+        - 2010년 오라클과 썬마이크로 시스템즈가 합병되면서 개발자들이 떠나게 된다.
 
-    - 떠난 mysql 개발자들이 만들어낸 DB가 MariaDB이다.
+        - 떠난 mysql 개발자들이 만들어낸 DB가 MariaDB이다.
 
-    -  MySQL 기반이기 때문에 사용법이 비슷하다.
+        - MySQL 기반이기 때문에 사용법이 비슷하다.
 
-    - 성능이 향상되어 있다.
+        - 성능이 향상되어 있다.
 
 - 템플릿에서 프리티어를 선택한다.
 
@@ -58,15 +58,15 @@
 - 오른쪽 위 편집 버튼을 누른다.
 - 그리고 time_zone을 검색해서 Asia/Seoul로 변경해 준다.
 - 그리고 character_set을 검색해서 모두 utf8mb4로 변경해 준다.
-  - character_set_client
-  - character_set_connection
-  - character_set_database
-  - character_set_filesystem
-  - character_set_results
-  - character_set_server
+    - character_set_client
+    - character_set_connection
+    - character_set_database
+    - character_set_filesystem
+    - character_set_results
+    - character_set_server
 - 그리고 collation을 검색해서 utf8mb4_general_ci로 변경해 준다.
-  - collation_connection
-  - collation_server
+    - collation_connection
+    - collation_server
 - 마지막으로 max_connections를 검색해서, 조금 더 넉넉하게 지정해 준다.
 - 그리고 데이터베이스 탭으로 이동한 후에 DB를 선택하고, 수정을 눌러준 다음 파라미터 그룹을 바꿔준다.
 - 아직 서비스를 오픈하지 않았으니 즉시 적용을 눌러준다.

@@ -6,7 +6,7 @@
 
 > 같은 메소드를 가지는 여러개의 클래스가 있을 때, 그 클래스들에게 추상 메소드를 상속하게 하는 등
 
-하지만 이러한 방식은 어떤  상황에서는 복잡도를 증가시키고 유지보수를 어렵게 할 수 있다.
+하지만 이러한 방식은 어떤 상황에서는 복잡도를 증가시키고 유지보수를 어렵게 할 수 있다.
 
 기능 향상을 하는 경우에는 로직 등 모든 방향에서 유지보수하고, 향상시켜야 한다.
 
@@ -43,8 +43,6 @@ EJB gateway는 rich domain object와 persistent domain object를 Presentation �
 > `Because of simplicity and built-in aspects, an EJB 3.1 happens to be the simplest and leanest candidate for a Gateway implementation.`
 >
 > lean Programming이란 효율을 최대한 올리고, 애플리케이션의 낭비를 최소화 하자는 소프트웨어 방법론
-
-
 
 ``` java
 @Stateful

@@ -2,7 +2,7 @@
 
 ### gradle
 
-MapStruct의 설정은 굉장히 간단하기 때문에 gradle 설정만 하면 사용할  수 있다.
+MapStruct의 설정은 굉장히 간단하기 때문에 gradle 설정만 하면 사용할 수 있다.
 
 ``` gradle
 ext {		// 변수같은 개념

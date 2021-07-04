@@ -8,13 +8,9 @@
 
 하나의 트랜잭션은 취소시킬 수 있고, 문제가 발생하지 않았다면 적용시킬 수 있다.
 
-
-
 Spring에서 트랜잭션은 Database와 비슷하지만 별개로 작동하는 AOP 기술이다.
 
 크게 **`@Transactional` 어노테이션을 이용하는 방법과 설정 파일을 이용하는 방법**으로 나뉘어 사용할 수 있다.
-
-
 
 ### 트랜잭션의 특징
 
@@ -35,8 +31,6 @@ Spring에서 트랜잭션은 Database와 비슷하지만 별개로 작동하는 
 
 그렇기 때문에 DBMS는 다음과 같은 특징들을 다 지키지는 못하고 **격리 수준**이라는 것을 통해 원칙을 덜 지키고 동시성을 얻는다.
 
-
-
 ### 트랜잭션의 상태
 
 ---
@@ -53,8 +47,6 @@ Spring에서 트랜잭션은 Database와 비슷하지만 별개로 작동하는 
 | 실패      | 트랜잭션의 실행 도중 오류가 발생하여 중지된 상태이다.        |
 | 철회      | 비정상적으로 종료된 트랜잭션을 적용하지 않기 위해 ROLLBACK 연산을 수행한 상태이다. |
 
-
-
 ### Spring Transaction
 
 ---
@@ -66,8 +58,6 @@ Spring에서 트랜잭션은 Database와 비슷하지만 별개로 작동하는 
 이 프록시 객체는 **`@Transactional`이 붙은 메소드가 호출되었을 때** `PlatformTransactonManager`를 사용해서 **트랜잭션을 시작**한다.
 
 해당 메소드의 **성공 여부에 따라 Rollback 또는 Commit을 수행**한다.
-
-
 
 #### 격리 수준
 
@@ -86,8 +76,6 @@ Spring에서 트랜잭션은 Database와 비슷하지만 별개로 작동하는 
 - REPEATABLE_READ
 
 - SERIALIZABLE
-
-
 
 #### 전파 옵션
 
@@ -135,10 +123,7 @@ Spring에서 트랜잭션은 Database와 비슷하지만 별개로 작동하는 
 
   독립적인 트랜잭션을 시작하는 Required_new와는 다르다.
 
-
-  중첩 트랜잭션은 부모의 커밋과 롤백은 영향을 받지만, 자신의 커밋과 롤백은 부모에게 영향을 주지 않는다.
-
-
+중첩 트랜잭션은 부모의 커밋과 롤백은 영향을 받지만, 자신의 커밋과 롤백은 부모에게 영향을 주지 않는다.
 
 #### readOnly
 
@@ -149,8 +134,6 @@ Spring에서 트랜잭션은 Database와 비슷하지만 별개로 작동하는 
 **성능 최적화** 또는 **쓰기 작업 방지**를 위해 사용된다.
 
 readOnly 트랜잭션 내부에서 `INSERT/DELETE/UPDATE`가 발생하면 예외가 발생하게 된다.
-
-
 
 ### 롤백 예외
 
@@ -170,7 +153,7 @@ readOnly 트랜잭션 내부에서 `INSERT/DELETE/UPDATE`가 발생하면 예외
 
   특정 예외가 발생하면 강제로 롤백한다.
 
-  `rollbackFor=UserNotFoundException.class`처럼 사용할 수  있다.
+  `rollbackFor=UserNotFoundException.class`처럼 사용할 수 있다.
 
 - noRollbackFor
 
@@ -178,23 +161,17 @@ readOnly 트랜잭션 내부에서 `INSERT/DELETE/UPDATE`가 발생하면 예외
 
   `noRollbackFor=UserNotFoundException.class`
 
-
-
 ### Timeout
 
 ---
 
 트랜잭션이 해당 시간동안 끝나지 않으면 롤백시켜 버린다.
 
-
-
 ### InnoDB의 Lock
 
 ---
 
 InnoDB는 ACID 원칙을 지키기 위해 **Lock**을 지원한다.
-
-
 
 #### Shared Lock
 
@@ -208,8 +185,6 @@ Shared Lock은 Read를 허용하는 Lock이다.
 
 하지만 만약 Exclusive Lock을 요청한다면 즉시 승인하지 않는다.
 
-
-
 #### Exclusive Lock
 
 ---
@@ -220,8 +195,6 @@ Exclusive Lock은 update 또는 delete를 허용하는 Lock이다.
 
 또한 다른 트랜잭션은 Lock을 가지고 있는 트랜잭션이 끝날때까지 기다려야 한다.
 
-
-
 #### Intention Lock
 
 ---
@@ -229,8 +202,6 @@ Exclusive Lock은 update 또는 delete를 허용하는 Lock이다.
 InnoDB는 테이블에 걸린 Lock과 로우에 걸린 Lock을 공존하게 해주는 `Multiple Granularity Locking`을 지원한다.
 
 MGL을 위해 InnoDB는 Intention Lock을 사용하는데, Intention Lock은 **테이블 단위의 Lock**이다.
-
-
 
 ### 트랜잭션의 격리 수준
 
@@ -241,8 +212,6 @@ MGL을 위해 InnoDB는 Intention Lock을 사용하는데, Intention Lock은 **�
 트랜잭션의 격리 수준에는 4가지가 있다.
 
 > 격리 수준은 `ANSI/ISO`에서 정한 4가지가 있다.
-
-
 
 #### Read UnCommitted
 
@@ -258,15 +227,11 @@ MGL을 위해 InnoDB는 Intention Lock을 사용하는데, Intention Lock은 **�
 
 위 그림과 같이 다른 트랜잭션이 수정되었을 때 커밋되지 않아도 해당 트랜잭션에서 수정된 값을 읽을 수 있다.
 
-
-
 #### Read Committed
 
 관계형 데이터베이스에서 주로 사용하고 있는 방법이다.
 
 `Dirty Read`현상이 발생하지 않는다.
-
-
 
 실제 테이블이 아닌, **Undo 영역에서 백업된 정보에서 값을 가져온다**.
 
@@ -283,8 +248,6 @@ MGL을 위해 InnoDB는 Intention Lock을 사용하는데, Intention Lock은 **�
 따라서 `Repeatable Read`의 정합성에 어긋난다.
 
 <img src="./images/transaction_isol_commit2.png" alt="Transaction Status" style="zoom:50%;" />
-
-
 
 #### Repeatable Read
 
@@ -316,8 +279,6 @@ UPDATE된 정보는 스냅샷에서 정보를 가져오기 때문에 문제가 �
 
 <img src="./images/repeatable_read_1.png" alt="Repeatable Read" style="zoom:50%;" />
 
-
-
 #### Serializable
 
 **가장 엄격한 격리 수준**으로 **동시성을 포기하고 안정성에 비중**을 두었다.
@@ -328,13 +289,9 @@ FOR SHARE의 의미는 **shared lock을 건다는 의미**이다.
 
 따라서 **해당 트랜잭션이 끝나기 전까지 해당 SELECT의 대상을 수정/삭제 할 수 없다.**
 
-
-
 만약 UPDATE 를 하려 하면, 계속해서 대기 상태에 들어가게 된다.
 
 > 일정 시간 이후 timeout이 발생한다.
-
-
 
 ### 발생 문제 정리
 

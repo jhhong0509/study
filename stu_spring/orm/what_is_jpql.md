@@ -1,4 +1,4 @@
-#  JPQL
+# JPQL
 
 ### JPQL이란?
 

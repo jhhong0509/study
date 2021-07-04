@@ -260,6 +260,7 @@ public List<ChatRoom> room() {
     return chatRoomRepository.findAllRoom();
 }
 ```
+
 > 채팅방 목록을 반환하는 컨트롤러이다.
 
 > @ResponseBody는 값을 json으로 반환하기 위해 사용된다.
@@ -281,6 +282,7 @@ public String roomDetail(Model model, @PathVariable String roomId) {
     return "/chat/roomDetail";
 }
 ```
+
 > 채팅방에 입장하는 컨트롤러
 
 ```java
@@ -290,6 +292,7 @@ public ChatRoom roomInfo(@PathVariable String roomId) {
     return chatRoomRepository.findRoomById(roomId);
 }
 ```
+
 > 특정 채팅방을 조회하는 컨트롤러
 >
 > 채팅방 구독을 하도록 해준다.

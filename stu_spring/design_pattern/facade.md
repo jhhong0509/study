@@ -10,8 +10,6 @@ Facade(퍼사드)는 프랑스의 `Façade`에서 유래된 단어로, **건물 
 
 > 거창하게 말했지만 평소에 Service와 ServiceImpl로 나눈것 처럼 하면 된다.
 
-
-
 ### 예제
 
 #### Interface
@@ -55,8 +53,6 @@ public class UserFacadeImpl implements UserFacade {
 ```
 
 실제 비지니스 로직에서 반복되던 작업들을 한 곳에서 작업해 준다.
-
-
 
 즉, 이제 해당 Facade 인터페이스를 의존성 주입해오면 **유저를 찾는 작업을 `facade.createAuthUser()`과 같이 단순하게 할 수 있다.**
 

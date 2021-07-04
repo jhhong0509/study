@@ -32,27 +32,23 @@ Spring은 ApplicationContext를 사용하기 때문에 ServletContext와 연동�
 
 > Spring Boot 없이 사용한다면 WebApplicationInitializer를 따로 구현해야 하지만 Spring Boot를 사용한다면 SpringBootServletInitializer에서 ServletContextApplicationContextInitializer를 사용해 ApplicationContext를 ServletContext에 등록하게 된다.
 
-
-
 - 필터 인터페이스의 종류
 
-  - Filter
+    - Filter
 
-    가장 기본적인 Filter로, 해야할 일의 전처리/후처리를 설정해줄 수 있다.
+      가장 기본적인 Filter로, 해야할 일의 전처리/후처리를 설정해줄 수 있다.
 
-  - GenericFilterBean
+    - GenericFilterBean
 
-    Filter를 상속받아 확장시킨 인터페이스로, 거의 비슷한데 `getFilterConfig()`나 `getEnvironment()` 정도를 추가로 지원한다.
+      Filter를 상속받아 확장시킨 인터페이스로, 거의 비슷한데 `getFilterConfig()`나 `getEnvironment()` 정도를 추가로 지원한다.
 
-  - OncePerRequestFilter
+    - OncePerRequestFilter
 
-    GenericFilterBean을 상속받아 확장시킨 필터.
+      GenericFilterBean을 상속받아 확장시킨 필터.
 
-    의도치 않게 GenericFilterBean의 필터가 중첩요청 되었을 때 중첩 요청을 예방한다.
+      의도치 않게 GenericFilterBean의 필터가 중첩요청 되었을 때 중첩 요청을 예방한다.
 
-    `doFilterInternal`을 구현해야 한다.
-
-
+      `doFilterInternal`을 구현해야 한다.
 
 Java doc에서 `OncePerRequestFilter`는 다음과 같이 설명된다.
 

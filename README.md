@@ -82,19 +82,19 @@
 #### 오류 해결
 
 - JWT
-  1. [다른 언어에서 발급된 토큰 검증](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/token_validate.md)
-  2. [필터에서 Exception처리](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/token_filter_exception.md)
+    1. [다른 언어에서 발급된 토큰 검증](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/token_validate.md)
+    2. [필터에서 Exception처리](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/token_filter_exception.md)
 - 테스트코드
-  1. [다른 테스트 간섭 문제](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/testcode_gradlew_not_work.md)
+    1. [다른 테스트 간섭 문제](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/testcode_gradlew_not_work.md)
 - Spring Data JPA
-  1. [Spring Data JPA의 flush](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/spring_data_jpa_flush.md)
+    1. [Spring Data JPA의 flush](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/spring_data_jpa_flush.md)
 - 영속성 전이
-  1. [PERSIST 저장 안됨](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/cascade_persist.md)
-  2. [PESIST 중복저장](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/cascade.md)
-  3. [DETACHED 엔티티 저장](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/cascade_merge.md)
+    1. [PERSIST 저장 안됨](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/cascade_persist.md)
+    2. [PESIST 중복저장](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/cascade.md)
+    3. [DETACHED 엔티티 저장](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/cascade_merge.md)
 - MySQL
-  1. [AUTO_INCREMENT 이상](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/mysql_generatedvalue.md)
-  2. [도커 MySQL 접속](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/mysql_connect.md)
+    1. [AUTO_INCREMENT 이상](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/mysql_generatedvalue.md)
+    2. [도커 MySQL 접속](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/mysql_connect.md)
 
 ---
 
@@ -108,7 +108,8 @@
 - [CSRF](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/security/csrf.md)
 - [커스텀 HEADER 네이밍 규칙](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/custom_header_naming.md)
 - [Exception Handler](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/coding_ways/exceptionhandler.md)
-- [Json Path 사용](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/coding_ways/json_path.md) (비추)
+- [Json Path 사용](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/coding_ways/json_path.md) (
+  비추)
 - [QueryParameter와 PathParameter 차이](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/coding_ways/query_vs_path.md)
 - [직렬화](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/serialization.md)
 - [서블릿](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/spring_basic/servlet.md)
@@ -121,16 +122,16 @@
 #### 라이브러리
 
 - Lombok
-  - [@Builder](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/lombok/builder.md)
+    - [@Builder](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/lombok/builder.md)
 - MapStruct
-  - [MapStruct란?](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/mapStruct/basic.md)
-  - [설정하기](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/mapStruct/setup.md)
-  - [시작하기](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/mapStruct/start.md)
-  - [만난 에러들](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/mapStruct/errors.md)
+    - [MapStruct란?](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/mapStruct/basic.md)
+    - [설정하기](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/mapStruct/setup.md)
+    - [시작하기](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/mapStruct/start.md)
+    - [만난 에러들](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/mapStruct/errors.md)
 - LOGBACK
-  - [LOGBACK](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/logback.md)
+    - [LOGBACK](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/logback.md)
 - REST TEMPLATE
-  - [Rest Template](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/rest_template.md)
+    - [Rest Template](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/rest_template.md)
 
 ---
 
@@ -209,19 +210,19 @@
 - [웹 서버란](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/web_server.md)
 - [테스트 코드에 대해](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/testcode.md)
 - CODE
-  - [컨트롤러](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/controller.md)
-  - [DTO와 Entity](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/DTOs_and_Entity.md)
-  - [JPA](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/jpa.md)
-  - [서비스 레이어](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/service.md)
-  - [템플릿(mustache)](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/template.md)
-  - [OAUTH](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/oauth.md)
-  - [테스트코드](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/test_code.md)
+    - [컨트롤러](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/controller.md)
+    - [DTO와 Entity](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/DTOs_and_Entity.md)
+    - [JPA](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/jpa.md)
+    - [서비스 레이어](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/service.md)
+    - [템플릿(mustache)](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/template.md)
+    - [OAUTH](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/oauth.md)
+    - [테스트코드](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/codes/test_code.md)
 - AWS
-  - [RDS](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/rds.md)
-  - [EC2](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/ec2.md)
-  - [배포](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/publish.md)
-  - [배포 자동화](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/auto_publish.md)
-  - [무중단 배포](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/no_stop_publish.md)
+    - [RDS](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/rds.md)
+    - [EC2](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/ec2.md)
+    - [배포](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/publish.md)
+    - [배포 자동화](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/auto_publish.md)
+    - [무중단 배포](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/no_stop_publish.md)
 
 ### WebFlux
 

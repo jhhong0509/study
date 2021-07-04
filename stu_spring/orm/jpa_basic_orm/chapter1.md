@@ -108,7 +108,7 @@ Member member = jpa.find(Member.class, memberId);
 Team team = member.getTeam();
 ```
 
-> 이렇게 사용하는 방식은 **List**의 경우에도 가능하다. 
+> 이렇게 사용하는 방식은 **List**의 경우에도 가능하다.
 
 ### 패러다임 불일치
 
@@ -236,41 +236,41 @@ class Member {
 
   우리가 객체 자체를 저장하기 때문에, 저장과 조회를 할 때 문제가 발생한다.
 
-  - 저장
+    - 저장
 
-    객체를 데이터베이스에 저장할 수 없기 때문에, 객체가 아니라 id를 저장해 줘야 한다.
+      객체를 데이터베이스에 저장할 수 없기 때문에, 객체가 아니라 id를 저장해 줘야 한다.
 
-    우리는 team 이라는 객체 대신 team.getId를 통해 해당 team의 id 값을 가져와서 그 값을 저장해야 한다.
+      우리는 team 이라는 객체 대신 team.getId를 통해 해당 team의 id 값을 가져와서 그 값을 저장해야 한다.
 
-  - 조회
+    - 조회
 
-    조회할 때에는 member를 조회한 후에, team을 조회하고 memer.setTeam() 메소드를 통해 member의 team을 원하는 team으로 바꾼 후에 반환한다.
+      조회할 때에는 member를 조회한 후에, team을 조회하고 memer.setTeam() 메소드를 통해 member의 team을 원하는 team으로 바꾼 후에 반환한다.
 
-    > 이러한 작업은 패러다임 불일치를 해결하기 위함이다.
-    >
-    > 그러므로, 컬렉션에 저장한다면 필요 없는 일이다.
+      > 이러한 작업은 패러다임 불일치를 해결하기 위함이다.
+      >
+      > 그러므로, 컬렉션에 저장한다면 필요 없는 일이다.
 
 - JPA를 통한 해결
 
   JPA는 **기본적으로 연관관계에 대한 패러다임 불일치 문제를 해결**해 준다.
 
-  - 저장
+    - 저장
 
-    ``` java
-    member.setTeam(team);
-    jpa.persist(member);
-    ```
+      ``` java
+      member.setTeam(team);
+      jpa.persist(member);
+      ```
 
-    JPA는 team 이라는 연관관계를 INSERT에 넣으면 알아서 teamId로 변환해서 넣어준다.
+      JPA는 team 이라는 연관관계를 INSERT에 넣으면 알아서 teamId로 변환해서 넣어준다.
 
-  - 조회
+    - 조회
 
-    ``` java
-    Member member = jpa.find(Member.class, memberId);
-    Team team = member.getTeam();
-    ```
+      ``` java
+      Member member = jpa.find(Member.class, memberId);
+      Team team = member.getTeam();
+      ```
 
-    위와 같이, JPA는 알아서 member의 teamId를 team 객체로 찾아서 반환해 준다.
+      위와 같이, JPA는 알아서 member의 teamId를 team 객체로 찾아서 반환해 준다.
 
 #### 참조의 방향
 

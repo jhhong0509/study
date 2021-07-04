@@ -14,7 +14,8 @@
 
 ### 해결 과정
 
-인터넷을 찾아보니 Spring Data Jpa에서는 자동으로 flush를 해주지 않고, `repository.flush()`를 호출하거나 `@Transactional` 어노테이션을 붙여야지만 `flush()`가 발생한다고 한다.
+인터넷을 찾아보니 Spring Data Jpa에서는 자동으로 flush를 해주지 않고, `repository.flush()`를 호출하거나 `@Transactional` 어노테이션을 붙여야지만 `flush()`가
+발생한다고 한다.
 
 그래서 `@Transactional` 도 붙여보고 `repository.flush()`도 호출해 봤는데 둘 다 잘 작동한다.
 
