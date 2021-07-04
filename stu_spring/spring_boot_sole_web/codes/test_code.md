@@ -1,5 +1,7 @@
 # 테스트코드 및 롬복
+
 ### 테스트코드
+
 - 이름
     - 클래스 이름은 테스트할 컨트롤러의 이름뒤에 Test를 붙인 것
 - 테스트코드의 어노테이션들
@@ -99,7 +101,9 @@
         - isEqualTo
             - assertThat에서 가져온 값과, 내가 원하는 값과 같은지 비교해 준다.
                 - assertThat(response.getTitle()).isEqualTo("원하는 제목")
+
 ### Lombok
+
 - getter setter
     - @Getter
         - 해당되는 모든 필드에 getter 메소드를 생성한다.

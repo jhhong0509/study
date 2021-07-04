@@ -37,9 +37,9 @@ public class SecurityConfig {
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                 .and()
                 .authorizeExchange()
-                    .pathMatchers(HttpMethod.POST, "/user").permitAll()
-                    .pathMatchers(HttpMethod.POST, "/auth").permitAll()
-                    .anyExchange().authenticated()
+                .pathMatchers(HttpMethod.POST, "/user").permitAll()
+                .pathMatchers(HttpMethod.POST, "/auth").permitAll()
+                .anyExchange().authenticated()
                 .and().build();
     }
 

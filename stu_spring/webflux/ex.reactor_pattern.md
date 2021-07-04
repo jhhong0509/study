@@ -12,8 +12,6 @@
 >
 > 초기 모델에서 Reactor Pattern의 장점들을 모아서 만들긴 했다고 한다.
 
-
-
 ## 구성
 
 ---
@@ -28,28 +26,19 @@ Event Queue에 이벤트를 등록/삭제 한다.
 
 위 그림에서 Reactor를 의미한다.
 
-
-
 ### Dispatcher
 
 요청이 오면 맞는 이벤트 핸들러에게 넘기게 된다.
 
 Demultiplexing 역할을 맡게 된다.
 
-
-
-
 ### Event Handler
 
 실질적으로 Event를 처리하는 역할이다.
 
-
-
 ### Event Queue
 
 Event와 그에 맞는 Handler가 저장되는 Queue이다.
-
-
 
 ### Event Handler Map
 

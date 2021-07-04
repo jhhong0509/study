@@ -2,8 +2,8 @@
 
 - JSON 형식의 반환값을 증명하기 위한 정형화된 방법이다.
 - 테스트코드에서 .andExpect(jsonPath("$.경로"),is("원하는 값"))처럼 사용할 수 있다.
-  - 여기서의 is는 alt+enter에서 보이지 않는다(이유는 모르겠다..)그래서 직접 써줘야 한다.
-    - import static org.hamcrest.core.Is.is;
+    - 여기서의 is는 alt+enter에서 보이지 않는다(이유는 모르겠다..)그래서 직접 써줘야 한다.
+        - import static org.hamcrest.core.Is.is;
 - JsonPath의 경로
 
 | XPath | JsonPath          | 설명                                       |

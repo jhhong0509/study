@@ -14,7 +14,7 @@ public class ExcelServiceImpl implements ExcelService {
 
     @Override
     public void uploadExcelToDatabase(MultipartFile file) {
-        if(!excelUtils.isExcel(file)) {
+        if (!excelUtils.isExcel(file)) {
             throw new RuntimeException("File Type Mismatch");
         }
 

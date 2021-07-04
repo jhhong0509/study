@@ -1,5 +1,7 @@
 # 이메일 발송에 대한 공부
+
 ### yml 설정
+
 ``` yml
 spring:
   mail:
@@ -15,6 +17,7 @@ spring:
           starttls:
             enable: true
 ```
+
 - host - gmail을 사용할 것이기 때문에 gmail로 설정한다.
 - port - SSL이 요구되면 465, TLS가 요구되면 587로 설정해야 한다.
 - username - 이메일 계정

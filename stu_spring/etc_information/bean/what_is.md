@@ -8,8 +8,6 @@
 
 이러한 Bean은 **스프링이 생명주기를 관리하는 객체** 라고 생각하면 편하다.
 
-
-
 ### Bean Scope
 
 기본적으로 Singleton 객체가 된다.
@@ -23,8 +21,6 @@
 | prototype | 요청마다 새로운 객체 생성                   |
 | request   | http request 하나마다 객체 생성             |
 | session   | http session과 동일한 생명 주기를 갖는 객체 |
-
-
 
 ### Bean Factory
 

@@ -177,7 +177,7 @@ homeworkMapper.toHomeworkResponse(homework, "asdf@dsm", "asdf@dsm");
 
 ### TMI
 
-생성된 클래스들은 
+생성된 클래스들은
 
 `build\generated\sources\annotationProcessor\java\main\com\gramo\gramo\mapper` 와 비슷한 위치에 있을 것이다.
 

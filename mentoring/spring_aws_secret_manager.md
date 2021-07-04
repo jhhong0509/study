@@ -70,7 +70,7 @@ AWS에서 IAM을 검색하면 다음과 같은 화면이 나온다.
 
 우리는 `SecretsManagerReadWrite`와 `AWSKeyManagementServicePowerUser`, `AmazonEC2FullAccess`만 추가해 주면 된다.
 
-그리고 난 다음 끝날 때 까지 계속을 눌러주면 **엑세스 키  ID와 비밀 엑세스 키**가 있는 화면이 나오게 되는데, **잘 보관해 두어야 한다.**
+그리고 난 다음 끝날 때 까지 계속을 눌러주면 **엑세스 키 ID와 비밀 엑세스 키**가 있는 화면이 나오게 되는데, **잘 보관해 두어야 한다.**
 
 ## 사용
 

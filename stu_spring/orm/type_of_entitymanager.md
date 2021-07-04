@@ -126,6 +126,7 @@ EntityManager의 공유를 위해 CDI를 이용할수도 있다
 
 <br>
 
-만약 resource-local EntityManager를 사용하고 있다면 조금만 깊게 `EntityManager.getTransaction()`을 사용해서 `javax.persistence.EntityTransaction`을 반환받을 수 있다.
+만약 resource-local EntityManager를 사용하고 있다면 조금만 깊게 `EntityManager.getTransaction()`을
+사용해서 `javax.persistence.EntityTransaction`을 반환받을 수 있다.
 
 해당 트랜잭션을 받아서 commit, rollback, begin 등의 작업을 수행할 수 있다.

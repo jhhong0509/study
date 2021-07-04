@@ -8,7 +8,7 @@ public class TestController {
 
     @GetMapping
     public String hello(@RequestParam String code) {
-        if(code.equals("aa")) {
+        if (code.equals("aa")) {
             return "not hello";
         }
         return "hello";

@@ -37,7 +37,7 @@ public class JwtTokenExtractor implements ServerAuthenticationConverter {
                                 jwtTokenInformation.getTokenType(),
                                 jwtTokenInformation.getClaims().getSubject(),
                                 jwtTokenInformation.getToken()
-                                )
+                        )
                         )
                 );
     }

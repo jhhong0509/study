@@ -58,8 +58,6 @@ DROP TABLE STUDENT;
 DROP TABLE STUDENT PURGE;
 ```
 
-
-
 그리고 tab에서 이미 삭제된 테이블이 나오는게 불편하다면 아래와 같이 하면 된다.
 
 > recyclebin 즉 휴지통에서 값들을 비우게 된다.

@@ -45,8 +45,8 @@ Dynamic Programming을 하기 위해 사용
 ### Memcached 와 Redis의 차이
 
 - 자료형
-  - Memcached는 Collection을 지원하지 않는다.
-  - Redis는 여러 자료형을 지원한다.
+    - Memcached는 Collection을 지원하지 않는다.
+    - Redis는 여러 자료형을 지원한다.
 
 Memcached는 기본적으로 간단함을 위해 개발되었기 때문에 실제 개발할 때엔 Redis가 효율적이다.
 

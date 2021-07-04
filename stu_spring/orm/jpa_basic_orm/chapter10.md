@@ -6,13 +6,9 @@
 
 하지만 이걸로 애플리케이션을 개발하기엔 기능이 너무 빈약하다.
 
-
-
 결국 SQL로 필요한 내용을 걸러서 조회해야 하는데, ORM을 사용하면 엔티티 객체를 대상으로 개발하기 때문에 검색할 때 언어가 필요하다.
 
 그래서 나온게 JPQL이다.
-
-
 
 ### JPQL 특징
 
@@ -54,8 +50,6 @@ JPQL도 SQL과 비슷하게 SELECT, UPDATE, DELEETE를 사용할 수 있다.
 
 참고로 INSERT는 PERSIST 메소드로 충분하기 때문에 없다.
 
-
-
 #### SELECT
 
 ``` sql
@@ -74,10 +68,6 @@ SELECT m FROM Member AS m WHERE m.username = 'hello'
 
 > JPA 구현체로 Hibernate를 사용하면 HQL 이라는걸 사용할 수 있는데, 여기선 별칭을 사용하지 않아도 된다.
 
-
-
-
-
 ### JPQL과 Criteria는 생략
 
 #### QueryDSL
@@ -87,8 +77,6 @@ Criteria는 복잡하다는 큰 단점이 있었는데, 작성이 쉽고 간결�
 QueryDSL은 **JPQL 빌더** 역할을 수행하는 오픈소스 프로젝트로, 자바 컬렉션이나 JPA, JDBC, 몽고DB 등 다양하게 지원한다.
 
 > 참고로 QueryDSL은 데이터를 조회하는 기능에 특화되어 있다.
-
-
 
 #### QueryDSL 설정
 
@@ -108,12 +96,10 @@ annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedPr
   AnnotationProcessor 즉 컴파일 단계에서 쿼리 타입을 생성할 때 필요한 라이브러리 이다.
 
   QUser 과 같이, Q가 붙은 클래스들을 자동으로 생성해 준다.
-  
-  >  querydsl은 entity 클래스를 사용하지 않기 때문에 따로 생성해 주어야 한다.
+
+  > querydsl은 entity 클래스를 사용하지 않기 때문에 따로 생성해 주어야 한다.
 
 쿼리타입은 사용의 편리를 위해 기본적인 인스턴스를 포함하고 있다.
-
-
 
 쿼리 타입의 기본 인스턴스를 사용하면 쿼리 타입을 훨씬 간결하게 할 수 있다.
 
@@ -122,8 +108,6 @@ import static ㅁㅁㅁㅁ.ㅁㅁㅁㅁ.ㅁㅁㅁㅁ.QEntity.entity;
 ```
 
 이렇게 하면 따로 생성자 호출 등의 작업이 필요 없다.
-
-
 
 #### 검색 조건 쿼리
 

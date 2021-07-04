@@ -2,7 +2,8 @@
 
 ### CI/CD란
 
-Version Control System(git 등) 시스템에 PUSH가 되면 자동으로 Test 및 Build가 수행되고, build 결과가 서버에 자동으로 배포되는 것을 CI(Continuous Delivery - 지속적 배포)라고 한다.
+Version Control System(git 등) 시스템에 PUSH가 되면 자동으로 Test 및 Build가 수행되고, build 결과가 서버에 자동으로 배포되는 것을 CI(Continuous Delivery -
+지속적 배포)라고 한다.
 
 #### CI/CD의 조건
 

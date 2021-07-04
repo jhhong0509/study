@@ -1,7 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.3.6.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+    id 'org.springframework.boot' version '2.3.6.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
 }
 
 group = 'com.first'
@@ -9,27 +9,27 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-webflux:2.5.0'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'io.projectreactor:reactor-test'
-	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive:2.5.0'
-	implementation "org.springframework.cloud:spring-cloud-starter-aws-secrets-manager-config:2.2.6.RELEASE"
-	implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux:2.5.0'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive:2.5.0'
+    implementation "org.springframework.cloud:spring-cloud-starter-aws-secrets-manager-config:2.2.6.RELEASE"
+    implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
 
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
