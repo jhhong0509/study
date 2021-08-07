@@ -2,7 +2,8 @@
 
 ### CI/CD
 
-> 공사중
+- [K8S](https://github.com/jhhong0509/study/blob/master/cicd/kubernetes/kubernetes.md)
+- [정의](https://github.com/jhhong0509/study/blob/master/cicd/what_is.md)
 
 ---
 
@@ -61,6 +62,7 @@
 #### 디자인 패턴
 
 - [FACADE 패턴](https://github.com/jhhong0509/study/blob/master/stu_spring/design_pattern/facade.md)
+- [Factory 패턴](https://github.com/jhhong0509/study/blob/master/stu_spring/design_pattern/factory.md)
 
 ---
 
@@ -103,19 +105,26 @@
 - [객체지향](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/stu_object_oriented.md)
 - [빈 이란](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/what_is.md)
 - [빈 등록 어노테이션](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/bean_annotation.md)
+- [SLSB](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/slsb.md)
 - [build.gradle 관련 설명](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/spring_basic/build.gradle.md)
 - [CORS와 SOP](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/security/cors_and_sop.md)
 - [CSRF](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/security/csrf.md)
 - [커스텀 HEADER 네이밍 규칙](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/custom_header_naming.md)
 - [Exception Handler](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/coding_ways/exceptionhandler.md)
-- [Json Path 사용](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/coding_ways/json_path.md) (
-  비추)
+- [Json Path 사용](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/coding_ways/json_path.md) (비추)
 - [QueryParameter와 PathParameter 차이](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/coding_ways/query_vs_path.md)
 - [직렬화](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/serialization.md)
 - [서블릿](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/spring_basic/servlet.md)
 - [var](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/var.md)
 - [트랜잭션](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/transaction.md)
 - [불변 객체](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/immutable_object.md)
+
+---
+
+### 파일
+
+- [상식](https://github.com/jhhong0509/study/blob/master/stu_spring/file/information.md)
+- [파일 업로드](https://github.com/jhhong0509/study/blob/master/stu_spring/file/file_upload.md)
 
 ---
 
@@ -141,6 +150,7 @@
 - [Query DSL이란?](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/what_is_query_dsl.md)
 - [Query DSL 세팅하기](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/query_dsl_settings.md)
 - [JPQL이란](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/what_is_jpql.md)
+- [EntityManager 타입](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/type_of_entitymanager.md)
 
 ---
 
@@ -156,14 +166,6 @@
 8. [챕터8](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/jpa_basic_orm/chapter8.md)
 9. [챕터9](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/jpa_basic_orm/chapter9.md)
 10. [챕터10](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/jpa_basic_orm/chapter10.md)
-
-> 업데이트 예정
-
----
-
-#### FIREBASE를 통한 푸쉬 알림 구현
-
-> 곧 할 예정
 
 ---
 
@@ -190,8 +192,10 @@
 
 #### 소켓
 
-- [SOCKET이란](https://github.com/jhhong0509/study/blob/master/stu_spring/socket/socket.md)
-- [STOMP란](https://github.com/jhhong0509/study/blob/master/stu_spring/socket/stomp.md)
+- [Socket 특징](https://github.com/jhhong0509/study/blob/master/stu_spring/socket/old_socket.md)
+- [STOMP란](https://github.com/jhhong0509/study/blob/master/stu_spring/socket/old_stomp.md)
+- [WebSocket 소개](https://github.com/jhhong0509/study/blob/master/stu_spring/socket/01.websocket.md)
+- [RSocket](https://github.com/jhhong0509/study/blob/master/stu_spring/socket/03.rsocket.md)
 
 > 실제 코드는 추가 예정
 
@@ -224,15 +228,34 @@
     - [배포 자동화](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/auto_publish.md)
     - [무중단 배포](https://github.com/jhhong0509/study/blob/master/stu_spring/spring_boot_sole_web/no_stop_publish.md)
 
+---
+
 ### WebFlux
 
-1. [Reactive Stream 기초](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/1.reactive_basic.md)
-2. [Observer Pattern](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/2.observer_pattern.md)
-3. [Non Block & Block & Async & Sync](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/3.non_block_block.md)
-4. [함수형 프로그래밍](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/4.functional_programming.md)
-5. [Stream API](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/5.stream_api.md)
+1. [팁](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/00.tips.md)
+2. [Reactive Stream 기초](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/01.reactive_basic.md)
+3. [Observer Pattern](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/02.observer_pattern.md)
+4. [Observer Pattern과 Reactive Programming](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/03.reactive_with_observer.md)
+5. [Non Block & Block & Async & Sync](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/04.non_block_block.md)
+6. [함수형 프로그래밍](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/05.functional_programming.md)
+7. [Stream API](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/06.stream_api.md)
+8. [동시성 프로그래밍](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/07.concurrent_programming.md)
+9. [Future Pattern](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/08.future.md)
+10. [Reactor](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/09.reactor.md)
+11. [webflux 사용](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/10.use_webflux.md)
+12. [Backpressure 심화](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/11.dipper_backpressure.md)
+13. [Webflux Jackson](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/12.jackson.md)
 
-> tmi
->
 > [Reactor Pattern](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/ex.reactor_pattern.md)
+
+---
+
+### AWS
+
+- Secret Manager
+
+  > [예제코드](https://github.com/jhhong0509/study/tree/master/mentoring/secretmanager)
+
+  - [소개](https://github.com/jhhong0509/study/blob/master/mentoring/aws_secrets.md)
+  - [aws-secretsmanager-jdbc](https://github.com/jhhong0509/study/blob/master/mentoring/spring_aws_secret_manager.md)
 
