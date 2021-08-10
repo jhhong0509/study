@@ -48,7 +48,6 @@
 ### 데이터베이스
 
 - [이름 명명 규칙](https://github.com/jhhong0509/study/blob/master/database/column_name_rule.md)
-- [정규화](https://github.com/jhhong0509/study/blob/master/database/normalization.md)
 - [용어](https://github.com/jhhong0509/study/blob/master/database/words.md)
 
 > 주기적으로 공사 예정
