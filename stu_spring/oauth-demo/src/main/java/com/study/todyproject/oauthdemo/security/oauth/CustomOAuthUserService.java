@@ -18,12 +18,11 @@ import java.util.Map;
 @Service
 public class CustomOAuthUserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {       // 요청/반환 타입
 
-    private final AuthDetailsService authDetailsService;
+    private final OAuth2Service oAuth2Service;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService = new DefaultOAuth2UserService();
-        OAuth2User oAuth2User = oauth2UserService.loadUser(userRequest);
+        OAuth2User oAuth2User = oAuth2Service.loadUser(userRequest);
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();    // 서비스의 이름
         String userNameAttributeName = userRequest.getClientRegistration()
