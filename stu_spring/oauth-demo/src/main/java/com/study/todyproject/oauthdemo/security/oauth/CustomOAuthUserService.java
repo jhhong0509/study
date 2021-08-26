@@ -27,6 +27,7 @@ public class CustomOAuthUserService implements OAuth2UserService<OAuth2UserReque
         String registrationId = userRequest.getClientRegistration().getRegistrationId();    // 서비스의 이름
         String userNameAttributeName = userRequest.getClientRegistration()
                 .getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();     // 해당 계정의 PK와 같은 역할을 하는 필드의 이름.
+        userRequest.getAccessToken();
 
         return new DefaultOAuth2User(new ArrayList<>(),         // 권한
                 oAuth2User.getAttributes(),                     // attributes

@@ -14,10 +14,10 @@ spring:
       client:
         registration:
           naver:
-            client-id: gpDmz2Tp25Sxh1C0S6o6             # id from naver
-            client-secret: O0Zctk3phq                   # secret from naver
+            client-id: ${NAVER_CLIENT_ID}             # id from naver
+            client-secret: ${NAVER_SECRET}                   # secret from naver
             redirectUri: 'http://localhost:8080/login/oauth2/code/naver'   # my call back url
-            authorization-grant-type: authorization_code
+            authorization-grant-type: authorization_code    # the way to communicate with oauth server
             scope:                             # what you will get from oauth server
               - name
               - email
