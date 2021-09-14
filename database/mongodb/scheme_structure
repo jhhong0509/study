@@ -17,7 +17,7 @@
 
 **쿼리 한번에 모든 정보를 조회**할 수 있다는 장점이 있지만, **특정 도큐먼트를 독자적으로 가져올 수 없다**는 단점이 있다.
 
-![image-20210913181912859](C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20210913181912859.png)
+![image-20210913181912859](./images/image-20210913181912859.png)
 
 위와 같이 많지 않고, 특정한 요소만 가져올 상황이 적을 때 사용할 수 있다.
 
@@ -33,7 +33,7 @@
 
 장점이라면 다대다 관계로 전환하기 쉽지만, DB에 여러번 접근해야 한다.
 
-![image-20210913182638646](C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20210913182638646.png)
+![image-20210913182638646](./images/image-20210913182638646.png)
 
 ## :three:One to Squillion
 
@@ -43,13 +43,13 @@
 
 따라서 **자식에서 부모의 Id를 가지게 하는게 좋다.**
 
-![image-20210913194039049](C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20210913194039049.png)
+![image-20210913194039049](./images/image-20210913194039049.png)
 
 ## :four:Two way Referencing
 
 양방향으로 관계를 표현하고 싶을때는 다음과 같이 하면 된다.
 
-![image-20210913200225070](C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20210913200225070.png)
+![image-20210913200225070](./images/image-20210913200225070.png)
 
 양방향 관계에서는 **조회가 간단**하지만, 그 대신 **삭제 시 여러 Collection에 접근**해야 한다는 단점이 있다.
 
@@ -59,7 +59,7 @@
 
 Many to One의 조회 횟수를 줄일 수 있도록 반정규화 할 수 있다.
 
-![image-20210913201024966](C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20210913201024966.png)
+![image-20210913201024966](./images/image-20210913201024966.png)
 
 위와 같이 하면 post의 title을 조회할 때 user만 조회해도 되기 때문에 성능상 이점이 있다.
 
@@ -69,7 +69,7 @@ Many to One의 조회 횟수를 줄일 수 있도록 반정규화 할 수 있다
 
 아래와 같이 설정해주면 된다.
 
-![image-20210913220807558](C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20210913220807558.png)
+![image-20210913220807558](./images/image-20210913220807558.png)
 
 이렇게 하면 여러개를 update 해야하지만, 조회에서는 이점을 얻을 수 있다.
 
