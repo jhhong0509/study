@@ -28,8 +28,6 @@
 - [NGINX란?](https://github.com/jhhong0509/study/blob/master/nginx/basic.md)
 - [NGINX 사용하기](https://github.com/jhhong0509/study/blob/master/nginx/use_nginx.md)
 
-> 언젠가 공사 예정
-
 ---
 
 ### DOCKER
@@ -41,18 +39,15 @@
 - [도커 데이터베이스 연결](https://github.com/jhhong0509/study/blob/master/docker/docker_database.md)
 - [Docker-Compose](https://github.com/jhhong0509/study/blob/master/docker/docker_compose.md)
 
-> 공사 예정
-
 ---
 
 ### 데이터베이스
 
 - [이름 명명 규칙](https://github.com/jhhong0509/study/blob/master/database/column_name_rule.md)
 - [용어](https://github.com/jhhong0509/study/blob/master/database/words.md)
-
-> 주기적으로 공사 예정
-
----
+- [Varchar size에 따른 MySQL 동작](https://github.com/jhhong0509/study/blob/master/database/varchar_size.md)
+- MongoDB
+  - [스키마 설계](https://github.com/jhhong0509/study/blob/master/database/mongodb/scheme_structure.md)
 
 ### SPRING 공부
 
@@ -104,6 +99,7 @@
 - [객체지향](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/stu_object_oriented.md)
 - [빈 이란](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/what_is.md)
 - [빈 등록 어노테이션](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/bean_annotation.md)
+- [Bean을 주입받을 때 Interface 타입을 사용해야 하는 이유](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/why_use_interface.md)
 - [SLSB](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/slsb.md)
 - [build.gradle 관련 설명](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/spring_basic/build.gradle.md)
 - [CORS와 SOP](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/security/cors_and_sop.md)
@@ -244,6 +240,7 @@
 11. [webflux 사용](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/10.use_webflux.md)
 12. [Backpressure 심화](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/11.dipper_backpressure.md)
 13. [Webflux Jackson](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/12.jackson.md)
+14. [RSocket](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/13.rsocket.md)
 
 > [Reactor Pattern](https://github.com/jhhong0509/study/blob/master/stu_spring/webflux/ex.reactor_pattern.md)
 
@@ -258,3 +255,17 @@
   - [소개](https://github.com/jhhong0509/study/blob/master/mentoring/aws_secrets.md)
   - [aws-secretsmanager-jdbc](https://github.com/jhhong0509/study/blob/master/mentoring/spring_aws_secret_manager.md)
 
+---
+
+### 배포 자동화
+
+0. [유의사항](https://github.com/jhhong0509/study/blob/master/stu_spring/auto_deployment/README.md)
+1. [S3 세팅](https://github.com/jhhong0509/study/blob/master/stu_spring/auto_deployment/01.s3_setting.md)
+2. [IAM 설정](https://github.com/jhhong0509/study/blob/master/stu_spring/auto_deployment/02.IAM_setting.md)
+3. [CodeCommit 설정](https://github.com/jhhong0509/study/blob/master/stu_spring/auto_deployment/03.code_commit.md)
+4. [CodeBuild 설정](https://github.com/jhhong0509/study/blob/master/stu_spring/auto_deployment/04.code_build.md)
+5. [CodeDeploy를 위한 IAM 설정](https://github.com/jhhong0509/study/blob/master/stu_spring/auto_deployment/05.IAM_for_code_deploy.md)
+6. [EC2 설정](https://github.com/jhhong0509/study/blob/master/stu_spring/auto_deployment/06.EC2_setting.md)
+7. [CodeDeploy 설정](https://github.com/jhhong0509/study/blob/master/stu_spring/auto_deployment/07.code_deploy_setting.md)
+8. [CodePipeline 설정](https://github.com/jhhong0509/study/blob/master/stu_spring/auto_deployment/08.code_pipeline_setting.md)
+9. [Docker 사용](https://github.com/jhhong0509/study/blob/master/stu_spring/auto_deployment/09.change_to_docker.md)
