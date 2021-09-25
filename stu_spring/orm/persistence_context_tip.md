@@ -136,3 +136,20 @@ public class NaturalRepositoryImpl<T, ID extends Serializable, NID extends Seria
 그리고 엔티티들의 정보를 담고있는 JpaEntityInformation과 EntityManager를 받아서 SimpleJpaRepository에 넘겨주고, 자신의 EntityManager도 초기화 해준다.
 
 마지막으로 NaturalId로 조회를 한다.
+
+참고로 `loadOptional()` 이라는 메소드와 `load()` 라는 메소드는 **그 즉시 객체를 초기화** 한다.
+
+반대로 `getReference()` 라는 메소드는 다음 3가지 경우로 나뉘게 된다.
+
+- 세션에 값이 있는 경우
+
+  세션에서 값을 가져오고 초기화된 엔티티를 반환한다.
+
+- 세션에 값은 없지만 Proxy를 지원하는 경우
+
+  초기화되지 않은 Proxy객체가 반환된다.
+
+- 세션에 값도 없고 Proxy도 지원하지 않는 경우
+
+  DB에 접근해서 값을 가져오고 반환한다.
+
