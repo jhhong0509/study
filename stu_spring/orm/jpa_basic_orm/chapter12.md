@@ -283,3 +283,249 @@ Specification은 컴포지트 패턴으로 구성되어 있어서 여러 Specifi
 <br>
 
 명세 기능을 사용하려면 JpaSpecificationExecutor 인터페이스를 상속받으면 된다.
+
+``` java
+public interface OrderRepository extends JpaRepository<Order, Long>, JpaSpecificationExecutor<Order> {
+}
+```
+
+JpaSpecificationExecutor는 다음과 같이 생겼다.
+
+``` java
+public interface JpaSpecificationExecutor<T> {
+    T findOne(Specification<T> spec);
+    List<T> findAll(Specification<T> spec);
+    List<T> findAll(Specification<T> spec, Sort sort);
+    Page<T> findAll(Specification<T> spec, Pageable pageable);
+    long count(Specification<T> spec);
+}
+```
+
+JpaSpecificationExecutor의 메소드들은 Specification을 파라미터로 받아서 검색 조건으로 사용한다.
+
+명세를 사용하는 코드는 다음과 같다.
+
+``` java
+import static org.springframework.data.jpa.domain.Specefication.*;		// where() 메소드
+import static it.is.test.domain.spec.OrderSpec.*;
+
+public List<Order> findOrders(String name) {
+    List<Order> result = orderRepository.findAll(where(memberName(name)).and(isOrderstatus()));
+    return result;
+}
+```
+
+위와 같이 and(), or(), not(), where() 등의 메소드를 제공한다.
+
+findAll을 보면 회원 이름 명세(조건)와 주문 상태 명세(조건)를 and로 조합해서 검색 조건으로 사용한다.
+
+> 위에서 import static을 이용한 이유는 Specification.where(Specification.and())와 같은 코드보단 where(and())가 훨씬 간결하기 때문이다.
+
+<br>
+
+이제 명세를 정의하는 코드를 보자
+
+``` java
+public class OrderSpec {
+    public static Specification<Order> memberName(final String memberName) {
+        return (root, query, builder) -> {
+            if (StringUtils.isEmpty(memberName)) return null;				// empty 검사
+            Join<Order, Member> m = root.join("member", JoinType.INNER);	// Order과 Member Join
+            return builder.equal(m.get("name"), memberName);
+        };
+    }
+    
+    public static Specification<Order> isOrderStatus(final String memberName) {
+        return (root, query, builder) ->
+                builder.equal(root.get("status"), OrderStatus.ORDER);
+    }
+}
+```
+
+람다로 간결하게 표현했지만 원래 toPredicate 라는 메소드를 구현해야 한다.
+
+Criteria의 Root, CriteriaQuery, CriteriaBuilder가 파라미터로 주어져서 적절하게 검색조건을 만들면 된다.
+
+## 사용자 정의 레포지토리 구현
+
+JpaRepository와 같이 인터페이스만 사용해서는 부족한 상황이 많다.
+
+하지만 그렇다고 JpaRepository의 기능들을 사용할 수 없는건 아쉽기 때문에 JpaRepository에 더해서 커스텀 레포지토리를 이용할 수 있도록 우회하는 방법이 존재한다.
+
+<br>
+
+우선 커스텀 레포지토리의 인터페이스를 작성한다
+
+``` java
+public interface CustomMemberRepository {
+    List<Member> findAllCustom();
+}
+```
+
+이제 다음과 같이 해당 Repository를 구현한 클래스를 만들어 준다.
+
+``` java
+public class CustomMemberRepositoryImpl implements MemberRepository {
+    @Override
+    public List<member> findAllCustom() {
+        // codes
+    }
+}
+```
+
+마지막으로 JpaRepository와 함께 해당 인터페이스를 상속받으면 된다.
+
+``` java
+public interface MemberRepository extends JpaRepository<Member, Long>, CustomMemberRepository {
+}
+```
+
+> 여기서는 구현체에서 CustomMemberRepositoryImpl이라는 이름을 붙여줬기 때문에 상관 없지만, 만약 Impl 대신 다른 키워드를 사용하고 싶다면 repository-impl-prefix을 설정해 주어야 한다.
+
+## 페이징과 정렬 기능
+
+Spring Data JPA는 페이징과 정렬을 쉽게 이용할 수 있도록 HandlerMethodArgumentResolver를 제공한다.
+
+- 페이징: PageableHandlerMethodArgumentResolver
+- 정렬: SortHandlerMethodArgumentResolver
+
+``` java
+@GetMapping
+public List<Member> list(Pageable pageable) {
+    return memberService.findMembers(pageable).getContent();
+}
+```
+
+위와 같이 Pageable을 파라미터로 넣어주면 다음 파라미터를 받을 수 있다.
+
+- page: 현재 페이지(0부터)
+- size: 한 페이지에 보여줄 데이터 개수
+- sort: 정렬 조건을 ASC, DESC처럼 넣어주거나 정렬의 기준이 되는 컬럼도 정의할 수 있다.
+
+### 접두사
+
+만약 페이징 정보가 여러개면 다음과 같이 사용할 수 있다.
+
+``` java
+@GetMapping
+public List<Member> list(@Qualifier("member") Pageable memberPageable,
+	                     @Qualifier("order") Pageable orderPageable) {
+}
+```
+
+파라미터에 호출할때는 다음과 같이 호출할 수 있다.
+
+`member_page=0&order_page=1`
+
+### 기본 값
+
+Pageable의 기본값은 page = 0, size = 20인데 변경하고 싶으면 다음과 같이 사용할 수 있다.
+
+``` java
+@GetMapping
+public List<Member> list(@PageableDefault(size=12, sort="name",
+                                          direction = Sort.Direction.DESC) Pageable pageble) {
+}
+```
+
+## Spring Data JPA가 사용하는 구현체
+
+Spring Data JPA가 제공하는 공통 인터페이스들은 SimpleJpaRepository 클래스가 구현한다.
+
+다음과 같은 특징들이 있다.
+
+- **`@Repository` 어노테이션이 붙어있다.**
+
+  즉 JpaRepository를 상속받았다면 @Repository 어노테이션을 붙이지 않아도 된다.
+
+- **데이터 수정 메소드 위에 `@Transactional` 어노테이션이 있다.**
+
+  JPA의 모든 변경은 하나의 트랜잭션에서 이루어져야 한다.
+
+  공통 인터페이스를 사용하면 데이터를 변경하는 메소드에 이미 트랜잭션 처리가 되어있다.
+
+  따라서 Service에서 트랜잭션을 시작하지 않았다면 Repository에서 트랜잭션을 시작하고, 이미 트랜잭션이 존재한다면 해당 트랜잭션을 전파받아서 사용한다.
+
+- **클래스 단위로 @Transactional(readOnly = true)이 붙어있다.**
+
+  이를 통해 readOnly임을 명시해서 flush를 발생시키 않을 수 있다.
+
+  따라서 약간의 성능 향상을 이룰 수 있다.
+
+- **save는 PK 필드로 persist/merge를 판단한다.**
+
+  save 메소드는 PK 필드가 null 혹은 0이면 새로운 엔티티로 판단하고 persist하지만, 아니라면 merge시킨다.
+
+  만약 해당 로직을 변경하고 싶다면 엔티티가 `Persistable<>`인터페이스를 구현할 수 있다.
+
+## Spring Data JPA + QueryDSL
+
+Spring Data JPA는 아래 2가지로 QueryDSL을 지원한다.
+
+- QueryDslPredicateExecutor
+- QueryDslRepositorySupport
+
+### QueryDslPredicateExecutor 사용
+
+먼저 Repository에서 QueryDslPredicateExecutor를 상속받으면 된다.
+
+``` java
+public interface ItemInterface extends JpaRepository<Item, Long>, QueryDslPredicateExecutor<Item> {}
+```
+
+이제 상품 Repository에서는 QueryDSL을 사용할 수 있다.
+
+또한 QueryDslPredicateExecutor를 살펴보면 기본적인 페이징과 정렬 기능도 사용할 수 있다.
+
+하지만 **기능의 한계가 있다** 따라서 JPAQuery를 직접 사용하거나 QueryDslRepositorySupport를 사용하면 된다.
+
+### QueryDslRepositorySupport 사용
+
+QueryDSL의 모든 기능을 사용하려면 JPAQuery를 직접적으로 사용하면 된다.
+
+이때 QueryDslRepositorySupport를 상속받으면 더 편하게 QueryDSL을 사용할 수 있다.
+
+<br>
+
+우선 커스텀할 인터페이스를 만들어 준다.
+
+``` java
+public interface CustomOrderRepository {
+    List<Order> search(OrderSearch orderSearch);
+}
+```
+
+이제 QueryDslRepositorySupport를 상속받는 CustomOrderRepository의 구현체를 만들어 보자
+
+``` java
+import static it.is.pack.domain.QOrder.order;
+import static it.is.pack.domain.QMember.member;
+
+public class OrderRepositoryImpl extends QueryDslRepositorySupport implements CustomOrderRepository {
+    
+    private final JPQLQuery query;		// 나는 주로 JPAQueryFactory를 주입받아서 사용하는걸 선호한다.
+    
+    public OrderRepositoryImpl() {
+        super(Order.class);
+    }
+    
+    @Override
+    public List<Order> search(OrderSearch orderSearch) {
+        JPQLQuery query = from(order);
+        
+        if(StringUtils.hasText(orderSearch.getMemberName())) {
+            query.leftJoion(order.member, member)
+                .where(member.name.contains(orderSearch.getMemberName()));
+        }
+        
+        if(orderSearch.getOrderStatus != null) {
+            query.where(order.status.eq(orderSearch.getOrderStatus()));
+        }
+        
+        return query.list(order);
+    }
+}
+```
+
+위와 같이 검색 조건에 따라 동적인 쿼리 작성이 가능하다.
+
