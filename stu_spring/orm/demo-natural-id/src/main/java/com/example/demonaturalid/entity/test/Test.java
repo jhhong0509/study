@@ -14,7 +14,6 @@ public class Test {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NaturalId
     @Column(name = "test11")
     private String unique;
 
