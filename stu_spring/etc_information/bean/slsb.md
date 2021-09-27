@@ -20,7 +20,7 @@ Stateless Bean 객체들은 서비스 계층의 요구에 따라 EJB 컨테이�
 
 다음과 같은 생명 주기를 갖는다.
 
-![lifecycle](https://www.javatpoint.com/ejbpages/images/statelessbeanlifecycle.png)
+![lifecycle](../images/statelessbeanlifecycle.png)
 
 우선 EJB Container는 **Session Bean pool을 생성하고, 유지**한다.
 

@@ -121,7 +121,7 @@ Docker는 컨테이너 런타임 인터페이스인 **CRI를 준수하지 않는
 
 CRI와 OCI에서 유래된 프로젝트.
 
-![CRI-O](https://image.samsungsds.com/kr/insights/container_img05.jpg?queryString=20210621120951)
+![CRI-O](./container_img05.jpeg)
 
 위가 도커, 아래가 CRI-O가 작동하는 방식이다.
 

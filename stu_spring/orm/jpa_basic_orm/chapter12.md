@@ -47,11 +47,11 @@ Spring Data JPA는 간단한 CRUD를 지원하는 JpaRepository라는 인터페�
 
 Repository는 다음과 같은 구조를 가진다.
 
-![1](https://t1.daumcdn.net/cfile/tistory/995883335CC5630C16)
+![1](./images/service1.png)
 
 또한 상속관계는 다음과 같다.
 
-<img src="https://blog.kakaocdn.net/dn/KcVAb/btqT7XbZscj/CKSFUNj6a64iZ7auAZxVJk/img.png" alt="img" style="zoom:50%;" />
+<img src="./images/img22.png" alt="img" style="zoom:50%;" />
 
 사용하는건 다음과 같다.
 
@@ -262,7 +262,7 @@ Specification은 컴포지트 패턴으로 구성되어 있어서 여러 Specifi
 >
 > 다음 3가지로 구분된다.
 >
-> ![img](https://blog.kakaocdn.net/dn/bgrkyh/btqB8PPdkZv/RkZq7OjpP7sBd1hJ7Z7pk0/img.png)
+> ![img](./images/img21.png)
 >
 > - **Component: **Leaf와 Composite를 위한 공통된 인터페이스 작성
 > - **Leaf: **Component의 인터페이스를 구현한 Composite 클래스의 부품 클래스이다.
@@ -270,7 +270,7 @@ Specification은 컴포지트 패턴으로 구성되어 있어서 여러 Specifi
 >
 > 컴퓨터를 예로 들면 다음과 같다.
 >
-> ![img](https://gmlwjd9405.github.io/images/design-pattern-composite/composite-solution2.png)
+> ![img](./images/composite.png)
 >
 > 위와 같이 Computer 라는 Component는 Keyboard, Body, Monitor, Speaker와 같은 Leaf를 가진다.
 >

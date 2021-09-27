@@ -24,7 +24,8 @@
 
 ### 무중단 배포의 구조
 
-- ![구조1](https://t1.daumcdn.net/cfile/tistory/997A14375A73F91D04)
+![997A14375A73F91D04](./997A14375A73F91D04.png)
+
 - 위와 같은 구조를 이루게 된다.
 - 운영 과정
     - 사용자는 주소로 접속한다.
@@ -77,17 +78,17 @@
 - 코드
 
     - ``` java
-    @RequiredArgsConstructor
-    @RestController
-    public class ProfileController {
+      @RequiredArgsConstructor
+      @RestController
+      public class ProfileController {
         private final Environment env;
-    
+      
         @GetMapping("/profile")
         public String profile(){
             List<String> profiles = Arrays.asList(env.getActiveProfiles());
             List<String> realProfiles = Arrays.asList("real", "real1", "real2");
             String defaultProfile = profiles.isEmpty()? "default" : profiles.get(0);
-    
+      
             return profiles.stream()
                 .filter(realProfiles::contains)
                 .findAny()
@@ -96,36 +97,36 @@
     
     }
     ```
-
+    
     - 코드 설명
-
+    
         - ``` java
       private final Environment evn
-      ```
+    ```
 
             - 외부 설정파일을 가져와서 프로퍼티를 추가하거나 추출하는 역할
-
+        
         - ``` java
       Arrays.asList(env.getActiveProfiles())
       ```
-
+    
             - 액티브인 프로필들을 가져온다.
             - real, oauth 등 활성화된 프로필을 가져온다.
-
+    
         - ``` java
       List<String> realProfiles = Arrays.asList("real", "real1", "real2")
       ```
 
             - 모두 배포에 필요한 프로필들이다.
             - 이중에 하나라도 활성화된 프로필이라면 그걸 반환한다.
-
+        
         - ``` java
       String defaultProfile = profiles.isEmpty()? "default" : profiles.get(0)
       ```
-
+    
             - 만약 활성화 중인 프로필이 없다면 default를 반환한다.
             - 만약 활성화된 프로필이 있다면 profiles 리스트의 첫번째 값을 넣어준다.
-
+    
         - ``` java
       return profiles.stream()
                   .filter(realProfiles::contains)
@@ -198,28 +199,28 @@
         }
     }
     ```
-
+    
     - 코드 설명
-
+    
         - ``` java
       String expectedProfile = "real";
       MockEnvironment env = new MockEnvironment();
       env.addActiveProfile(expectedProfile);
       env.addActiveProfile("oauth");
       env.addActiveProfile("real-db");
-      ```
+    ```
 
             - Environment는 인터페이스 이기 때문에 가짜 구현체인 MockEnvironment를 통해 테스트할 수 있다.
             - 원하는 profile과 기본적인 oauth, real-db 프로필을 활성화 시킨다.
-
+        
         - ```java
       ProfileController controller = new ProfileController(env);
-      
+    
       String profile = controller.profile();
-      
+    
       assertThat(profile).isEqualTo(expectedProfile);
       ```
-
+    
             - 컨트롤러에 현재 환경을 넘겨준다.
             - 그리고 컨트롤러가 반환한 프로필이, 내가 원하는 프로필인지 검증한다.
 
@@ -232,7 +233,7 @@
     - ``` java
     .antMatchers("/","/css/**","/images/**","/js/**","/h2-console/**", "/profile").permitAll()
     ```
-
+    
         - 맨 뒤에 , "/profile"이 추가되었다.
 
 ### real1, real2 프로필 생성
@@ -281,7 +282,7 @@ spring.session.store-type=jdbc
       	.
       }
       ```
-
+  
         - include를 한것과, 기존의 proxy_pass 값이 localhost로 되어있던 것을 $service_url로 바꿔주었다.
 
 - 엔진엑스 재시작
@@ -313,7 +314,7 @@ spring.session.store-type=jdbc
 - appspec.yml에서 위 스크립트들을 사용하도록 수정
 
     - ``` yaml
-    hooks:
+      hooks:
       AferInstall:
         - location: stop.sh
           timeout: 60
@@ -347,14 +348,14 @@ spring.session.store-type=jdbc
         else
             CURRENT_PROFILE=$(curl -s http://localhost/profile)
         fi
-    
+        
         if [ ${CURRENT_PROFILE} == real1 ]
         then
           IDLE_PROFILE=real2
         else
           IDLE_PROFILE=real1
         fi
-    
+        
         echo "${IDLE_PROFILE}"
     }
     
@@ -373,11 +374,11 @@ spring.session.store-type=jdbc
 
         - ``` sh
       $(curl -s -o /dev/null -w "%{http_code}" http://localhost/profile)
-      ```
+    ```
 
             - profile에 요청을 보내서, http 상태코드를 반환 받는다.
             - 400 이상은 모두 예외로 판단하고, 현재 프로필을 real2로 설정한다.
-
+    
         - ``` sh
       if [ ${CURRENT_PROFILE} == real1 ]
           then
@@ -414,11 +415,11 @@ spring.session.store-type=jdbc
 
         - ``` sh
       ABSPATH=$(readlink -f $0)
-      ```
+    ```
 
             - 현재 해당 스크립트 파일의 경로를 찾는다.
             - profile.sh 파일을 찾기 위해 사용된다.
-
+    
         - ``` sh
       source ${ABSDIR}/profile.sh
       ```
@@ -430,7 +431,7 @@ spring.session.store-type=jdbc
       ```
 
             - 현재 구동중인 애플리케이션을 가져온다.
-
+    
         - ``` sh
       if [ -z ${IDLE_PID} ]
       then
@@ -548,7 +549,7 @@ spring.session.store-type=jdbc
         echo "> 전환할 Port: $IDLE_PORT"
         echo "> Port 전환"
         echo "set \$service_url http://127.0.0.1:${IDLE_PORT};" | sudo tee /etc/nginx/conf.d/service-url.inc
-    
+        
         echo "> 엔진엑스 Reload"
         sudo service nginx reload
     }
@@ -556,11 +557,11 @@ spring.session.store-type=jdbc
 
         - ``` sh
       echo "set \$service_url http://127.0.0.1:${IDLE_PORT};" | sudo tee /etc/nginx/conf.d/service-url.inc
-      ```
+    ```
 
             - 엔진엑스가 변경할 프록시 주소 생성
             - ""를 사용해야 한다.
-
+    
         - ``` sh
       sudo service nginx reload
       ```

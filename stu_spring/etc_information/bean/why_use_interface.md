@@ -4,7 +4,7 @@
 
 ## Basic Knowledge
 
-![img](https://blog.kakaocdn.net/dn/biMpYS/btqZFsXfuRI/sLZIs47sNA79RZqKq95cCK/img.png)
+![img](../images/img.png)
 
 위 그림과 같이 Proxy 가 요청을 대신 받고, Proxy가 실제 객체를 호출해 준다.
 
@@ -36,7 +36,7 @@ Cglib은 **클래스의 상속**을 통해 객체를 생성하며, **인터페�
 
 Spring Bean에선 인터페이스의 유무에 따라 Proxy를 만드는 방법이 달라진다.
 
-![img](https://gmoon92.github.io/md/img/aop/jdk-dynamic-proxy-and-cglib/aop-proxy-mechanism2.png)
+![img](../images/aop-proxy-mechanism2.png)
 
 위 그림과 같이 인터페이스의 유무에 따라 있으면 Dynamic Proxy, 없으면 CGLib를 사용하게 된다.
 

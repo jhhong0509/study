@@ -64,7 +64,7 @@ Servlet 클래스는 HttpServlet 클래스를 상속받아서 사용하며, Serv
 
 ## Servlet의 처리
 
-![img](https://gmlwjd9405.github.io/images/web/servlet-program.png)
+![img](../images/servlet-program.png)
 
 1. Web Server가 **Request를 Web Container에게 위임**한다.(Servlet Container)
     1. 어떤 URL과 매핑되어 있는지 확인한다.

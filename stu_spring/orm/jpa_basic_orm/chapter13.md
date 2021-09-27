@@ -8,13 +8,13 @@
 
 Spring Container는 영속성 컨텍스트의 생존 범위를 트랜잭션 범위와 동일하게 하는 전략을 기본으로 사용한다.
 
-![3.7 트랜잭션 범위의 영속성 컨텍스트 · jpa](https://ultrakain.gitbooks.io/jpa/content/chapter3/images/JPA_13_1.png)
+![3.7 트랜잭션 범위의 영속성 컨텍스트 · jpa](./images/JPA_13_1.png)
 
 Spring에선 보통 Service에 `@Transactional` 어노테이션을 붙여서 트랜잭션을 시작한다.
 
 외부에선 단순히 서비스의 메소드를 호출하는 것처럼 보이지만, `@Transactional` 어노테이션이 있으면 메소드 실행 전 트랜잭션 AOP가 동작한다.
 
- ![3.7 트랜잭션 범위의 영속성 컨텍스트 · jpa](https://ultrakain.gitbooks.io/jpa/content/chapter3/images/JPA_13_2.png)
+ ![3.7 트랜잭션 범위의 영속성 컨텍스트 · jpa](./images/JPA_13_2.png)
 
 위 그림과 같이 컨트롤러가 서비스를 호출하기 직전에 AOP가 동작해서 트랜잭션이 시작되고, 무사히 서비스가 끝났다면 트랜잭션을 종료해 준다.
 
@@ -33,7 +33,7 @@ Spring에선 보통 Service에 `@Transactional` 어노테이션을 붙여서 트
 
 ### 트랜잭션이 같으면 같은 영속성 컨텍스트를 사용한다.
 
-![3.7 트랜잭션 범위의 영속성 컨텍스트 · jpa](https://ultrakain.gitbooks.io/jpa/content/chapter3/images/JPA_13_3.png)
+![3.7 트랜잭션 범위의 영속성 컨텍스트 · jpa](./images/JPA_13_3.png)
 
 트랜잭션 범위의 영속성 컨텍스트 전략에서 어디서 엔티티 매니저를 사용하던간에 같은 트랜잭션이라면 같은 영속성 컨텍스트를 사용하게 된다.
 
@@ -41,7 +41,7 @@ Spring에선 보통 Service에 `@Transactional` 어노테이션을 붙여서 트
 
 ### 트랜잭션이 다르면 다른 영속성 컨텍스트를 사용한다.
 
-![3.7 트랜잭션 범위의 영속성 컨텍스트 · jpa](https://ultrakain.gitbooks.io/jpa/content/chapter3/images/JPA_13_4.png)
+![3.7 트랜잭션 범위의 영속성 컨텍스트 · jpa](./images/JPA_13_4.png)
 
 위 그림과 같이 여러 쓰레드에서 하나의 엔티티 매니저를 사용하더라도 다른 트랜잭션이면 각각의 영속성 컨텍스트를 사용하게 된다.
 
@@ -150,7 +150,7 @@ Global Fetch 전략을 수정하는건 Application 전체에 영향을 끼치기
 
 Facade 계층을 추가해서 서비스 계층과 Presentation 계층간의 의존성을 분리할 수 있다.
 
-![img](https://media.vlpt.us/images/minide/post/0fbd452c-5ea8-4039-9766-f548b90e221d/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202021-08-07%20%EC%98%A4%ED%9B%84%202.33.17.png)
+![img](./images/hello.png)
 
 Facade 계층에서 프록시를 초기화 해야하기 때문에 `@Transactional`은 여기에 있어야 한다.
 
@@ -183,7 +183,7 @@ OSIV의 핵심은 **View에서도 지연 로딩이 가능**하다는 것이다.
 
 이것은 **Transaction Per Request 방식의 OSIV**라고 부른다.
 
-![img](https://media.vlpt.us/images/minide/post/4bc48359-da87-4c2c-a3cf-7090c04c25ca/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202021-08-07%20%EC%98%A4%ED%9B%84%202.46.18.png)
+![img](./images/helllo.png)
 
 위와 같이 Interceptor에서 트랜잭션을 시작하고, 종료한다.
 
@@ -259,7 +259,7 @@ Spring에서는 다양한 OSIV 클래스를 제공한다.
 
 이전의 Presentation 계층에서 엔티티를 수정하는 문제는 **Service/Repository 계층 이외에는 수정이 불가능** 하도록 해서 일부 해결했다.
 
-![img](https://media.vlpt.us/images/minide/post/388e1492-ea6b-4f8f-944c-b51ffef203cd/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202021-08-07%20%EC%98%A4%ED%9B%84%202.57.35.png)
+![img](./images/helo.png)
 
 동작 원리는 다음과 같다.
 

@@ -117,7 +117,7 @@ Spring에선 이러한 문제를 해결하기 위해 상황에 따라 다른 전
 
 ### 영속성 컨텍스트가 같을 때 엔티티의 비교
 
-![고급 주제와 성능 최적화 · JPA](https://backend.gitbooks.io/jpa/content/Picture3.png)
+![고급 주제와 성능 최적화 · JPA](./images/Picture3.png)
 
 만약 우리가 테스트에서 `@Transactional` 어노테이션을 붙이게 되면 다음과 같은 트랜잭션 범위를 가진다.
 
@@ -137,7 +137,7 @@ Spring에선 이러한 문제를 해결하기 위해 상황에 따라 다른 전
 
 만약 서비스에스에만 `@Transactional` 다음과 같은 영속성 컨텍스트 범위를 갖는다.
 
-![img](https://backend.gitbooks.io/jpa/content/Picture4.png)
+![img](./images/Picture4.png)
 
 이렇게 하면 Service에서 save한 엔티티와 테스트에서 조회한 엔티티는 서로 다른 엔티티가 된다.
 
@@ -427,7 +427,7 @@ public class OrderItem {
 
 > Visitor 패턴이란 방문자/방문 공간을 분리해서 방문자에 따라 행동을 달리 해서 개방-폐쇄 원칙을 지켜주는 디자인 패턴이다.
 
-![image](/Users/jeonghyeonhong/Downloads/image.png)
+![image](./images/image.png)
 
 위 그림과 같이 Visitor와 Visitor와 Visitor를 받아들이는 클래스로 구성된다.
 

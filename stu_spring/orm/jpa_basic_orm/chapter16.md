@@ -1,4 +1,4 @@
-# ![만렙 개발자 키우기](https://user-images.githubusercontent.com/51476083/123985859-c5e66d00-da00-11eb-83b4-d7a86ecf2bd8.png)챕터 16 트랜잭션과 락
+# 챕터 16 트랜잭션과 락
 
 ## 트랜잭션과 격리 수준
 
@@ -45,7 +45,7 @@
 
 이것을 DIRTY READ라고 부르는데, 트랜잭션2는 A를 조회했는데 트랜잭션1이 롤백하게 되면 **트랜잭션2는 비정상적인 데이터를 가지고 비지니스 로직을 처리하게 된다.**
 
-<img src="https://blog.kakaocdn.net/dn/bgjwus/btqKbV7Q7go/DwXX4Bgjl39Gu1FO78SkJk/img.png" alt="img" style="zoom: 50%;" />
+<img src="./images/img.png" alt="img" style="zoom: 50%;" />
 
 그러므로 **데이터 정합성을 크게 위반**한 것이다.
 
@@ -63,7 +63,7 @@
 
 예를 들어 트랜잭션1이 A를 조회중인데 트랜잭션 2가 A를 B로 수정하고 트랜잭션을 커밋하게 되었을 때, 트랜잭션1이 다시 해당 row 를 조회하게 되면 B가 된다.
 
-<img src="https://blog.kakaocdn.net/dn/OAHDX/btqJ8fZ5yJr/AKYMiEi3XQ7m71RasvPXF1/img.png" alt="img" style="zoom:50%;" />
+<img src="./images/img.png" alt="img" style="zoom:50%;" />
 
 이처럼 **한 트랜잭션에서 하나의 row를 조회했을 때 항상 일관된 값을 조회하도록 보장하지 못한다.**
 
@@ -79,7 +79,7 @@
 
 이처럼 반복 조회 시 결과 집합이 달라지는 것을 PHANTOM READ 라고 한다.
 
-<img src="https://blog.kakaocdn.net/dn/xunmZ/btqJ0pJFsmi/2KhKRBkksKwyIOWbhaeVBk/img.png" alt="img" style="zoom:50%;" />
+<img src="./images/img2.png" alt="img" style="zoom:50%;" />
 
 이렇듯 PHANTOM READ는 허용하지만 NON-REPEATABLE READ는 허용하지 않는 격리 수준을 **REPEABLE READ**라고 한다.
 
@@ -202,7 +202,7 @@ board.setTitle("제목B");
 
 따라서 트랜잭션1은 수정에 실패하게 된다.
 
-![JPA낙관적 락](https://blog.kakaocdn.net/dn/bqTzTB/btq5IsQ0OT3/r0A2R8ai6OQjmZ5bvJGTcK/img.jpg)
+<img src="./images/img.png" alt="JPA낙관적 락" style="zoom:50%;" />
 
 즉 **최초 커밋만 인정하게 된다.**
 
@@ -297,7 +297,7 @@ JPA가 사용하는 낙관적 락은 Version을 사용한다.
 
 DIRTY READ와 NON-REPEATABLE READ를 방지한다.
 
-<img src="https://blog.kakaocdn.net/dn/bJxzIG/btqDGgE9g6u/5I34Q18bTRNcrQ2IJnMrf0/img.png" alt="JPA 락" style="zoom:50%;" />
+
 
 #### OPTIMISTIC_FORCE_INCREMENT
 
@@ -313,7 +313,7 @@ DIRTY READ와 NON-REPEATABLE READ를 방지한다.
 
 만약 엔티티의 버전이 DB의 버전과 다르면 오류가 발생하게 된다.
 
-![만렙 개발자 키우기](https://user-images.githubusercontent.com/51476083/123985859-c5e66d00-da00-11eb-83b4-d7a86ecf2bd8.png)
+![만렙 개발자 키우기](./images/123985859-c5e66d00-da00-11eb-83b4-d7a86ecf2bd8.png)
 
 ### JPA 비관적 락
 
@@ -374,7 +374,7 @@ NON-REPEATABLE READ를 방지해 준다.
 
 2차 캐시를 통해 Application 전체에 캐시를 적용해서 **DB 접근 횟수를 획기적으로 줄일 수 있다.**
 
-<img src="https://leejaedoo.github.io/assets/img/ehcache.jpg" alt="자바 ORM 표준 JPA 프로그래밍 | D-log" style="zoom:50%;" />
+![ehcache](./images/ehcache.jpeg)
 
 ### 1차 캐시
 

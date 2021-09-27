@@ -93,7 +93,7 @@ spring:
 
 ### 도메인 모델과 테이블 설계
 
-![minishop_UML](https://user-images.githubusercontent.com/51476083/105446681-f7bb1100-5cb5-11eb-9d9d-f66380c58d67.png)
+![minishop_UML](./images/hellaso.png)
 
 - **회원, 주문, 상품간의 관계: **회원은 여러 상품을 주문할 수 있고, 한번 주문할 때 여러 상품을 선택할 수 있기 때문에 주문과 상품은 다대다 관계이다.
 - **상품 분류: **상품은 도서, 음반, 영화로 구분되는데 상품 이라는 슈퍼타입 서브타입으로 만들었다.

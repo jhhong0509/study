@@ -110,7 +110,7 @@ list.get(10);				// 10번째 위치에 있는 값만 조회하는게 가능
 
 실제 DB에는 다음과 같이 저장된다.
 
-![Order](https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fx487B%2FbtqALtH2qPd%2Fw9ikKsWumcHVWwGxDLRrVK%2Fimg.png)
+![Order](./images/img11.png)
 
 이렇게 하면 편해보이지만 다음 문제들 때문에 실무에선 사용되기 힘들다.
 
@@ -203,7 +203,7 @@ public class BooleanToYNConverter implements AttributeConverter<Boolean, String>
 
 ### 이벤트 종류
 
-![자바 ORM 표준 JPA 프로그래밍 | D-log](https://leejaedoo.github.io/assets/img/listener.jpeg)
+![자바 ORM 표준 JPA 프로그래밍 | D-log](./images/listener.jpeg)
 
 1. **PostLoad:** 엔티티가 조회된 직후에 호출된다.
 2. **PrePersist:** 엔티티를 영속성 컨텍스트에서 관리하기 직전에 호출된다. 새로운 인스턴스를 merge할때도 수행된다.
