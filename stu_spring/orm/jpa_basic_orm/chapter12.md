@@ -264,9 +264,9 @@ Specification은 컴포지트 패턴으로 구성되어 있어서 여러 Specifi
 >
 > ![img](./images/img21.png)
 >
-> - **Component: **Leaf와 Composite를 위한 공통된 인터페이스 작성
-> - **Leaf: **Component의 인터페이스를 구현한 Composite 클래스의 부품 클래스이다.
-> - **Composite: **집합 객체로 Leaf 객체나 다른 Composite를 가진다.
+> - **Component:** Leaf와 Composite를 위한 공통된 인터페이스 작성
+> - **Leaf:** Component의 인터페이스를 구현한 Composite 클래스의 부품 클래스이다.
+> - **Composite:** 집합 객체로 Leaf 객체나 다른 Composite를 가진다.
 >
 > 컴퓨터를 예로 들면 다음과 같다.
 >
