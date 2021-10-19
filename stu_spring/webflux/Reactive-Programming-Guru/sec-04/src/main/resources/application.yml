@@ -1,0 +1,5 @@
+logging:
+  level:
+    reactor:
+      netty:
+        http: trace
