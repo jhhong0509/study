@@ -1,5 +1,6 @@
 package com.kotlin.test.kotlintest.domain.user.controller
 
+import com.kotlin.test.kotlintest.domain.user.payload.request.SignInRequest
 import com.kotlin.test.kotlintest.domain.user.payload.request.SignUpRequest
 import com.kotlin.test.kotlintest.domain.user.service.UserService
 import org.springframework.web.bind.annotation.PostMapping
@@ -14,6 +15,11 @@ class UserController(
     @PostMapping("/user")
     fun signUp(@RequestBody signUpRequest: SignUpRequest) {
         userService.signUp(signUpRequest)
+    }
+
+    @PostMapping("/auth")
+    fun signUp(@RequestBody signInRequest: SignInRequest) {
+        userService.signIn(signInRequest)
     }
 
 }
