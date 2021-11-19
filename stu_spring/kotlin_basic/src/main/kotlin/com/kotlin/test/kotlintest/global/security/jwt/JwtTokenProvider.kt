@@ -61,7 +61,7 @@ class JwtTokenProvider(
     private fun generateToken(subject: String, expiration: Long, type: String): String {
         return Jwts.builder()
             .setSubject(subject)
-            .setExpiration(Date(System.currentTimeMillis() + expiration))
+            .setExpiration(Date(System.currentTimeMillis() + expiration * 1000))
             .setIssuedAt(Date())
             .setHeaderParam("typ", type)
             .signWith(SignatureAlgorithm.HS512, jwtProperties.secretKey)
