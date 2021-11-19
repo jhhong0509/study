@@ -25,11 +25,11 @@ class JwtTokenProvider(
     }
 
     fun generateAccessToken(subject: String): String {
-        generateToken(subject, jwtProperties.accessExp, TOKEN_TYPE_ACCESS)
+        return generateToken(subject, jwtProperties.accessExp, TOKEN_TYPE_ACCESS)
     }
 
     fun generateRefreshToken(subject: String): String {
-        generateToken(subject, jwtProperties.refreshExp, TOKEN_TYPE_REFRESH)
+        return generateToken(subject, jwtProperties.refreshExp, TOKEN_TYPE_REFRESH)
     }
 
     fun parseToken(request: HttpServletRequest): String? {
