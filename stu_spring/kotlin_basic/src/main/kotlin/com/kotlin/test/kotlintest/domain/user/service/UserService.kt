@@ -30,8 +30,9 @@ class UserService(
     fun signIn(request: SignInRequest): TokenResponse {
 
         return userRepository.findByEmail(request.email)?.let { user ->
-            if (!passwordEncoder.matches(user.password, request.password))
+            if (!passwordEncoder.matches(request.password, user.password)) {
                 throw PasswordNotMatchException.EXCEPTION
+            }
 
             val accessToken = jwtTokenProvider.generateAccessToken(user.id.toString())
             val refreshToken = jwtTokenProvider.generateRefreshToken(user.id.toString())
@@ -47,7 +48,7 @@ class UserService(
         return User(
             name = signUpRequest.name,
             email = signUpRequest.email,
-            password = signUpRequest.password
+            password = passwordEncoder.encode(signUpRequest.password)
         )
     }
 

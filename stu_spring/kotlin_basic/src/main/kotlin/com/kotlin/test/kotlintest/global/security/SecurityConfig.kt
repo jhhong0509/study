@@ -28,6 +28,7 @@ class SecurityConfig(
 
             .authorizeRequests()
             .antMatchers(HttpMethod.POST, "/auth").permitAll()
+            .antMatchers(HttpMethod.POST, "/user").permitAll()
             .antMatchers(HttpMethod.GET, "/auth").permitAll()
             .antMatchers(HttpMethod.GET, "/posts/list").permitAll()
             .anyRequest().authenticated()

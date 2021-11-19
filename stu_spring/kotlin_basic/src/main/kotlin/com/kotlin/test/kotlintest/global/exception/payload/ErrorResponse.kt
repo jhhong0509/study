@@ -7,7 +7,7 @@ class ErrorResponse(private val errorCode: ErrorCode) {
         """
             {
                 "status": ${this.errorCode.status}
-                "cause" ${this.errorCode.cause}
+                "cause": "${this.errorCode.cause}"
             }
         """.trimIndent()
 }

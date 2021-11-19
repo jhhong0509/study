@@ -10,7 +10,6 @@ spring:
     database: mysql
 
 jwt:
-  secret: ${SECRET}
-  exp:
-    access: ${ACCESS_EXP}
-    refresh: ${REFRESH_EXP}
+  secretKey: ${SECRET}
+  accessExp: ${ACCESS_EXP}
+  refreshExp: ${REFRESH_EXP}
