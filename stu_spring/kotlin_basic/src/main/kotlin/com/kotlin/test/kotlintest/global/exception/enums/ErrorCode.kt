@@ -11,5 +11,7 @@ enum class ErrorCode(
     TOKEN_EXPIRED(401, "Token Expired"),
     POST_NOT_ACCESSIBLE(403, "Not Accessible"),
     POST_NOT_FOUND(404, "Post Not Found"),
+    METHOD_ARGUMENT(400, "Invalid Method Argument"),
+    NO_HANDLER(404, "No Controller Handler"),
     UNEXPECTED_EXCEPTION(500, "Unexpected Exception")
 }
