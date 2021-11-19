@@ -5,6 +5,7 @@ enum class ErrorCode(
     val cause: String
 ) {
     USER_NOT_FOUND(404, "User Not Found"),
+    PASSWORD_NOT_MATCH(404, "Password Not Match"),
     USER_ALREADY_EXIST(409, "User Already Exist"),
     INVALID_TOKEN(401, "Invalid Token"),
     TOKEN_EXPIRED(401, "Token Expired"),
