@@ -3,6 +3,7 @@ package com.kotlin.test.kotlintest.domain.user.service
 import com.kotlin.test.kotlintest.domain.user.entity.User
 import com.kotlin.test.kotlintest.domain.user.entity.UserRepository
 import com.kotlin.test.kotlintest.domain.user.exceptions.PasswordNotMatchException
+import com.kotlin.test.kotlintest.domain.user.exceptions.UserAlreadyExistException
 import com.kotlin.test.kotlintest.domain.user.exceptions.UserNotFoundException
 import com.kotlin.test.kotlintest.domain.user.payload.request.SignInRequest
 import com.kotlin.test.kotlintest.domain.user.payload.request.SignUpRequest
@@ -19,8 +20,11 @@ class UserService(
 ) {
 
     fun signUp(signUpRequest: SignUpRequest) {
+        userRepository.findByEmail(signUpRequest.email)?.let { throw UserAlreadyExistException.EXCEPTION }
+
         buildUser(signUpRequest)
             .let { user -> userRepository.save(user) }
+
     }
 
     fun signIn(request: SignInRequest): TokenResponse {
