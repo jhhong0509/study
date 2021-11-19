@@ -29,19 +29,19 @@ class UserService(
 
     fun signIn(request: SignInRequest): TokenResponse {
 
-        return userRepository.findByEmail(request.email)?.let { user ->
-            if (!passwordEncoder.matches(request.password, user.password)) {
-                throw PasswordNotMatchException.EXCEPTION
-            }
+        val user = userRepository.findByEmail(request.email) ?: throw UserNotFoundException.EXCEPTION
 
-            val accessToken = jwtTokenProvider.generateAccessToken(user.id.toString())
-            val refreshToken = jwtTokenProvider.generateRefreshToken(user.id.toString())
+        if (!passwordEncoder.matches(request.password, user.password)) {
+            throw PasswordNotMatchException.EXCEPTION
+        }
 
-            TokenResponse(
-                accessToken = accessToken,
-                refreshToken = refreshToken
-            )
-        } ?: throw UserNotFoundException.EXCEPTION
+        val accessToken = jwtTokenProvider.generateAccessToken(user.id.toString())
+        val refreshToken = jwtTokenProvider.generateRefreshToken(user.id.toString())
+
+        return TokenResponse(
+            accessToken = accessToken,
+            refreshToken = refreshToken
+        )
     }
 
     private fun buildUser(signUpRequest: SignUpRequest): User {
