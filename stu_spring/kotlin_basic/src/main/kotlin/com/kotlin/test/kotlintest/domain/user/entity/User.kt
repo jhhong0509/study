@@ -1,9 +1,6 @@
 package com.kotlin.test.kotlintest.domain.user.entity
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 class User(
@@ -12,6 +9,7 @@ class User(
 
     var name: String,
 
+    @Column(unique = true)
     var email: String,
 
     var password: String
