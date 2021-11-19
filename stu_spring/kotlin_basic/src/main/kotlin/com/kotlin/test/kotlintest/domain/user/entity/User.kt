@@ -1,5 +1,6 @@
 package com.kotlin.test.kotlintest.domain.user.entity
 
+import com.kotlin.test.kotlintest.domain.post.entity.Board
 import javax.persistence.*
 
 @Entity
@@ -12,7 +13,10 @@ class User(
     @Column(unique = true)
     val email: String,
 
-    val password: String
+    val password: String,
+
+    @OneToMany(mappedBy = "writer")
+    val boards: MutableList<Board> = mutableListOf()
 
 ) {
 
