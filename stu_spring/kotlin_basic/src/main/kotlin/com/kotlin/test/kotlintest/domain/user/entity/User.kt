@@ -15,7 +15,7 @@ class User(
 
     val password: String,
 
-    @OneToMany(mappedBy = "writer")
+    @OneToMany(mappedBy = "user")
     val boards: MutableList<Board> = mutableListOf()
 
 ) {
