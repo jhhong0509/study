@@ -5,6 +5,7 @@ import com.kotlin.test.kotlintest.domain.post.entity.BoardRepository
 import com.kotlin.test.kotlintest.domain.post.exceptions.BoardNotFoundException
 import com.kotlin.test.kotlintest.domain.post.payload.request.CreateBoardRequest
 import com.kotlin.test.kotlintest.domain.post.payload.response.BoardContentResponse
+import com.kotlin.test.kotlintest.domain.post.payload.response.BoardListResponse
 import com.kotlin.test.kotlintest.domain.user.entity.User
 import com.kotlin.test.kotlintest.domain.user.entity.UserFacade
 import org.springframework.data.repository.findByIdOrNull
@@ -22,7 +23,7 @@ class BoardService(
         boardRepository.save(board)
     }
 
-    fun getOneBoard(id: Long) : BoardContentResponse{
+    fun getOneBoard(id: Long): BoardContentResponse {
         val userBoard = boardRepository.findByIdOrNull(id) ?: throw BoardNotFoundException.EXCEPTION
         return userBoard.let { board ->
             BoardContentResponse(
@@ -32,6 +33,16 @@ class BoardService(
                 writerName = board.user.name
             )
         }
+    }
+
+    fun getBoardList(): BoardListResponse {
+        val boardList = boardRepository.findAll()
+        return BoardListResponse(boardList.map { board -> BoardContentResponse(
+            title = board.title,
+            content = board.content,
+            createdAt = board.createdAt ?: LocalDateTime.now(),
+            writerName = board.user.name
+        ) }.toCollection(mutableListOf()))
     }
 
     private fun buildBoard(boardRequest: CreateBoardRequest, writer: User): Board {
