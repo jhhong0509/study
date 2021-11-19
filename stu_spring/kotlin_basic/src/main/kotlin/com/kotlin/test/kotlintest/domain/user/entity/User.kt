@@ -1,6 +1,5 @@
 package com.kotlin.test.kotlintest.domain.user.entity
 
-import com.kotlin.test.kotlintest.domain.user.payload.request.SignUpRequest
 import javax.persistence.*
 
 @Entity
@@ -8,12 +7,12 @@ class User(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    var name: String,
+    val name: String,
 
     @Column(unique = true)
-    var email: String,
+    val email: String,
 
-    var password: String
+    val password: String
 
 ) {
 
