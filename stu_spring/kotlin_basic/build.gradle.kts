@@ -38,6 +38,19 @@ tasks.withType<KotlinCompile> {
 	}
 }
 
+noArg {
+	annotation("javax.persistence.Entity")
+	annotation("javax.persistence.MappedSuperclass")
+	annotation("javax.persistence.Embeddable")
+}
+
+allOpen {
+	annotation("javax.persistence.Entity")
+	annotation("javax.persistence.MappedSuperclass")
+	annotation("javax.persistence.Embeddable")
+}
+
+
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
