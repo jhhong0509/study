@@ -2,6 +2,7 @@ package com.kotlin.test.kotlintest.domain.post.service
 
 import com.kotlin.test.kotlintest.domain.post.entity.Board
 import com.kotlin.test.kotlintest.domain.post.entity.BoardRepository
+import com.kotlin.test.kotlintest.domain.post.exceptions.BoardNotAccessibleException
 import com.kotlin.test.kotlintest.domain.post.exceptions.BoardNotFoundException
 import com.kotlin.test.kotlintest.domain.post.payload.request.CreateBoardRequest
 import com.kotlin.test.kotlintest.domain.post.payload.response.BoardContentResponse
@@ -43,6 +44,17 @@ class BoardService(
             createdAt = board.createdAt ?: LocalDateTime.now(),
             writerName = board.user.name
         ) }.toCollection(mutableListOf()))
+    }
+
+    fun deleteBoard(id: Long) {
+        val board = boardRepository.findByIdOrNull(id) ?: throw BoardNotFoundException.EXCEPTION
+        val user = userFacade.getCurrentUser()
+
+        if (!board.user.equals(user)) {
+            throw BoardNotAccessibleException.EXCEPTION
+        }
+
+        boardRepository.delete(board)
     }
 
     private fun buildBoard(boardRequest: CreateBoardRequest, writer: User): Board {

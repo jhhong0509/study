@@ -27,4 +27,9 @@ class BoardController(
         return boardService.getBoardList()
     }
 
+    @DeleteMapping("/board/{id}")
+    fun deleteBoard(@PathVariable id: Long) {
+        boardService.deleteBoard(id)
+    }
+
 }
