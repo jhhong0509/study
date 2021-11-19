@@ -24,11 +24,11 @@ class JwtTokenProvider(
         const val TOKEN_TYPE_PREFIX: String = "Bearer "
     }
 
-    fun generateAccessToken(subject: String) {
+    fun generateAccessToken(subject: String): String {
         generateToken(subject, jwtProperties.accessExp, TOKEN_TYPE_ACCESS)
     }
 
-    fun generateRefreshToken(subject: String) {
+    fun generateRefreshToken(subject: String): String {
         generateToken(subject, jwtProperties.refreshExp, TOKEN_TYPE_REFRESH)
     }
 
