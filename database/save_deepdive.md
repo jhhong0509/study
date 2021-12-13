@@ -19,4 +19,3 @@
 B+Tree의 구조를 유지해야하기 때문인데, 따라서 Index는 항상 최소한으로 유지하는게 좋다.
 
 ![성능](./images/save_index.png)
-
