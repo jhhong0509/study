@@ -34,7 +34,7 @@ val maxOddSquare = list
     .max()
 ```
 
-위와 같이 `asSequence(0)`만 붙여주면 된다.
+위와 같이 `asSequence()`만 붙여주면 된다.
 
 이렇게 하면 `map{ }`이나 `filter { }`과 같은 **중간 과정에서 새로운 객체가 반환되지 않는다.**
 
