@@ -19,8 +19,6 @@ StreamAPI에 비해 다음과 같은 차이가 있다.
 - 더 많은 함수 지원
 - 병렬 실행 미지원
 
-
-
 <br>
 
 Collection은 **Eager Evaluation으로 처리**되지만 Sequence는 **Lazy Evaluation으로 처리**된다.
@@ -75,4 +73,17 @@ list.asSequence().map(::map).filter(::filter)
 
 또한 LAZY하게 동작하기 때문에 **끝 연산이 존재하지 않으면 아무 일도 일어나지 않는다.**
 
+<br>
+
+작은 연산에서는 Sequence가 더 빠르지만 큰 연산을 수행했을 때에는 오히려 List보다 성능이 떨어지게 된다.
+
+![img](https://miro.medium.com/max/1400/1*taUBu-kzgZ1_zXJHh7dunQ.png)
+
+하지만 `first()`같은 종단 연산자를 사용하면 훨씬 빠른 실행 속도를 가진다.
+
+![img](https://miro.medium.com/max/1400/1*hC0UHdYw2QaK79hRPIRgKQ.png)
+
+> 실제로 이렇게 차이나는건 아니고, 이건 좀 극단적인 경우라고 할 수 있다.
+
 [참고한 글](https://kt.academy/article/ek-sequence)
+
