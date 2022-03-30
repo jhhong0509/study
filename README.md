@@ -1,57 +1,152 @@
 # 목차
 
-### CI/CD
+## OAuth
+
+1. [소개](https://github.com/jhhong0509/study/blob/master/auth/oauth/01.introduction.md)
+2. [동작 방식](https://github.com/jhhong0509/study/blob/master/auth/oauth/02.how_auth_work.md)
+
+---
+
+## CI/CD
 
 - [K8S](https://github.com/jhhong0509/study/blob/master/cicd/kubernetes/kubernetes.md)
 - [정의](https://github.com/jhhong0509/study/blob/master/cicd/what_is.md)
 - [점진적 배포 핵클 웨비나](https://github.com/jhhong0509/study/blob/master/cicd/feature_flag_webina.md)
+- [CodeCoverage](https://github.com/jhhong0509/study/blob/master/cicd/code_coverage.md)
 
 ---
 
-### 토큰
+## 토큰
 
-- [JWT](https://github.com/jhhong0509/study/blob/master/token/jwt.md)
 - [JWS](https://github.com/jhhong0509/study/blob/master/token/jws.md)
 
 ---
 
-### MSA
+## Database
 
-- 공부하며 알게된 MSA 지식
-  1. [기초](https://github.com/jhhong0509/study/blob/master/msa/01.msa_basic.md)
-  2. [구조](https://github.com/jhhong0509/study/blob/master/msa/02.msa_structure.md)
-  3. [RPC란?](https://github.com/jhhong0509/study/blob/master/msa/03.rpc.md)
-  4. [MQ란?](https://github.com/jhhong0509/study/blob/master/msa/04.mq.md)
-
-- 책
-  1. Monolithic 지옥에서 벗어나라
-     1. [마이크로서비스 아키텍쳐가 답이다](https://github.com/jhhong0509/study/blob/master/msa/book/01%20%EB%AA%A8%EB%86%80%EB%A6%AC%EC%8B%9D%20%EC%A7%80%EC%98%A5%EC%97%90%EC%84%9C%20%EB%B2%97%EC%96%B4%EB%82%98%EB%9D%BC/1.4%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%EA%B0%80%20%EB%8B%B5%EC%9D%B4%EB%8B%A4.md)
-     2. [마이크로서비스 아키텍쳐의 장단점](https://github.com/jhhong0509/study/blob/master/msa/book/01%20%EB%AA%A8%EB%86%80%EB%A6%AC%EC%8B%9D%20%EC%A7%80%EC%98%A5%EC%97%90%EC%84%9C%20%EB%B2%97%EC%96%B4%EB%82%98%EB%9D%BC/1.5%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%EC%9D%98%20%EC%9E%A5%EB%8B%A8%EC%A0%90.md)
-     3. [마이크로서비스 아키텍쳐 패턴 언어](https://github.com/jhhong0509/study/blob/master/msa/book/01%20%EB%AA%A8%EB%86%80%EB%A6%AC%EC%8B%9D%20%EC%A7%80%EC%98%A5%EC%97%90%EC%84%9C%20%EB%B2%97%EC%96%B4%EB%82%98%EB%9D%BC/1.6%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%20%ED%8C%A8%ED%84%B4%20%EC%96%B8%EC%96%B4.md)
-     4. [마이크로서비스 너머 프로세스와 조직](https://github.com/jhhong0509/study/blob/master/msa/book/01%20%EB%AA%A8%EB%86%80%EB%A6%AC%EC%8B%9D%20%EC%A7%80%EC%98%A5%EC%97%90%EC%84%9C%20%EB%B2%97%EC%96%B4%EB%82%98%EB%9D%BC/1.7%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%84%88%EB%A8%B8%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80%20%EC%A1%B0%EC%A7%81.md)
-  2. 분해 전략
-     1. [마이크로서비스 아키텍쳐란 무엇인가](https://github.com/jhhong0509/study/blob/master/msa/book/02%20%EB%B6%84%ED%95%B4%20%EC%A0%84%EB%9E%B5/2.1%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%EB%9E%80%20%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80.md)
-     2. [마이크로서비스 아키텍쳐 정의](https://github.com/jhhong0509/study/blob/master/msa/book/02%20%EB%B6%84%ED%95%B4%20%EC%A0%84%EB%9E%B5/2.2%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%20%EC%A0%95%EC%9D%98.md)
-  3. 프로세스 간 통신
-     1. [마이크로서비스  아키텍쳐 IPC개요](https://github.com/jhhong0509/study/blob/master/msa/book/03%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20%EA%B0%84%20%ED%86%B5%EC%8B%A0/3.1%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%20IPC%20%EA%B0%9C%EC%9A%94md.md)
-     2. [동기 RPI 패턴 응용 통신](https://github.com/jhhong0509/study/blob/master/msa/book/03%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20%EA%B0%84%20%ED%86%B5%EC%8B%A0/3.2%20%EB%8F%99%EA%B8%B0%20RPI%20%ED%8C%A8%ED%84%B4%20%EC%9D%91%EC%9A%A9%20%ED%86%B5%EC%8B%A0.md)
-     3. [비동기 메세징 패턴 응용 통신](https://github.com/jhhong0509/study/blob/master/msa/book/03%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20%EA%B0%84%20%ED%86%B5%EC%8B%A0/3.3%20%EB%B9%84%EB%8F%99%EA%B8%B0%20%EB%A9%94%EC%84%B8%EC%A7%95%20%ED%8C%A8%ED%84%B4%20%EC%9D%91%EC%9A%A9%20%ED%86%B5%EC%8B%A0.md)
-     4. [비동기 메세징으로 가용성 개선](https://github.com/jhhong0509/study/blob/master/msa/book/03%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20%EA%B0%84%20%ED%86%B5%EC%8B%A0/3.4%20%EB%B9%84%EB%8F%99%EA%B8%B0%20%EB%A9%94%EC%84%B8%EC%A7%95%EC%9C%BC%EB%A1%9C%20%EA%B0%80%EC%9A%A9%EC%84%B1%20%EA%B0%9C%EC%84%A0.md)
-  4. 사가를 이용한 트랜잭션 관리
-     1. [MSA에서 트랜잭션의 필요성](https://github.com/jhhong0509/study/blob/master/msa/book/04%20%EC%82%AC%EA%B0%80%EB%A5%BC%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%20%EA%B4%80%EB%A6%AC/4.1%20MSA%EC%97%90%EC%84%9C%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EC%9D%98%20%ED%95%84%EC%9A%94%EC%84%B1.md)
-     2. [Saga의 구성](https://github.com/jhhong0509/study/blob/master/msa/book/04%20%EC%82%AC%EA%B0%80%EB%A5%BC%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%20%EA%B4%80%EB%A6%AC/4.2%20Saga%20%EA%B5%AC%EC%84%B1.md)
-     3. [비격리 문제](https://github.com/jhhong0509/study/blob/master/msa/book/04%20%EC%82%AC%EA%B0%80%EB%A5%BC%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%20%EA%B4%80%EB%A6%AC/4.3%20%EB%B9%84%EA%B2%A9%EB%A6%AC%20%EB%AC%B8%EC%A0%9C.md)
-     4. [주문 서비스 디자인과 주문 생성 Saga 설계](https://github.com/jhhong0509/study/blob/master/msa/book/04%20%EC%82%AC%EA%B0%80%EB%A5%BC%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%20%EA%B4%80%EB%A6%AC/4.4%20%EC%A3%BC%EB%AC%B8%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%94%94%EC%9E%90%EC%9D%B8%EA%B3%BC%20%EC%A3%BC%EB%AC%B8%20%EC%83%9D%EC%84%B1%20Saga%20%EC%84%A4%EA%B3%84.md)
-  5. 비지니스 로직 설계
-     1. [비지니스 로직 구성 패턴](https://github.com/jhhong0509/study/blob/master/msa/book/05%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EC%84%A4%EA%B3%84/5.1%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EA%B5%AC%EC%84%B1%20%ED%8C%A8%ED%84%B4.md)
-     2. [DDD Aggregate Pattern](https://github.com/jhhong0509/study/blob/master/msa/book/05%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EC%84%A4%EA%B3%84/5.2%20DDD%20Aggregate%20Pattern.md)
-     3. [Publish Domain Event](https://github.com/jhhong0509/study/blob/master/msa/book/05%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EC%84%A4%EA%B3%84/5.3%20Publish%20Domain%20Event.md)
-     4. [주방 서비스 비지니스 로직 예제](https://github.com/jhhong0509/study/blob/master/msa/book/05%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EC%84%A4%EA%B3%84/5.4%20%20%EC%A3%BC%EB%B0%A9%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EC%98%88%EC%A0%9C.md)
-     5. [주문 서비스 비지니스 로직 예제](https://github.com/jhhong0509/study/blob/master/msa/book/05%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EC%84%A4%EA%B3%84/5.5%20%EC%A3%BC%EB%AC%B8%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EC%98%88%EC%A0%9C.md)
+- [이름 명명 규칙](https://github.com/jhhong0509/study/blob/master/database/column_name_rule.md)
+- [용어](https://github.com/jhhong0509/study/blob/master/database/words.md)
+- [Varchar size에 따른 MySQL 동작](https://github.com/jhhong0509/study/blob/master/database/varchar_size.md)
+- [INDEX](https://github.com/jhhong0509/study/blob/master/stu_spring/faster_db/index.md)
+- [Pagination](https://github.com/jhhong0509/study/blob/master/database/pagination.md)
+- [저장 Deep Dive](https://github.com/jhhong0509/study/blob/master/database/save_deepdive.md)
 
 ---
 
-### 리팩토링
+## MongoDB
+
+- [스키마 구조](https://github.com/jhhong0509/study/blob/master/database/mongodb/scheme_structure.md)
+
+---
+
+## Kotlin
+
+- [기초](https://github.com/jhhong0509/study/blob/master/kotlin/basic.md)
+- [Sequence](https://github.com/jhhong0509/study/blob/master/kotlin/sequence.md)
+- [VS Java](https://github.com/jhhong0509/study/blob/master/kotlin/vs_java.md)
+
+---
+
+## Kotlin Coroutine
+
+- [기본 개념](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/01.%20%EA%B8%B0%EB%B3%B8%20%EA%B0%9C%EB%85%90.md)
+- [Global Scope를 사용하면 안되는 이유](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/GlobalScope%EB%A5%BC%20%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80%20%EB%A7%90%EC%95%84%EC%95%BC%20%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0.md)
+- [TestDispatcher](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/Test%20Dispatcher.md)
+
+---
+
+### Kotlin Coroutine 책
+
+1. **Kotlin Coroutine에 대한 이해**
+   1. [왜 코루틴을 사용하는가](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/1%EC%9E%A5%20%EC%BD%94%ED%8B%80%EB%A6%B0%20%EC%BD%94%EB%A3%A8%ED%8B%B4%EC%97%90%20%EB%8C%80%ED%95%9C%20%EC%9D%B4%ED%95%B4/01.%20%EC%99%9C%20%EC%BD%94%EB%A3%A8%ED%8B%B4%EC%9D%84%20%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94%EA%B0%80%3F.md)
+   2. [Sequence Builder](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/1%EC%9E%A5%20%EC%BD%94%ED%8B%80%EB%A6%B0%20%EC%BD%94%EB%A3%A8%ED%8B%B4%EC%97%90%20%EB%8C%80%ED%95%9C%20%EC%9D%B4%ED%95%B4/02.%20Sequence%20Builder.md)
+   3. [Suspension은 어떻게 동작할까](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/1%EC%9E%A5%20%EC%BD%94%ED%8B%80%EB%A6%B0%20%EC%BD%94%EB%A3%A8%ED%8B%B4%EC%97%90%20%EB%8C%80%ED%95%9C%20%EC%9D%B4%ED%95%B4/03.%20Suspension%EC%9D%80%20%EC%96%B4%EB%96%BB%EA%B2%8C%20%EB%8F%99%EC%9E%91%ED%95%98%EB%8A%94%EA%B0%80%3F.md)
+   4. [Coroutine 자세히 보기](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/1%EC%9E%A5%20%EC%BD%94%ED%8B%80%EB%A6%B0%20%EC%BD%94%EB%A3%A8%ED%8B%B4%EC%97%90%20%EB%8C%80%ED%95%9C%20%EC%9D%B4%ED%95%B4/04.%20%EC%BD%94%EB%A3%A8%ED%8B%B4%20%EC%9E%90%EC%84%B8%ED%9E%88%20%EB%B3%B4%EA%B8%B0.md)
+   5. [Coroutine 내장 지원 / 외부 라이브러리](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/1%EC%9E%A5%20%EC%BD%94%ED%8B%80%EB%A6%B0%20%EC%BD%94%EB%A3%A8%ED%8B%B4%EC%97%90%20%EB%8C%80%ED%95%9C%20%EC%9D%B4%ED%95%B4/05.%20%EC%BD%94%EB%A3%A8%ED%8B%B4%20%EB%82%B4%EC%9E%A5%20%EC%A7%80%EC%9B%90%20vs%20%EC%99%B8%EB%B6%80%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC.md)
+2. **Koroutine 라이브러리**
+   1. [Coroutine Builder](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/2%EC%9E%A5%20%EC%BD%94%EB%A3%A8%ED%8B%B4%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC/01.%20Coroutine%20Builder.md)
+   2. [Coroutine Context](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/2%EC%9E%A5%20%EC%BD%94%EB%A3%A8%ED%8B%B4%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC/02.%20Coroutine%20Context.md)
+   3. [Job과 자식 await하기](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/2%EC%9E%A5%20%EC%BD%94%EB%A3%A8%ED%8B%B4%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC/03.%20Job%EA%B3%BC%20%EC%9E%90%EC%8B%9D%20await%ED%95%98%EA%B8%B0.md)
+   4. [Cacellation](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/2%EC%9E%A5%20%EC%BD%94%EB%A3%A8%ED%8B%B4%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC/04.%20Cancellation.md)
+   5. [예외 처리](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/2%EC%9E%A5%20%EC%BD%94%EB%A3%A8%ED%8B%B4%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC/05.%20%EC%98%88%EC%99%B8%20%EC%B2%98%EB%A6%AC.md)
+   6. [Coroutine Scope 함수](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/2%EC%9E%A5%20%EC%BD%94%EB%A3%A8%ED%8B%B4%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC/06.%20Coroutine%20Scope%20%ED%95%A8%EC%88%98%EB%93%A4.md)
+   7. [Dispatcher](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/2%EC%9E%A5%20%EC%BD%94%EB%A3%A8%ED%8B%B4%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC/07.%20dispatcher.md)
+   8. [Coroutine Scope](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/2%EC%9E%A5%20%EC%BD%94%EB%A3%A8%ED%8B%B4%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC/08.%20coroutine%20scope%20%EB%A7%8C%EB%93%A4%EA%B8%B0.md)
+   9. [State 관리 문제](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/2%EC%9E%A5%20%EC%BD%94%EB%A3%A8%ED%8B%B4%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC/09.%20state%20%EA%B4%80%EB%A6%AC%20%EB%AC%B8%EC%A0%9C.md)
+   10. [Coroutine 테스트하기](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/2%EC%9E%A5%20%EC%BD%94%EB%A3%A8%ED%8B%B4%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC/10.%20coroutine%20%ED%85%8C%EC%8A%A4%ED%8A%B8%20%ED%95%98%EA%B8%B0.md)
+3. **Channel과 Flow**
+   1. [Channel](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/3%EC%9E%A5%20channel%EA%B3%BC%20flow/01.%20Channel.md)
+   2. [Actor](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/3%EC%9E%A5%20channel%EA%B3%BC%20flow/02.%20Actor.md)
+   3. [Hot / Cold Datasource](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/3%EC%9E%A5%20channel%EA%B3%BC%20flow/03.%20Hot%20and%20Cold%20datasource.md)
+   4. [Flow 소개](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/3%EC%9E%A5%20channel%EA%B3%BC%20flow/04.%20Flow%20%EC%86%8C%EA%B0%9C.md)
+   5. [Flow 만들기](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/3%EC%9E%A5%20channel%EA%B3%BC%20flow/05.%20Flow%20%EB%A7%8C%EB%93%A4%EA%B8%B0.md)
+   6. [Flow 생명주기 함수](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/3%EC%9E%A5%20channel%EA%B3%BC%20flow/06.%20Flow%20%EC%83%9D%EB%AA%85%EC%A3%BC%EA%B8%B0%20%ED%95%A8%EC%88%98.md)
+   7. [Flow process](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/3%EC%9E%A5%20channel%EA%B3%BC%20flow/07.%20Flow%20Process.md)
+   8. [sharedFlow와 stateFlow](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/3%EC%9E%A5%20channel%EA%B3%BC%20flow/08.%20sharedFlow%EC%99%80%20stateFlow.md)
+   9. [마치며](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine/kotlin_coroutine/3%EC%9E%A5%20channel%EA%B3%BC%20flow/09.%20%EB%81%9D%EB%82%B4%EB%A9%B0.md)
+
+---
+
+## MSA
+
+### 내가 공부한 MSA
+
+1. [기초](https://github.com/jhhong0509/study-architecture/blob/main/msa/01.msa_basic.md)
+2. [구조](https://github.com/jhhong0509/study-architecture/blob/main/msa/02.msa_structure.md)
+3. [RPC란?](https://github.com/jhhong0509/study-architecture/blob/main/msa/03.rpc.md)
+4. [MQ란?](https://github.com/jhhong0509/study-architecture/blob/main/msa/04.mq.md)
+
+### 마이크로서비스 아키텍쳐 패턴
+
+1. **Monolithic 지옥에서 벗어나라**
+   1. [마이크로서비스 아키텍쳐가 답이다](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/01%20%EB%AA%A8%EB%86%80%EB%A6%AC%EC%8B%9D%20%EC%A7%80%EC%98%A5%EC%97%90%EC%84%9C%20%EB%B2%97%EC%96%B4%EB%82%98%EB%9D%BC/1.4%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%EA%B0%80%20%EB%8B%B5%EC%9D%B4%EB%8B%A4.md)
+   2. [마이크로서비스 아키텍쳐의 장단점](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/01%20%EB%AA%A8%EB%86%80%EB%A6%AC%EC%8B%9D%20%EC%A7%80%EC%98%A5%EC%97%90%EC%84%9C%20%EB%B2%97%EC%96%B4%EB%82%98%EB%9D%BC/1.5%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%EC%9D%98%20%EC%9E%A5%EB%8B%A8%EC%A0%90.md)
+   3. [마이크로서비스 아키텍쳐 패턴 언어](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/01%20%EB%AA%A8%EB%86%80%EB%A6%AC%EC%8B%9D%20%EC%A7%80%EC%98%A5%EC%97%90%EC%84%9C%20%EB%B2%97%EC%96%B4%EB%82%98%EB%9D%BC/1.6%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%20%ED%8C%A8%ED%84%B4%20%EC%96%B8%EC%96%B4.md)
+   4. [마이크로서비스 너머 프로세스와 조직](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/01%20%EB%AA%A8%EB%86%80%EB%A6%AC%EC%8B%9D%20%EC%A7%80%EC%98%A5%EC%97%90%EC%84%9C%20%EB%B2%97%EC%96%B4%EB%82%98%EB%9D%BC/1.7%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%84%88%EB%A8%B8%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80%20%EC%A1%B0%EC%A7%81.md)
+2. **분해 전략**
+   1. [마이크로서비스 아키텍쳐란 무엇인가](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/02%20%EB%B6%84%ED%95%B4%20%EC%A0%84%EB%9E%B5/2.1%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%EB%9E%80%20%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80.md)
+   2. [마이크로서비스 아키텍쳐 정의](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/02%20%EB%B6%84%ED%95%B4%20%EC%A0%84%EB%9E%B5/2.2%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%20%EC%A0%95%EC%9D%98.md)
+3. **프로세스 간 통신**
+   1. [마이크로서비스  아키텍쳐 IPC개요](https://github.com/jhhong0509/study-architecture/blob/master/msa/book/03%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20%EA%B0%84%20%ED%86%B5%EC%8B%A0/3.1%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%20IPC%20%EA%B0%9C%EC%9A%94md.md)
+   2. [동기 RPI 패턴 응용 통신](https://github.com/jhhong0509/study-architecture/blob/master/msa/book/03%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20%EA%B0%84%20%ED%86%B5%EC%8B%A0/3.2%20%EB%8F%99%EA%B8%B0%20RPI%20%ED%8C%A8%ED%84%B4%20%EC%9D%91%EC%9A%A9%20%ED%86%B5%EC%8B%A0.md)
+   3. [비동기 메세징 패턴 응용 통신](https://github.com/jhhong0509/study-architecture/blob/master/msa/book/03%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20%EA%B0%84%20%ED%86%B5%EC%8B%A0/3.3%20%EB%B9%84%EB%8F%99%EA%B8%B0%20%EB%A9%94%EC%84%B8%EC%A7%95%20%ED%8C%A8%ED%84%B4%20%EC%9D%91%EC%9A%A9%20%ED%86%B5%EC%8B%A0.md)
+   4. [비동기 메세징으로 가용성 개선](https://github.com/jhhong0509/study-architecture/blob/master/msa/book/03%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20%EA%B0%84%20%ED%86%B5%EC%8B%A0/3.4%20%EB%B9%84%EB%8F%99%EA%B8%B0%20%EB%A9%94%EC%84%B8%EC%A7%95%EC%9C%BC%EB%A1%9C%20%EA%B0%80%EC%9A%A9%EC%84%B1%20%EA%B0%9C%EC%84%A0.md)
+4. **사가를 이용한 트랜잭션 관리**
+   1. [MSA에서 트랜잭션의 필요성](https://github.com/jhhong0509/study-architecture/blob/master/msa/book/04%20%EC%82%AC%EA%B0%80%EB%A5%BC%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%20%EA%B4%80%EB%A6%AC/4.1%20MSA%EC%97%90%EC%84%9C%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EC%9D%98%20%ED%95%84%EC%9A%94%EC%84%B1.md)
+   2. [Saga의 구성](https://github.com/jhhong0509/study-architecture/blob/master/msa/book/04%20%EC%82%AC%EA%B0%80%EB%A5%BC%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%20%EA%B4%80%EB%A6%AC/4.2%20Saga%20%EA%B5%AC%EC%84%B1.md)
+   3. [비격리 문제](https://github.com/jhhong0509/study-architecture/blob/master/msa/book/04%20%EC%82%AC%EA%B0%80%EB%A5%BC%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%20%EA%B4%80%EB%A6%AC/4.3%20%EB%B9%84%EA%B2%A9%EB%A6%AC%20%EB%AC%B8%EC%A0%9C.md)
+   4. [주문 서비스 디자인과 주문 생성 Saga 설계](https://github.com/jhhong0509/study-architecture/blob/master/msa/book/04%20%EC%82%AC%EA%B0%80%EB%A5%BC%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%20%EA%B4%80%EB%A6%AC/4.4%20%EC%A3%BC%EB%AC%B8%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%94%94%EC%9E%90%EC%9D%B8%EA%B3%BC%20%EC%A3%BC%EB%AC%B8%20%EC%83%9D%EC%84%B1%20Saga%20%EC%84%A4%EA%B3%84.md)
+5. **비지니스 로직 설계**
+   1. [비지니스 로직 구성 패턴](https://github.com/jhhong0509/study-architecture/blob/master/msa/book/05%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EC%84%A4%EA%B3%84/5.1%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EA%B5%AC%EC%84%B1%20%ED%8C%A8%ED%84%B4.md)
+   2. [DDD Aggregate Pattern](https://github.com/jhhong0509/study-architecture/blob/master/msa/book/05%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EC%84%A4%EA%B3%84/5.2%20DDD%20Aggregate%20Pattern.md)
+   3. [Publish Domain Event](https://github.com/jhhong0509/study-architecture/blob/master/msa/book/05%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EC%84%A4%EA%B3%84/5.3%20Publish%20Domain%20Event.md)
+   4. [주방 서비스 비지니스 로직 예제](https://github.com/jhhong0509/study-architecture/blob/master/msa/book/05%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EC%84%A4%EA%B3%84/5.4%20%20%EC%A3%BC%EB%B0%A9%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EC%98%88%EC%A0%9C.md)
+   5. [주문 서비스 비지니스 로직 예제](https://github.com/jhhong0509/study-architecture/blob/master/msa/book/05%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EC%84%A4%EA%B3%84/5.5%20%EC%A3%BC%EB%AC%B8%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EC%98%88%EC%A0%9C.md)
+6. **비지니스 로직 개발: Event Sourcing**
+   1. [Event Sourcing 응용 비지니스 로직 개발](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/06%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EA%B0%9C%EB%B0%9C%3A%20%EC%9D%B4%EB%B2%A4%ED%8A%B8%20%EC%86%8C%EC%8B%B1/6.1%20%EC%9D%B4%EB%B2%A4%ED%8A%B8%20%EC%86%8C%EC%8B%B1%20%EC%9D%91%EC%9A%A9%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EA%B0%9C%EB%B0%9C.md)
+   2. [Event Store 구축하기](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/06%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EA%B0%9C%EB%B0%9C:%20%EC%9D%B4%EB%B2%A4%ED%8A%B8%20%EC%86%8C%EC%8B%B1/6.2%20%EC%9D%B4%EB%B2%A4%ED%8A%B8%20%EC%A0%80%EC%9E%A5%EC%86%8C%20%EA%B5%AC%ED%98%84.md)
+   3. [Saga와 Event Sourcing](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/06%20%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4%20%EB%A1%9C%EC%A7%81%20%EA%B0%9C%EB%B0%9C:%20%EC%9D%B4%EB%B2%A4%ED%8A%B8%20%EC%86%8C%EC%8B%B1/6.3%20Saga%EC%99%80%20%EC%9D%B4%EB%B2%A4%ED%8A%B8%20%EC%86%8C%EC%8B%B1.md)
+7. **마이크로서비스 쿼리 구현하기**
+   1. [API 조합 패턴 응용 쿼리](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/07%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%BF%BC%EB%A6%AC%20%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/7.1%20API%20%EC%A1%B0%ED%95%A9%20%ED%8C%A8%ED%84%B4%20%EC%9D%91%EC%9A%A9%20%EC%BF%BC%EB%A6%AC.md)
+   2. [CQRS 패턴](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/07%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%BF%BC%EB%A6%AC%20%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/7.2%20CQRS%20%ED%8C%A8%ED%84%B4.md)
+   3. [CQRS View 설계](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/07%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%BF%BC%EB%A6%AC%20%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/7.3%20CQRS%20View%20%EC%84%A4%EA%B3%84.md)
+   4. [CQRS를 AWS DynamoDB로 구현](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/07%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%BF%BC%EB%A6%AC%20%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/7.4%20CQRS:%20AWS%20DynamoDB%EB%A1%9C%20%EA%B5%AC%ED%98%84.md)
+8. **외부 API 패턴**
+   1. [외부 API 설계 이슈](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/08%20%EC%99%B8%EB%B6%80%20API%20%ED%8C%A8%ED%84%B4/8.1%20%EC%99%B8%EB%B6%80%20API%20%EC%84%A4%EA%B3%84%20%EC%9D%B4%EC%8A%88.md)
+   2. [API Gateway 패턴](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/08%20%EC%99%B8%EB%B6%80%20API%20%ED%8C%A8%ED%84%B4/8.2%20API%20Gateway%20%ED%8C%A8%ED%84%B4.md)
+   3. [API Gateway 구현](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/08%20%EC%99%B8%EB%B6%80%20API%20%ED%8C%A8%ED%84%B4/8.3%20API%20Gateway%20%EA%B5%AC%ED%98%84.md)
+
+---
+
+## 육각형 아키텍쳐
+
+1. [육각형 아키텍쳐란](https://github.com/jhhong0509/study-architecture/blob/main/hexagonal_architecture/01.%20%EC%9C%A1%EA%B0%81%ED%98%95%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%EB%9E%80.md)
+2. [구현하기](https://github.com/jhhong0509/study-architecture/blob/main/hexagonal_architecture/02.%20%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0.md)
+3. [Spring Boot에서 구현하기](https://github.com/jhhong0509/study-architecture/blob/main/hexagonal_architecture/03.%20spring%20boot%EC%97%90%EC%84%9C%20%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0.md)
+
+---
+
+## 리팩토링
 
 - [리팩토링이란?](https://github.com/jhhong0509/study/blob/master/refactoring/1.what_is.md)
 - [언제 리팩토링 해야 하는가?](https://github.com/jhhong0509/study/blob/master/refactoring/2.when_we_should_do.md)
@@ -60,14 +155,14 @@
 
 ---
 
-### NGINX
+## NGINX
 
 - [NGINX란?](https://github.com/jhhong0509/study/blob/master/nginx/basic.md)
 - [NGINX 사용하기](https://github.com/jhhong0509/study/blob/master/nginx/use_nginx.md)
 
 ---
 
-### DOCKER
+## DOCKER
 
 - [도커란?](https://github.com/jhhong0509/study/blob/master/docker/what_is_docker.md)
 - [도커파일](https://github.com/jhhong0509/study/blob/master/docker/dockerfile.md)
@@ -78,87 +173,69 @@
 
 ---
 
-### 데이터베이스
-
-- [이름 명명 규칙](https://github.com/jhhong0509/study/blob/master/database/column_name_rule.md)
-- [용어](https://github.com/jhhong0509/study/blob/master/database/words.md)
-- [Varchar size에 따른 MySQL 동작](https://github.com/jhhong0509/study/blob/master/database/varchar_size.md)
-- MongoDB
-  - [스키마 설계](https://github.com/jhhong0509/study/blob/master/database/mongodb/scheme_structure.md)
-
-### SPRING 공부
+## SPRING 공부
 
 ---
 
-#### 디자인 패턴
+### 디자인 패턴
 
 - [FACADE 패턴](https://github.com/jhhong0509/study/blob/master/stu_spring/design_pattern/facade.md)
 - [Factory 패턴](https://github.com/jhhong0509/study/blob/master/stu_spring/design_pattern/factory.md)
+- [Defensive Copy](https://github.com/jhhong0509/study/blob/master/stu_spring/design_pattern/defensive_copy.md)
 
 ---
 
-#### DB 최적화
-
-- [INDEX](https://github.com/jhhong0509/study/blob/master/stu_spring/faster_db/index.md) (심화)
-
----
-
-#### FILE SERVER
+### FILE SERVER
 
 - [SPRING 기본 파일 상식](https://github.com/jhhong0509/study/blob/master/stu_spring/file/information.md)
 - [SPRING 파일 업로드](https://github.com/jhhong0509/study/blob/master/stu_spring/file/file_upload.md)
 
----
+### 오류 해결
 
-#### 오류 해결
-
-- JWT
+- **JWT**
     1. [다른 언어에서 발급된 토큰 검증](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/token_validate.md)
     2. [필터에서 Exception처리](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/token_filter_exception.md)
-- 테스트코드
+- **테스트코드**
     1. [다른 테스트 간섭 문제](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/testcode_gradlew_not_work.md)
-- Spring Data JPA
+- **Spring Data JPA**
     1. [Spring Data JPA의 flush](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/spring_data_jpa_flush.md)
-- 영속성 전이
+- **영속성 전이**
     1. [PERSIST 저장 안됨](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/cascade_persist.md)
     2. [PESIST 중복저장](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/cascade.md)
     3. [DETACHED 엔티티 저장](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/cascade_merge.md)
-- MySQL
+- **MySQL**
     1. [AUTO_INCREMENT 이상](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/mysql_generatedvalue.md)
     2. [도커 MySQL 접속](https://github.com/jhhong0509/study/blob/master/stu_spring/fixing/mysql_connect.md)
 
 ---
 
-#### ETC
+### ETC
 
 - [객체지향](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/stu_object_oriented.md)
-- [빈 이란](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/what_is.md)
-- [빈 등록 어노테이션](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/bean_annotation.md)
-- [Bean을 주입받을 때 Interface 타입을 사용해야 하는 이유](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/why_use_interface.md)
-- [SLSB](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/slsb.md)
+- **Bean**
+  - [빈 이란](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/what_is.md)
+  - [빈 등록 어노테이션](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/bean_annotation.md)
+  - [Bean을 주입받을 때 Interface 타입을 사용해야 하는 이유](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/why_use_interface.md)
+  - [SLSB](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/bean/slsb.md)
+- **Security**
+  - [CORS와 SOP](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/security/cors_and_sop.md)
+  - [CSRF](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/security/csrf.md)
 - [build.gradle 관련 설명](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/spring_basic/build.gradle.md)
-- [CORS와 SOP](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/security/cors_and_sop.md)
-- [CSRF](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/security/csrf.md)
+- [Business Exception](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/business_exception.md)
 - [커스텀 HEADER 네이밍 규칙](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/custom_header_naming.md)
 - [Exception Handler](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/coding_ways/exceptionhandler.md)
 - [Json Path 사용](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/coding_ways/json_path.md) (비추)
 - [QueryParameter와 PathParameter 차이](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/coding_ways/query_vs_path.md)
 - [직렬화](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/serialization.md)
 - [서블릿](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/spring_basic/servlet.md)
+- [컨텍스트](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/spring_basic/context.md)
 - [var](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/var.md)
 - [트랜잭션](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/transaction.md)
 - [불변 객체](https://github.com/jhhong0509/study/blob/master/stu_spring/etc_information/immutable_object.md)
 
 ---
 
-### 파일
-
-- [상식](https://github.com/jhhong0509/study/blob/master/stu_spring/file/information.md)
-- [파일 업로드](https://github.com/jhhong0509/study/blob/master/stu_spring/file/file_upload.md)
-
----
-
-#### 기타 라이브러리
+### 기타 라이브러리
 
 - Lombok
     - [@Builder](https://github.com/jhhong0509/study/blob/master/stu_spring/libraries/lombok/builder.md)
@@ -174,19 +251,21 @@
 
 ---
 
-#### ORM
+### ORM
 
 - [상식](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/orm_stu.md)
 - [Query DSL이란?](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/what_is_query_dsl.md)
 - [Query DSL 세팅하기](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/query_dsl_settings.md)
 - [JPQL이란](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/what_is_jpql.md)
 - [EntityManager 타입](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/type_of_entitymanager.md)
-- [save는 어떻게 동작하는가?](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/spring_data_save.md)
 - [Natural ID 예제](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/demo-natural-id)
+- [Entity Manager 종류](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/type_of_entitymanager.md)
+- [영속성 컨텍스트 팁](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/persistence_context_tip.md)
+- [LazyConnectionDataSourceProxy](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/LazyConnectionDataSourceProxy.md)
 
 ---
 
-##### 자바 ORM 표준 JPA 프로그래밍
+#### 자바 ORM 표준 JPA 프로그래밍
 
 1. [챕터1](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/jpa_basic_orm/chapter01.md)
 2. [챕터2](https://github.com/jhhong0509/study/blob/master/stu_spring/orm/jpa_basic_orm/chapter02.md)
@@ -231,17 +310,10 @@
 #### 소켓
 
 - [WebSocket 소개](https://github.com/jhhong0509/study/blob/master/stu_spring/socket/01.websocket.md)
-- [RSocket](https://github.com/jhhong0509/study/blob/master/stu_spring/socket/03.rsocket.md)
 - STOMP
   - [소개](https://github.com/jhhong0509/study/blob/master/stu_spring/socket/stomp/01.introduce.md)
   - [설정](https://github.com/jhhong0509/study/blob/master/stu_spring/socket/stomp/02.basic_config.md)
   - [사용하기](https://github.com/jhhong0509/study/blob/master/stu_spring/socket/stomp/03.using.md)
-
----
-
-#### JWT
-
-- [JWT 코드 설명](https://github.com/jhhong0509/study/blob/master/stu_spring/token/stu_token.md)
 
 ---
 
@@ -388,15 +460,3 @@
 9. [Docker 사용](https://github.com/jhhong0509/study/blob/master/stu_spring/auto_deployment/09.change_to_docker.md)
 
 ---
-
-### 코틀린
-
-- [Kotlin 기초](https://github.com/jhhong0509/study/blob/master/kotlin/basic.md)
-- [Kotlin vs Java](https://github.com/jhhong0509/study/blob/master/kotlin/vs_java.md)
-- [코틀린 CRUD 예제](https://github.com/jhhong0509/study/blob/master/stu_spring/kotlin_basic)
-
----
-
-### 코루틴
-
-- [기본 개념](https://github.com/jhhong0509/study/blob/master/stu_spring/coroutine.md)
