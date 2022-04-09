@@ -27,7 +27,7 @@
 - [이름 명명 규칙](https://github.com/jhhong0509/study/blob/master/database/column_name_rule.md)
 - [용어](https://github.com/jhhong0509/study/blob/master/database/words.md)
 - [Varchar size에 따른 MySQL 동작](https://github.com/jhhong0509/study/blob/master/database/varchar_size.md)
-- [INDEX](https://github.com/jhhong0509/study/blob/master/stu_spring/faster_db/index.md)
+- [INDEX](https://github.com/jhhong0509/study/blob/master/database/index.md)
 - [Pagination](https://github.com/jhhong0509/study/blob/master/database/pagination.md)
 - [저장 Deep Dive](https://github.com/jhhong0509/study/blob/master/database/save_deepdive.md)
 
