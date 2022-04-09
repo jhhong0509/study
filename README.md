@@ -135,6 +135,36 @@
    1. [외부 API 설계 이슈](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/08%20%EC%99%B8%EB%B6%80%20API%20%ED%8C%A8%ED%84%B4/8.1%20%EC%99%B8%EB%B6%80%20API%20%EC%84%A4%EA%B3%84%20%EC%9D%B4%EC%8A%88.md)
    2. [API Gateway 패턴](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/08%20%EC%99%B8%EB%B6%80%20API%20%ED%8C%A8%ED%84%B4/8.2%20API%20Gateway%20%ED%8C%A8%ED%84%B4.md)
    3. [API Gateway 구현](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/08%20%EC%99%B8%EB%B6%80%20API%20%ED%8C%A8%ED%84%B4/8.3%20API%20Gateway%20%EA%B5%AC%ED%98%84.md)
+9. **마이크로서비스 테스트 - 1**
+   1. [MSA 테스트 전략](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/09%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%ED%85%8C%EC%8A%A4%ED%8A%B8-1/9.1%20MSA%20%ED%85%8C%EC%8A%A4%ED%8A%B8%20%EC%A0%84%EB%9E%B5.md)
+   2. [서비스 단위 테스트](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/09%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%ED%85%8C%EC%8A%A4%ED%8A%B8-1/9.2%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%8B%A8%EC%9C%84%20%ED%85%8C%EC%8A%A4%ED%8A%B8.md)
+
+10. **마이크로서비스 테스트 - 2**
+    1. [통합 테스트](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/10%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%ED%85%8C%EC%8A%A4%ED%8A%B8-2/01.%20%ED%86%B5%ED%95%A9%20%ED%85%8C%EC%8A%A4%ED%8A%B8%20%EC%9E%91%EC%84%B1%ED%95%98%EA%B8%B0.md)
+    2. [Component 테스트](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/10%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%ED%85%8C%EC%8A%A4%ED%8A%B8-2/02.%20Component%20%ED%85%8C%EC%8A%A4%ED%8A%B8.md)
+    3. [End-To-End 테스트](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/10%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%ED%85%8C%EC%8A%A4%ED%8A%B8-2/03.%20%EC%A2%85%EB%8B%A8%20%ED%85%8C%EC%8A%A4%ED%8A%B8.md)
+
+11. **Production Ready 서비스 개발**
+    1. [보안 서비스 개발](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/11%20Production-Ready%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EA%B0%9C%EB%B0%9C/01.%20%EB%B3%B4%EC%95%88%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EA%B0%9C%EB%B0%9C.md)
+    2. [Configurable 서비스 개발](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/11%20Production-Ready%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EA%B0%9C%EB%B0%9C/02.%20%EC%84%A4%EC%A0%95%20%EA%B0%80%EB%8A%A5%ED%95%9C%20%EC%84%9C%EB%B9%84%EC%8A%A4.md)
+    3. [Observable 서비스 개발](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/11%20Production-Ready%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EA%B0%9C%EB%B0%9C/03.%20%EA%B4%80%EC%B8%A1%20%EA%B0%80%EB%8A%A5%ED%95%9C%20%EC%84%9C%EB%B9%84%EC%8A%A4.md)
+    4. [Microservice Chassis](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/11%20Production-Ready%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EA%B0%9C%EB%B0%9C/04.%20Microservice%20chassis.md)
+
+12. **Microservice 배포**
+    1. [언어 특정 Packaging Format 패턴](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/12%20microservice%20%EB%B0%B0%ED%8F%AC/01.%20%EC%96%B8%EC%96%B4%EC%97%90%20%ED%8A%B9%EC%A0%95%ED%95%9C%20packaging%20format.md)
+    2. [Virtual Machine 패턴](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/12%20microservice%20%EB%B0%B0%ED%8F%AC/02.%20Virtual%20Machine%20%ED%8C%A8%ED%84%B4.md)
+    3. [Container 패턴](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/12%20microservice%20%EB%B0%B0%ED%8F%AC/03.%20Container%20%ED%8C%A8%ED%84%B4.md)
+    4. [K8S](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/12%20microservice%20%EB%B0%B0%ED%8F%AC/04.%20Kubernetes.md)
+    5. [Serverless](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/12%20microservice%20%EB%B0%B0%ED%8F%AC/05.%20serverless.md)
+    6. [AWS Lambda와 API Gateway로 서비스 배포](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/12%20microservice%20%EB%B0%B0%ED%8F%AC/06.%20AWS%20Lambda%EC%99%80%20API%20Gateway%EB%A1%9C%20RestAPI%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%B0%B0%ED%8F%AC.md)
+
+13. **마이크로서비스 리팩토링**
+    1. [개요](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/13%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81/13.1%20%EA%B0%9C%EC%9A%94.md)
+    2. [마이크로서비스 전환 전략](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/13%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81/13.2%20%EB%AA%A8%EB%86%80%EB%A6%AC%EC%8A%A4%20-%3E%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%A0%84%ED%99%98%20%EC%A0%84%EB%9E%B5.md)
+    3. [Monolith와 서비스의 Communication](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/13%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81/13.3%20%EB%AA%A8%EB%86%80%EB%A6%AC%EC%8A%A4%EC%99%80%20%EC%84%9C%EB%B9%84%EC%8A%A4%EC%9D%98%20%ED%98%91%EB%A0%A5.md)
+    4. [배달 실패 주문 처리](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/13%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81/13.4%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%83%9D%EC%84%B1:%20%EB%B0%B0%EB%8B%AC%20%EC%8B%A4%ED%8C%A8%20%EC%A3%BC%EB%AC%B8%20%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0.md)
+    5. [배달 관리 추출하기](https://github.com/jhhong0509/study-architecture/blob/main/msa/book/13%20%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81/13.5%20%EB%AA%A8%EB%86%80%EB%A6%AC%EC%8A%A4%20%EB%B6%84%ED%95%B4:%20%EB%B0%B0%EB%8B%AC%20%EA%B4%80%EB%A6%AC%20%EC%B6%94%EC%B6%9C.md)
+
 
 ---
 
