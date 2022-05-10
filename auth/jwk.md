@@ -2,7 +2,7 @@
 
 ## JWK란?
 
-Json Web Key는 **암호호 Key를 나타내는 Json**으로, Key에 대한 속성을 담고있다.
+Json Web Key는 **암호화 Key를 나타내는 Json**으로, Key에 대한 속성을 담고있다.
 
 OAuth처럼 JWT를 사용하는 서비스에서는 JWT를 암호화 할 때 사용했던 Public Key를 제공하는 편이다.
 
