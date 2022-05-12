@@ -18,7 +18,8 @@
 
 ## 토큰
 
-- [JWS](https://github.com/jhhong0509/study/blob/master/token/jws.md)
+- [JWT](https://github.com/jhhong0509/study/blob/master/auth/jwt.md)
+- [JWK](https://github.com/jhhong0509/study/blob/master/auth/jwk.md)
 
 ---
 
