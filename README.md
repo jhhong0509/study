@@ -7,6 +7,12 @@
 
 ---
 
+## OOP
+
+- [IoC, DI, DIP](https://github.com/jhhong0509/study/blob/master/oop/ioc_di_dip.md)
+
+---
+
 ## CI/CD
 
 - [K8S](https://github.com/jhhong0509/study/blob/master/cicd/kubernetes/kubernetes.md)
