@@ -96,6 +96,9 @@
 2. [구조](https://github.com/jhhong0509/study-architecture/blob/main/msa/02.msa_structure.md)
 3. [RPC란?](https://github.com/jhhong0509/study-architecture/blob/main/msa/03.rpc.md)
 4. [MQ란?](https://github.com/jhhong0509/study-architecture/blob/main/msa/04.mq.md)
+5. [Service Mesh란](https://github.com/jhhong0509/study-architecture/blob/main/msa/service_mesh.md)
+6. [CDC, Outbox, Event Sourcing 소개](https://github.com/jhhong0509/study-architecture/blob/main/msa/cdc%2C%20outbox%2C%20event%20sourcing.md)
+7. [Debezium 소개](https://github.com/jhhong0509/study-architecture/blob/main/msa/debezium.md)
 
 ### 마이크로서비스 아키텍쳐 패턴
 
