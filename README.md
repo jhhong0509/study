@@ -15,10 +15,16 @@
 
 ## CI/CD
 
-- [K8S](https://github.com/jhhong0509/study/blob/master/cicd/kubernetes/kubernetes.md)
 - [정의](https://github.com/jhhong0509/study/blob/master/cicd/what_is.md)
 - [점진적 배포 핵클 웨비나](https://github.com/jhhong0509/study/blob/master/cicd/feature_flag_webina.md)
 - [CodeCoverage](https://github.com/jhhong0509/study/blob/master/cicd/code_coverage.md)
+
+---
+
+## Kubernetes
+
+- [K8S 소개](https://github.com/jhhong0509/study/blob/master/kubernetes/kubernetes.md)
+- [ConfigMap과 Secret](https://github.com/jhhong0509/study/blob/master/kubernetes/configmap_and_secret.md)
 
 ---
 
